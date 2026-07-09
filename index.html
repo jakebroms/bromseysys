@@ -8,6 +8,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=Inter:wght@400;500;600;650;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="assets/reveal.css">
   <style>
     :root {
       --background: #FAFAF8;
@@ -990,15 +991,15 @@
 
           <div class="visual-footer">
             <div class="stat">
-              <strong>10+</strong>
+              <strong data-counter="10" data-suffix="+">0+</strong>
               <span>hours found</span>
             </div>
             <div class="stat">
-              <strong>4</strong>
+              <strong data-counter="4">0</strong>
               <span>tools connected</span>
             </div>
             <div class="stat">
-              <strong>1</strong>
+              <strong data-counter="1">0</strong>
               <span>clean workflow</span>
             </div>
           </div>
@@ -1007,7 +1008,7 @@
     </section>
 
     <section class="section section-tight">
-      <div class="section-heading">
+      <div class="section-heading reveal">
         <div>
           <span class="badge">Symptoms of operational drag</span>
           <h2>You do not need more software. You need better workflows.</h2>
@@ -1017,36 +1018,36 @@
         </p>
       </div>
 
-      <div class="pain-grid">
-        <div class="pain-card">
+      <div class="pain-grid reveal-group">
+        <div class="pain-card reveal-item">
           <span class="icon">↔</span>
           <p>Your team enters the same information in multiple places.</p>
         </div>
-        <div class="pain-card">
+        <div class="pain-card reveal-item">
           <span class="icon">▦</span>
           <p>Your business depends on spreadsheets only one person understands.</p>
         </div>
-        <div class="pain-card">
+        <div class="pain-card reveal-item">
           <span class="icon">!</span>
           <p>Leads, jobs, tasks, or follow-ups slip through the cracks.</p>
         </div>
-        <div class="pain-card">
+        <div class="pain-card reveal-item">
           <span class="icon">◎</span>
           <p>The owner is still the central router for every update and decision.</p>
         </div>
-        <div class="pain-card">
+        <div class="pain-card reveal-item">
           <span class="icon">⌁</span>
           <p>Customer updates and internal handoffs are handled manually.</p>
         </div>
-        <div class="pain-card">
+        <div class="pain-card reveal-item">
           <span class="icon">▤</span>
           <p>Reports take hours to pull together from scattered sources.</p>
         </div>
-        <div class="pain-card">
+        <div class="pain-card reveal-item">
           <span class="icon">⎇</span>
           <p>You pay for software but still do work around it.</p>
         </div>
-        <div class="pain-card">
+        <div class="pain-card reveal-item">
           <span class="icon">AI</span>
           <p>You know automation could help, but you are not sure where to start.</p>
         </div>
@@ -1054,7 +1055,7 @@
     </section>
 
     <section id="systems" class="section">
-      <div class="section-heading">
+      <div class="section-heading reveal">
         <div>
           <span class="badge">Before / after</span>
           <h2>Compress messy operations into one clean operating rhythm.</h2>
@@ -1064,8 +1065,8 @@
         </p>
       </div>
 
-      <div class="split-system">
-        <div class="system-panel">
+      <div class="split-system reveal-group">
+        <div class="system-panel reveal-item">
           <div class="panel-title">
             <h3>Before</h3>
             <span class="mono-label">Manual drag</span>
@@ -1079,7 +1080,7 @@
           </div>
         </div>
 
-        <div class="system-panel after">
+        <div class="system-panel after reveal-item">
           <div class="panel-title">
             <h3>After</h3>
             <span class="status-chip">Compressed</span>
@@ -1098,7 +1099,7 @@
     </section>
 
     <section id="services" class="section">
-      <div class="section-heading">
+      <div class="section-heading reveal">
         <div>
           <span class="badge">Productized services</span>
           <h2>Start small. Fix the highest-value workflow first.</h2>
@@ -1108,8 +1109,8 @@
         </p>
       </div>
 
-      <div class="services-grid">
-        <article id="audit" class="service-card featured">
+      <div class="services-grid reveal-group">
+        <article id="audit" class="service-card featured reveal-item">
           <div class="service-kicker">01 / DIAGNOSE</div>
           <h3>Workflow Audit</h3>
           <p>For businesses that know operations are messy but are not sure what to fix first.</p>
@@ -1123,7 +1124,7 @@
           <div class="price">Typical investment <strong>$1.5k–$3.5k</strong></div>
         </article>
 
-        <article class="service-card">
+        <article class="service-card reveal-item">
           <div class="service-kicker">02 / IMPLEMENT</div>
           <h3>Workflow Sprint</h3>
           <p>A focused sprint to remove manual work from one painful workflow.</p>
@@ -1137,7 +1138,7 @@
           <div class="price">Typical investment <strong>$5k–$12k</strong></div>
         </article>
 
-        <article class="service-card">
+        <article class="service-card reveal-item">
           <div class="service-kicker">03 / BUILD</div>
           <h3>Custom Micro App</h3>
           <p>Lightweight internal software built around how your business actually works.</p>
@@ -1151,7 +1152,7 @@
           <div class="price">Typical investment <strong>$10k–$30k+</strong></div>
         </article>
 
-        <article class="service-card">
+        <article class="service-card reveal-item">
           <div class="service-kicker">04 / OPERATE</div>
           <h3>Systems Partner</h3>
           <p>Ongoing workflow, automation, and systems support without a full-time CIO.</p>
@@ -1168,8 +1169,8 @@
     </section>
 
     <section class="section">
-      <div class="capabilities">
-        <div class="dark-card">
+      <div class="capabilities reveal-group">
+        <div class="dark-card reveal-item">
           <span class="badge">Practical systems, not AI hype</span>
           <h2>Built for the work your team actually does.</h2>
           <p>
@@ -1191,7 +1192,7 @@
           </div>
         </div>
 
-        <div class="cap-list">
+        <div class="cap-list reveal-item">
           <div class="cap-item">
             <h3>CRM design</h3>
             <p>Lead, customer, job, and follow-up workflows built around the actual sales process.</p>
@@ -1221,7 +1222,7 @@
     </section>
 
     <section class="section">
-      <div class="section-heading">
+      <div class="section-heading reveal">
         <div>
           <span class="badge">Why Bromsey Systems</span>
           <h2>Operations first. Software second.</h2>
@@ -1231,18 +1232,18 @@
         </p>
       </div>
 
-      <div class="proof-grid">
-        <div class="proof-card">
+      <div class="proof-grid reveal-group">
+        <div class="proof-card reveal-item">
           <span class="icon">01</span>
           <h3>Understands messy work</h3>
           <p>We start with how the process actually happens today, including the spreadsheets, inboxes, workarounds, and owner-dependent decisions.</p>
         </div>
-        <div class="proof-card">
+        <div class="proof-card reveal-item">
           <span class="icon">02</span>
           <h3>Builds lightweight</h3>
           <p>No bloated agency process. No unnecessary enterprise complexity. Just practical systems designed to remove drag.</p>
         </div>
-        <div class="proof-card">
+        <div class="proof-card reveal-item">
           <span class="icon">03</span>
           <h3>Focuses on adoption</h3>
           <p>A workflow only works if the team uses it. Every build includes structure, documentation, and training.</p>
@@ -1250,7 +1251,7 @@
       </div>
     </section>
 
-    <section class="cta">
+    <section class="cta reveal">
       <div>
         <span class="badge"><span class="pulse"></span> Start with a Workflow Audit</span>
         <h2>Find where your business is losing time before buying or building more software.</h2>
@@ -1272,6 +1273,7 @@
     </footer>
   </main>
 
+  <script src="assets/reveal.js" defer></script>
   <script>
     const navToggle = document.getElementById("navToggle");
     const navLinks = document.getElementById("navLinks");

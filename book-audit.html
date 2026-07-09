@@ -8,6 +8,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=Inter:wght@400;500;600;650;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="assets/reveal.css">
   <style>
     :root {
       --background: #FAFAF8;
@@ -454,14 +455,14 @@
     </nav>
 
     <main>
-      <section class="intro">
+      <section class="intro reveal">
         <span class="badge"><span class="pulse"></span> Workflow audit intake</span>
         <h1>Tell us about your business.</h1>
         <p>Share a few details and we'll follow up to schedule your workflow audit.</p>
       </section>
 
       <section class="form-shell">
-        <div class="panel" id="formPanel">
+        <div class="panel reveal" id="formPanel">
           <form id="intakeForm" novalidate>
             <div class="form-error" id="formError"></div>
 
@@ -516,6 +517,7 @@
     </footer>
   </div>
 
+  <script src="assets/reveal.js" defer></script>
   <script>
     const navToggle = document.getElementById("navToggle");
     const navActions = document.getElementById("navActions");

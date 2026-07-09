@@ -8,6 +8,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=Inter:wght@400;500;600;650;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="assets/reveal.css">
   <style>
     :root {
       --background: #FAFAF8;
@@ -834,8 +835,8 @@
             <span class="status">Audit ready</span>
           </div>
 
-          <div class="before-after">
-            <div class="mini-panel">
+          <div class="before-after reveal-group">
+            <div class="mini-panel reveal-item">
               <h3>Manual mess</h3>
               <div class="mess-list">
                 <div class="mess-item">Lead details buried in email</div>
@@ -848,7 +849,7 @@
 
             <div class="arrow">→</div>
 
-            <div class="mini-panel">
+            <div class="mini-panel reveal-item">
               <h3>Compressed system</h3>
               <div class="clean-list">
                 <div class="clean-item">One intake queue</div>
@@ -862,15 +863,15 @@
 
           <div class="visual-metrics">
             <div class="metric">
-              <strong>10+</strong>
+              <strong data-counter="10" data-suffix="+">0+</strong>
               <span>hours found</span>
             </div>
             <div class="metric">
-              <strong>5</strong>
+              <strong data-counter="5">0</strong>
               <span>manual steps cut</span>
             </div>
             <div class="metric">
-              <strong>1</strong>
+              <strong data-counter="1">0</strong>
               <span>clean workflow</span>
             </div>
           </div>
@@ -878,7 +879,7 @@
       </section>
 
       <section id="problem">
-        <div class="section-head">
+        <div class="section-head reveal">
           <div>
             <span class="badge">The problem</span>
             <h2>Your business grows. Your workflows do not.</h2>
@@ -888,20 +889,20 @@
           </p>
         </div>
 
-        <div class="pain-grid">
-          <div class="pain-card">
+        <div class="pain-grid reveal-group">
+          <div class="pain-card reveal-item">
             <span class="icon">01</span>
             <p>The same data gets entered in two, three, or four places.</p>
           </div>
-          <div class="pain-card">
+          <div class="pain-card reveal-item">
             <span class="icon">02</span>
             <p>Leads, jobs, and follow-ups slip because there is no single view.</p>
           </div>
-          <div class="pain-card">
+          <div class="pain-card reveal-item">
             <span class="icon">03</span>
             <p>Spreadsheets have become the operating system of the business.</p>
           </div>
-          <div class="pain-card">
+          <div class="pain-card reveal-item">
             <span class="icon">04</span>
             <p>The owner is still the router for updates, decisions, and next steps.</p>
           </div>
@@ -910,7 +911,7 @@
 
       <section id="how">
         <div class="how">
-          <div class="dark-panel">
+          <div class="dark-panel reveal">
             <span class="badge">What workflow compression means</span>
             <h2>Fewer steps. Cleaner systems. More time back.</h2>
             <p>
@@ -933,8 +934,8 @@
             </div>
           </div>
 
-          <div class="steps">
-            <div class="step">
+          <div class="steps reveal-group">
+            <div class="step reveal-item">
               <div class="step-number">01</div>
               <div>
                 <h3>Map how the work actually happens</h3>
@@ -942,7 +943,7 @@
               </div>
             </div>
 
-            <div class="step">
+            <div class="step reveal-item">
               <div class="step-number">02</div>
               <div>
                 <h3>Identify the highest-value bottlenecks</h3>
@@ -950,7 +951,7 @@
               </div>
             </div>
 
-            <div class="step">
+            <div class="step reveal-item">
               <div class="step-number">03</div>
               <div>
                 <h3>Build only what the business needs</h3>
@@ -958,7 +959,7 @@
               </div>
             </div>
 
-            <div class="step">
+            <div class="step reveal-item">
               <div class="step-number">04</div>
               <div>
                 <h3>Document, train, and improve</h3>
@@ -970,7 +971,7 @@
       </section>
 
       <section id="audit">
-        <div class="offer-card">
+        <div class="offer-card reveal">
           <div>
             <span class="badge"><span class="pulse"></span> Best first step</span>
             <h2>Start with a Workflow Audit.</h2>
@@ -1000,7 +1001,7 @@
         </div>
       </section>
 
-      <section class="cta">
+      <section class="cta reveal">
         <div>
           <span class="badge">Less manual work. More operating leverage.</span>
           <h2>Build the system your business should have had already.</h2>
@@ -1023,6 +1024,7 @@
     </footer>
   </div>
 
+  <script src="assets/reveal.js" defer></script>
   <script>
     const navToggle = document.getElementById("navToggle");
     const navActions = document.getElementById("navActions");

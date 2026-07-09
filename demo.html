@@ -8,6 +8,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=Inter:wght@400;500;600;650;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="assets/reveal.css">
   <style>
     :root {
       --background: #FAFAF8;
@@ -1396,7 +1397,7 @@
       </section>
 
       <section id="compare" class="section">
-        <div class="section-head">
+        <div class="section-head reveal">
           <div>
             <span class="badge">What this demo proves</span>
             <h2>A tiny internal tool can remove a lot of recurring drag.</h2>
@@ -1406,8 +1407,8 @@
           </p>
         </div>
 
-        <div class="manual-vs-system">
-          <div class="compare-panel">
+        <div class="manual-vs-system reveal-group">
+          <div class="compare-panel reveal-item">
             <h3>Before: manual workflow</h3>
             <ul class="compare-list">
               <li>Lead comes in through email, phone, text, or web form.</li>
@@ -1418,7 +1419,7 @@
             </ul>
           </div>
 
-          <div class="compare-panel after">
+          <div class="compare-panel after reveal-item">
             <h3>After: compressed workflow</h3>
             <ul class="compare-list">
               <li>One intake creates the record, owner view, and next action.</li>
@@ -1431,7 +1432,7 @@
         </div>
       </section>
 
-      <section id="cta" class="cta">
+      <section id="cta" class="cta reveal">
         <div>
           <span class="badge"><span class="pulse"></span> Build the first workflow sprint</span>
           <h2>This is the kind of lightweight system a Workflow Audit can uncover.</h2>
@@ -1456,6 +1457,7 @@
 
   <div class="toast-stack" id="toastStack" aria-live="polite"></div>
 
+  <script src="assets/reveal.js" defer></script>
   <script>
     const stages = ["lead", "estimate", "job", "invoice", "review"];
 

@@ -1,0 +1,40 @@
+.reveal {
+  opacity: 0;
+  transform: translateY(22px);
+  transition: opacity 640ms cubic-bezier(0.16, 1, 0.3, 1), transform 640ms cubic-bezier(0.16, 1, 0.3, 1);
+  will-change: opacity, transform;
+}
+
+.reveal.in-view {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.reveal-group.in-view .reveal-item {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.reveal-item {
+  opacity: 0;
+  transform: translateY(18px);
+  transition: opacity 560ms cubic-bezier(0.16, 1, 0.3, 1), transform 560ms cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.reveal-group.in-view .reveal-item:nth-child(1) { transition-delay: 0ms; }
+.reveal-group.in-view .reveal-item:nth-child(2) { transition-delay: 60ms; }
+.reveal-group.in-view .reveal-item:nth-child(3) { transition-delay: 120ms; }
+.reveal-group.in-view .reveal-item:nth-child(4) { transition-delay: 180ms; }
+.reveal-group.in-view .reveal-item:nth-child(5) { transition-delay: 240ms; }
+.reveal-group.in-view .reveal-item:nth-child(6) { transition-delay: 300ms; }
+.reveal-group.in-view .reveal-item:nth-child(7) { transition-delay: 360ms; }
+.reveal-group.in-view .reveal-item:nth-child(8) { transition-delay: 420ms; }
+
+@media (prefers-reduced-motion: reduce) {
+  .reveal,
+  .reveal-item {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+}
