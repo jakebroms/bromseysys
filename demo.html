@@ -1,0 +1,1445 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Bromsey Systems | Interactive Workflow Compression Demo</title>
+  <meta name="description" content="An interactive demo micro app showing how a service business can compress lead intake, estimate follow-up, job status, invoice reminders, and review requests into one workflow." />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=Inter:wght@400;500;600;650;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --background: #FAFAF8;
+      --surface: #FFFFFF;
+      --surface-2: #F5F5F2;
+      --text: #11110F;
+      --muted: #66665B;
+      --muted-2: #8C8C80;
+      --border: #EDEDE8;
+      --border-strong: #D8D8D0;
+      --brand: #245BFF;
+      --brand-hover: #123EF2;
+      --brand-soft: #EEF4FF;
+      --brand-border: #D9E6FF;
+      --brand-dark: #0A1438;
+      --success: #17B26A;
+      --success-soft: rgba(23, 178, 106, 0.09);
+      --success-border: rgba(23, 178, 106, 0.22);
+      --warning: #F79009;
+      --warning-soft: rgba(247, 144, 9, 0.09);
+      --warning-border: rgba(247, 144, 9, 0.22);
+      --danger: #F04438;
+      --danger-soft: rgba(240, 68, 56, 0.09);
+      --danger-border: rgba(240, 68, 56, 0.22);
+      --font-sans: "Inter", "Helvetica Neue", Arial, sans-serif;
+      --font-mono: "IBM Plex Mono", "SFMono-Regular", Consolas, monospace;
+      --radius-sm: 6px;
+      --radius-md: 10px;
+      --radius-lg: 16px;
+      --radius-xl: 24px;
+      --radius-full: 999px;
+      --shadow-sm: 0 1px 2px rgba(17, 17, 15, 0.06);
+      --shadow-md: 0 8px 24px rgba(17, 17, 15, 0.08);
+      --shadow-lg: 0 24px 80px rgba(17, 17, 15, 0.14);
+      --glow-brand: 0 0 80px rgba(36, 91, 255, 0.35);
+    }
+
+    * { box-sizing: border-box; }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      margin: 0;
+      font-family: var(--font-sans);
+      color: var(--text);
+      background:
+        radial-gradient(circle at 78% 4%, rgba(36, 91, 255, 0.13), transparent 440px),
+        radial-gradient(circle at 5% 20%, rgba(36, 91, 255, 0.055), transparent 390px),
+        var(--background);
+      line-height: 1.5;
+    }
+
+    a { color: inherit; text-decoration: none; }
+
+    button, input, select, textarea {
+      font: inherit;
+    }
+
+    .container {
+      width: min(1180px, calc(100% - 40px));
+      margin: 0 auto;
+    }
+
+    .nav {
+      padding: 24px 0 16px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 24px;
+    }
+
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      font-weight: 700;
+      letter-spacing: -0.035em;
+    }
+
+    .logo-mark {
+      width: 34px;
+      height: 34px;
+      border-radius: 10px;
+      background: var(--text);
+      position: relative;
+      box-shadow: var(--shadow-md);
+      flex: 0 0 auto;
+    }
+
+    .logo-mark::after {
+      content: "";
+      position: absolute;
+      inset: 8px;
+      border-radius: 6px;
+      background: var(--brand);
+      box-shadow: 0 0 34px rgba(36, 91, 255, 0.45);
+    }
+
+    .nav-actions {
+      display: flex;
+      align-items: center;
+      gap: 18px;
+      color: var(--muted);
+      font-size: 14px;
+      font-weight: 500;
+    }
+
+    .nav-actions a:hover { color: var(--text); }
+
+    .button {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: var(--radius-md);
+      padding: 12px 18px;
+      font-weight: 650;
+      font-size: 14px;
+      line-height: 1;
+      transition: transform 180ms ease, background 180ms ease, border-color 180ms ease, box-shadow 180ms ease, opacity 180ms ease;
+      white-space: nowrap;
+      border: 1px solid transparent;
+      cursor: pointer;
+    }
+
+    .button-primary {
+      background: var(--brand);
+      color: white;
+      border-color: var(--brand);
+      box-shadow: 0 0 40px rgba(36, 91, 255, 0.28);
+    }
+
+    .button-primary:hover {
+      background: var(--brand-hover);
+      transform: translateY(-1px);
+    }
+
+    .button-secondary {
+      background: var(--surface);
+      border-color: var(--border);
+      color: var(--text);
+      box-shadow: var(--shadow-sm);
+    }
+
+    .button-secondary:hover {
+      border-color: var(--border-strong);
+      transform: translateY(-1px);
+    }
+
+    .button-ghost {
+      background: transparent;
+      color: var(--muted);
+      border-color: transparent;
+      padding-left: 10px;
+      padding-right: 10px;
+    }
+
+    .button-ghost:hover {
+      color: var(--text);
+      background: var(--surface-2);
+    }
+
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      border-radius: var(--radius-full);
+      border: 1px solid var(--brand-border);
+      background: var(--brand-soft);
+      color: var(--brand-hover);
+      padding: 7px 11px;
+      font-family: var(--font-mono);
+      font-size: 12px;
+      font-weight: 600;
+      letter-spacing: -0.02em;
+      width: fit-content;
+    }
+
+    .pulse {
+      width: 7px;
+      height: 7px;
+      border-radius: var(--radius-full);
+      background: var(--brand);
+      box-shadow: 0 0 0 6px rgba(36, 91, 255, 0.10);
+      flex: 0 0 auto;
+    }
+
+    .hero {
+      padding: 78px 0 44px;
+      display: grid;
+      grid-template-columns: minmax(0, 0.95fr) minmax(420px, 1.05fr);
+      gap: 56px;
+      align-items: center;
+    }
+
+    h1 {
+      margin: 24px 0 24px;
+      font-size: clamp(50px, 7vw, 82px);
+      line-height: 0.92;
+      letter-spacing: -0.07em;
+      font-weight: 650;
+      max-width: 820px;
+    }
+
+    .hero-copy {
+      margin: 0 0 30px;
+      max-width: 670px;
+      color: var(--muted);
+      font-size: 19px;
+      line-height: 1.58;
+    }
+
+    .hero-actions {
+      display: flex;
+      gap: 12px;
+      flex-wrap: wrap;
+      margin-bottom: 26px;
+    }
+
+    .trust {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 12px;
+      color: var(--muted);
+      font-family: var(--font-mono);
+      font-size: 12px;
+      letter-spacing: -0.02em;
+    }
+
+    .dot {
+      width: 4px;
+      height: 4px;
+      background: var(--border-strong);
+      border-radius: var(--radius-full);
+    }
+
+    .preview-card {
+      border-radius: 30px;
+      background: rgba(255, 255, 255, 0.86);
+      border: 1px solid var(--border);
+      box-shadow: var(--shadow-lg);
+      padding: 22px;
+      backdrop-filter: blur(16px);
+      position: relative;
+    }
+
+    .preview-card::before {
+      content: "";
+      position: absolute;
+      inset: 34px;
+      background: var(--brand);
+      opacity: 0.13;
+      filter: blur(80px);
+      z-index: -1;
+    }
+
+    .preview-top {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 16px;
+      border-bottom: 1px solid var(--border);
+      padding-bottom: 18px;
+      margin-bottom: 18px;
+    }
+
+    .mono {
+      font-family: var(--font-mono);
+      font-size: 12px;
+      color: var(--muted);
+      letter-spacing: -0.02em;
+      text-transform: uppercase;
+    }
+
+    .status-pill {
+      display: inline-flex;
+      align-items: center;
+      border-radius: var(--radius-full);
+      border: 1px solid var(--brand-border);
+      background: var(--brand-soft);
+      color: var(--brand-hover);
+      padding: 6px 9px;
+      font-family: var(--font-mono);
+      font-size: 12px;
+      font-weight: 600;
+      letter-spacing: -0.02em;
+      white-space: nowrap;
+    }
+
+    .mini-flow {
+      display: grid;
+      gap: 10px;
+    }
+
+    .mini-flow-row {
+      display: grid;
+      grid-template-columns: 96px 1fr auto;
+      align-items: center;
+      gap: 12px;
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      background: var(--surface);
+      box-shadow: var(--shadow-sm);
+      padding: 13px;
+    }
+
+    .mini-flow-row .stage {
+      font-family: var(--font-mono);
+      color: var(--muted);
+      font-size: 11px;
+      letter-spacing: -0.02em;
+    }
+
+    .mini-flow-row strong {
+      letter-spacing: -0.025em;
+    }
+
+    .mini-flow-row small {
+      display: block;
+      color: var(--muted);
+      font-size: 13px;
+      margin-top: 2px;
+    }
+
+    .mini-outcome {
+      font-family: var(--font-mono);
+      font-size: 12px;
+      color: var(--success);
+      background: var(--success-soft);
+      border: 1px solid var(--success-border);
+      border-radius: var(--radius-full);
+      padding: 6px 8px;
+      white-space: nowrap;
+    }
+
+    .section {
+      padding: 72px 0;
+    }
+
+    .section-head {
+      display: grid;
+      grid-template-columns: 0.95fr 0.55fr;
+      gap: 48px;
+      align-items: end;
+      margin-bottom: 34px;
+    }
+
+    h2 {
+      margin: 14px 0 0;
+      font-size: clamp(36px, 5vw, 56px);
+      line-height: 0.98;
+      letter-spacing: -0.06em;
+      font-weight: 650;
+    }
+
+    .section-head p {
+      margin: 0;
+      color: var(--muted);
+      font-size: 17px;
+      line-height: 1.6;
+    }
+
+    .demo-shell {
+      display: grid;
+      grid-template-columns: 300px minmax(0, 1fr) 330px;
+      gap: 14px;
+      align-items: start;
+    }
+
+    .panel {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-xl);
+      box-shadow: var(--shadow-md);
+      overflow: hidden;
+    }
+
+    .panel-header {
+      padding: 18px 18px 16px;
+      border-bottom: 1px solid var(--border);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+    }
+
+    .panel-header h3 {
+      margin: 0;
+      font-size: 17px;
+      letter-spacing: -0.04em;
+      line-height: 1;
+    }
+
+    .panel-body {
+      padding: 18px;
+    }
+
+    .pipeline {
+      display: grid;
+      gap: 10px;
+    }
+
+    .pipeline-step {
+      width: 100%;
+      text-align: left;
+      border: 1px solid var(--border);
+      background: var(--surface-2);
+      border-radius: 15px;
+      padding: 14px;
+      cursor: pointer;
+      transition: 160ms ease;
+      color: var(--text);
+      display: grid;
+      gap: 8px;
+    }
+
+    .pipeline-step:hover {
+      transform: translateY(-1px);
+      border-color: var(--border-strong);
+      box-shadow: var(--shadow-sm);
+    }
+
+    .pipeline-step.active {
+      border-color: var(--brand-border);
+      background: var(--brand-soft);
+      box-shadow: 0 0 0 4px rgba(36, 91, 255, 0.05);
+    }
+
+    .pipeline-step.complete {
+      border-color: var(--success-border);
+      background: var(--success-soft);
+    }
+
+    .pipeline-step.due {
+      border-color: var(--warning-border);
+      background: var(--warning-soft);
+    }
+
+    .step-top {
+      display: flex;
+      justify-content: space-between;
+      gap: 10px;
+      align-items: center;
+    }
+
+    .step-title {
+      font-weight: 700;
+      letter-spacing: -0.035em;
+      font-size: 15px;
+    }
+
+    .step-chip {
+      font-family: var(--font-mono);
+      font-size: 11px;
+      color: var(--muted);
+      background: rgba(255,255,255,0.55);
+      border: 1px solid rgba(216, 216, 208, 0.72);
+      padding: 5px 7px;
+      border-radius: var(--radius-full);
+      white-space: nowrap;
+    }
+
+    .step-text {
+      color: var(--muted);
+      font-size: 13px;
+      line-height: 1.4;
+    }
+
+    .app-main {
+      min-width: 0;
+    }
+
+    .record-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+    }
+
+    .field {
+      display: grid;
+      gap: 7px;
+    }
+
+    .field.full {
+      grid-column: 1 / -1;
+    }
+
+    label {
+      font-family: var(--font-mono);
+      color: var(--muted);
+      font-size: 11px;
+      letter-spacing: -0.02em;
+      text-transform: uppercase;
+      font-weight: 600;
+    }
+
+    input, select, textarea {
+      width: 100%;
+      background: var(--surface-2);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-md);
+      color: var(--text);
+      padding: 12px 13px;
+      outline: none;
+      transition: 160ms ease;
+    }
+
+    textarea {
+      min-height: 88px;
+      resize: vertical;
+      line-height: 1.5;
+    }
+
+    input:focus, select:focus, textarea:focus {
+      border-color: var(--brand);
+      box-shadow: 0 0 0 4px rgba(36, 91, 255, 0.10);
+      background: #fff;
+    }
+
+    .action-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 16px;
+    }
+
+    .context-card {
+      margin-top: 14px;
+      border: 1px solid var(--border);
+      border-radius: var(--radius-lg);
+      background: var(--surface-2);
+      padding: 16px;
+    }
+
+    .context-card h4 {
+      margin: 0 0 8px;
+      font-size: 15px;
+      letter-spacing: -0.035em;
+    }
+
+    .context-card p {
+      margin: 0;
+      color: var(--muted);
+      font-size: 14px;
+      line-height: 1.5;
+    }
+
+    .message-box {
+      margin-top: 14px;
+      border: 1px solid var(--brand-border);
+      border-radius: var(--radius-lg);
+      background: var(--brand-soft);
+      padding: 16px;
+    }
+
+    .message-top {
+      display: flex;
+      justify-content: space-between;
+      gap: 10px;
+      align-items: center;
+      margin-bottom: 8px;
+    }
+
+    .message-title {
+      font-weight: 700;
+      letter-spacing: -0.035em;
+    }
+
+    .message-box p {
+      margin: 0;
+      color: var(--text);
+      font-size: 14px;
+      line-height: 1.5;
+    }
+
+    .right-stack {
+      display: grid;
+      gap: 14px;
+    }
+
+    .metrics-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px;
+    }
+
+    .metric-card {
+      background: var(--surface-2);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 14px;
+      min-width: 0;
+    }
+
+    .metric-card strong {
+      display: block;
+      font-size: 30px;
+      line-height: 1;
+      letter-spacing: -0.06em;
+      margin-bottom: 7px;
+    }
+
+    .metric-card span {
+      display: block;
+      color: var(--muted);
+      font-family: var(--font-mono);
+      font-size: 11px;
+      letter-spacing: -0.02em;
+      line-height: 1.25;
+      text-transform: uppercase;
+    }
+
+    .timeline {
+      display: grid;
+      gap: 10px;
+      max-height: 430px;
+      overflow: auto;
+      padding-right: 2px;
+    }
+
+    .timeline-item {
+      display: grid;
+      grid-template-columns: 22px 1fr;
+      gap: 10px;
+      align-items: start;
+      padding: 12px;
+      border: 1px solid var(--border);
+      background: var(--surface-2);
+      border-radius: 14px;
+    }
+
+    .timeline-dot {
+      width: 10px;
+      height: 10px;
+      border-radius: var(--radius-full);
+      background: var(--brand);
+      margin-top: 5px;
+      box-shadow: 0 0 0 5px rgba(36,91,255,0.09);
+    }
+
+    .timeline-item strong {
+      display: block;
+      font-size: 14px;
+      letter-spacing: -0.03em;
+      margin-bottom: 3px;
+    }
+
+    .timeline-item span {
+      display: block;
+      color: var(--muted);
+      font-size: 13px;
+      line-height: 1.4;
+    }
+
+    .timeline-time {
+      font-family: var(--font-mono);
+      color: var(--muted-2);
+      font-size: 11px;
+      margin-top: 5px;
+    }
+
+    .manual-vs-system {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 14px;
+      margin-top: 14px;
+    }
+
+    .compare-panel {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-xl);
+      box-shadow: var(--shadow-sm);
+      padding: 20px;
+    }
+
+    .compare-panel h3 {
+      margin: 0 0 14px;
+      font-size: 20px;
+      letter-spacing: -0.045em;
+    }
+
+    .compare-list {
+      display: grid;
+      gap: 9px;
+      margin: 0;
+      padding: 0;
+      list-style: none;
+    }
+
+    .compare-list li {
+      border: 1px solid var(--border);
+      background: var(--surface-2);
+      border-radius: 13px;
+      padding: 11px 12px;
+      color: var(--muted);
+      font-size: 14px;
+      line-height: 1.4;
+    }
+
+    .compare-panel.after {
+      border-color: var(--brand-border);
+      box-shadow: var(--shadow-md), 0 0 60px rgba(36, 91, 255, 0.11);
+    }
+
+    .compare-panel.after li {
+      background: var(--brand-soft);
+      border-color: var(--brand-border);
+      color: var(--text);
+    }
+
+    .cta {
+      margin: 24px auto 86px;
+      border-radius: 34px;
+      background:
+        radial-gradient(circle at 84% 18%, rgba(36, 91, 255, 0.28), transparent 360px),
+        #11110F;
+      color: #FAFAF8;
+      padding: clamp(36px, 6vw, 68px);
+      box-shadow: var(--shadow-lg);
+      display: grid;
+      grid-template-columns: 1fr auto;
+      gap: 34px;
+      align-items: end;
+    }
+
+    .cta h2 {
+      color: #FAFAF8;
+      max-width: 850px;
+    }
+
+    .cta p {
+      color: #B8B8AC;
+      max-width: 780px;
+      margin: 18px 0 0;
+      font-size: 18px;
+      line-height: 1.6;
+    }
+
+    .cta .button-secondary {
+      background: #FAFAF8;
+      border-color: #FAFAF8;
+    }
+
+    footer {
+      padding: 0 0 38px;
+      display: flex;
+      justify-content: space-between;
+      gap: 20px;
+      flex-wrap: wrap;
+      color: var(--muted);
+      font-family: var(--font-mono);
+      font-size: 12px;
+      letter-spacing: -0.02em;
+    }
+
+    .footer-links {
+      display: flex;
+      gap: 16px;
+    }
+
+    .footer-links a:hover {
+      color: var(--text);
+    }
+
+    .hidden {
+      display: none !important;
+    }
+
+    @media (max-width: 1100px) {
+      .hero,
+      .section-head,
+      .cta {
+        grid-template-columns: 1fr;
+      }
+
+      .preview-card {
+        max-width: 700px;
+      }
+
+      .demo-shell {
+        grid-template-columns: 270px minmax(0, 1fr);
+      }
+
+      .right-stack {
+        grid-column: 1 / -1;
+        grid-template-columns: 1fr 1fr;
+        align-items: start;
+      }
+    }
+
+    @media (max-width: 820px) {
+      .container {
+        width: min(100% - 28px, 1180px);
+      }
+
+      .nav-actions a:not(.button) {
+        display: none;
+      }
+
+      .hero {
+        padding-top: 52px;
+      }
+
+      h1 {
+        font-size: 50px;
+      }
+
+      .hero-copy {
+        font-size: 17px;
+      }
+
+      .mini-flow-row,
+      .demo-shell,
+      .right-stack,
+      .manual-vs-system,
+      .record-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .section {
+        padding: 56px 0;
+      }
+
+      .metrics-grid {
+        grid-template-columns: 1fr 1fr;
+      }
+
+      .cta {
+        margin-bottom: 56px;
+        border-radius: 26px;
+      }
+    }
+
+    @media (max-width: 540px) {
+      .preview-card,
+      .panel-body,
+      .panel-header {
+        padding-left: 14px;
+        padding-right: 14px;
+      }
+
+      .metrics-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .visual-top,
+      .preview-top {
+        align-items: flex-start;
+        flex-direction: column;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <nav class="nav">
+      <a class="logo" href="index.html">
+        <span class="logo-mark" aria-hidden="true"></span>
+        <span>Bromsey Systems</span>
+      </a>
+      <div class="nav-actions">
+        <a href="index.html">Home</a>
+        <a href="workflow-audit.html">Workflow Audit</a>
+        <a href="demo.html">Demo</a>
+        <a class="button button-primary" href="mailto:hello@bromseysystems.com?subject=Workflow%20Audit">Book audit</a>
+      </div>
+    </nav>
+
+    <main>
+      <section class="hero">
+        <div>
+          <span class="badge"><span class="pulse"></span> Interactive service business demo</span>
+          <h1>A micro app that compresses the whole customer workflow.</h1>
+          <p class="hero-copy">
+            This demo shows how a local service business can move from lead intake to estimate follow-up, job status, invoice reminders, and review requests without running the process from spreadsheets, inboxes, and memory.
+          </p>
+          <div class="hero-actions">
+            <a class="button button-primary" href="#demo">Try the workflow</a>
+            <a class="button button-secondary" href="#compare">See what it replaces</a>
+          </div>
+          <div class="trust">
+            <span>Lead intake</span>
+            <span class="dot"></span>
+            <span>Estimate follow-up</span>
+            <span class="dot"></span>
+            <span>Job status</span>
+            <span class="dot"></span>
+            <span>Invoice + review</span>
+          </div>
+        </div>
+
+        <div class="preview-card">
+          <div class="preview-top">
+            <div>
+              <div class="mono">Example business</div>
+              <strong>Clearline Exterior Services</strong>
+            </div>
+            <span class="status-pill">Workflow live</span>
+          </div>
+
+          <div class="mini-flow">
+            <div class="mini-flow-row">
+              <span class="stage">INTAKE</span>
+              <div>
+                <strong>Lead captured once</strong>
+                <small>Customer details, service need, value, and notes enter one record.</small>
+              </div>
+              <span class="mini-outcome">1 source</span>
+            </div>
+            <div class="mini-flow-row">
+              <span class="stage">ESTIMATE</span>
+              <div>
+                <strong>Follow-up is triggered</strong>
+                <small>Reminders and next actions appear automatically.</small>
+              </div>
+              <span class="mini-outcome">no chase</span>
+            </div>
+            <div class="mini-flow-row">
+              <span class="stage">JOB</span>
+              <div>
+                <strong>Status is visible</strong>
+                <small>Scheduled, in progress, completed, invoiced, reviewed.</small>
+              </div>
+              <span class="mini-outcome">live view</span>
+            </div>
+            <div class="mini-flow-row">
+              <span class="stage">REVIEW</span>
+              <div>
+                <strong>Invoice and review request sent</strong>
+                <small>The final mile stops depending on memory.</small>
+              </div>
+              <span class="mini-outcome">closed loop</span>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section id="demo" class="section">
+        <div class="section-head">
+          <div>
+            <span class="badge">Live demo</span>
+            <h2>Click through the workflow like an owner would use it.</h2>
+          </div>
+          <p>
+            Edit the lead, move it through the workflow, and watch the next actions, timeline, metrics, and customer messages update.
+          </p>
+        </div>
+
+        <div class="demo-shell">
+          <aside class="panel">
+            <div class="panel-header">
+              <h3>Pipeline</h3>
+              <span class="status-pill" id="pipelineStatus">Lead</span>
+            </div>
+            <div class="panel-body">
+              <div class="pipeline">
+                <button class="pipeline-step active" data-stage="lead">
+                  <span class="step-top">
+                    <span class="step-title">1. Lead intake</span>
+                    <span class="step-chip" id="chip-lead">Active</span>
+                  </span>
+                  <span class="step-text">Capture the request once and create the customer record.</span>
+                </button>
+                <button class="pipeline-step" data-stage="estimate">
+                  <span class="step-top">
+                    <span class="step-title">2. Estimate follow-up</span>
+                    <span class="step-chip" id="chip-estimate">Waiting</span>
+                  </span>
+                  <span class="step-text">Track quote sent date, follow-up due date, and next action.</span>
+                </button>
+                <button class="pipeline-step" data-stage="job">
+                  <span class="step-top">
+                    <span class="step-title">3. Job status</span>
+                    <span class="step-chip" id="chip-job">Waiting</span>
+                  </span>
+                  <span class="step-text">Move the job from scheduled to in progress to complete.</span>
+                </button>
+                <button class="pipeline-step" data-stage="invoice">
+                  <span class="step-top">
+                    <span class="step-title">4. Invoice reminder</span>
+                    <span class="step-chip" id="chip-invoice">Waiting</span>
+                  </span>
+                  <span class="step-text">Create the invoice reminder and keep the owner out of the chase.</span>
+                </button>
+                <button class="pipeline-step" data-stage="review">
+                  <span class="step-top">
+                    <span class="step-title">5. Review request</span>
+                    <span class="step-chip" id="chip-review">Waiting</span>
+                  </span>
+                  <span class="step-text">Close the loop with a review request after the work is complete.</span>
+                </button>
+              </div>
+            </div>
+          </aside>
+
+          <section class="panel app-main" aria-label="Interactive workflow record">
+            <div class="panel-header">
+              <div>
+                <div class="mono">Customer record</div>
+                <h3 id="recordTitle">New lead intake</h3>
+              </div>
+              <button class="button button-ghost" id="resetButton" type="button">Reset</button>
+            </div>
+
+            <div class="panel-body">
+              <div class="record-grid">
+                <div class="field">
+                  <label for="customerName">Customer</label>
+                  <input id="customerName" value="Sarah Mitchell" />
+                </div>
+                <div class="field">
+                  <label for="serviceType">Service</label>
+                  <select id="serviceType">
+                    <option>Gutter cleaning</option>
+                    <option selected>Exterior wash</option>
+                    <option>Drainage repair</option>
+                    <option>Window cleaning</option>
+                    <option>Roof moss treatment</option>
+                  </select>
+                </div>
+                <div class="field">
+                  <label for="leadSource">Lead source</label>
+                  <select id="leadSource">
+                    <option selected>Google search</option>
+                    <option>Referral</option>
+                    <option>Facebook</option>
+                    <option>Repeat customer</option>
+                    <option>Yard sign</option>
+                  </select>
+                </div>
+                <div class="field">
+                  <label for="jobValue">Estimated value</label>
+                  <input id="jobValue" value="$875" />
+                </div>
+                <div class="field full">
+                  <label for="address">Address</label>
+                  <input id="address" value="184 Parkside Ave, Rochester, NY" />
+                </div>
+                <div class="field full">
+                  <label for="notes">Request notes</label>
+                  <textarea id="notes">Customer wants exterior wash before a graduation party next weekend. Asked for quick estimate and preferred text updates.</textarea>
+                </div>
+              </div>
+
+              <div class="action-row" id="actionRow">
+                <button class="button button-primary" type="button" id="primaryAction">Capture lead</button>
+                <button class="button button-secondary" type="button" id="secondaryAction">Generate next message</button>
+              </div>
+
+              <div class="context-card">
+                <h4 id="contextTitle">What this replaces</h4>
+                <p id="contextText">Instead of copying this lead from email into a spreadsheet and then remembering to follow up, the intake creates one record and the next action automatically.</p>
+              </div>
+
+              <div class="message-box">
+                <div class="message-top">
+                  <span class="message-title" id="messageTitle">Suggested customer message</span>
+                  <span class="status-pill" id="messageChannel">Text</span>
+                </div>
+                <p id="messageText">Hi Sarah — thanks for reaching out to Clearline Exterior Services. We received your exterior wash request for 184 Parkside Ave and will send over an estimate shortly.</p>
+              </div>
+            </div>
+          </section>
+
+          <aside class="right-stack">
+            <section class="panel">
+              <div class="panel-header">
+                <h3>Workflow metrics</h3>
+                <span class="status-pill">Live</span>
+              </div>
+              <div class="panel-body">
+                <div class="metrics-grid">
+                  <div class="metric-card">
+                    <strong id="hoursSaved">2.5</strong>
+                    <span>hours saved / week</span>
+                  </div>
+                  <div class="metric-card">
+                    <strong id="stepsCut">4</strong>
+                    <span>manual steps cut</span>
+                  </div>
+                  <div class="metric-card">
+                    <strong id="openTasks">1</strong>
+                    <span>open next actions</span>
+                  </div>
+                  <div class="metric-card">
+                    <strong id="ownerTouches">3</strong>
+                    <span>owner touches removed</span>
+                  </div>
+                </div>
+              </div>
+            </section>
+
+            <section class="panel">
+              <div class="panel-header">
+                <h3>Timeline</h3>
+                <span class="status-pill" id="timelineCount">1 event</span>
+              </div>
+              <div class="panel-body">
+                <div class="timeline" id="timeline"></div>
+              </div>
+            </section>
+          </aside>
+        </div>
+      </section>
+
+      <section id="compare" class="section">
+        <div class="section-head">
+          <div>
+            <span class="badge">What this demo proves</span>
+            <h2>A tiny internal tool can remove a lot of recurring drag.</h2>
+          </div>
+          <p>
+            The value is not that the app is complicated. The value is that the workflow is finally explicit, visible, and hard to forget.
+          </p>
+        </div>
+
+        <div class="manual-vs-system">
+          <div class="compare-panel">
+            <h3>Before: manual workflow</h3>
+            <ul class="compare-list">
+              <li>Lead comes in through email, phone, text, or web form.</li>
+              <li>Someone copies details into a spreadsheet.</li>
+              <li>Estimate follow-up depends on memory or sticky notes.</li>
+              <li>Owner gets asked for status updates throughout the week.</li>
+              <li>Invoice and review request happen late or not at all.</li>
+            </ul>
+          </div>
+
+          <div class="compare-panel after">
+            <h3>After: compressed workflow</h3>
+            <ul class="compare-list">
+              <li>One intake creates the record, owner view, and next action.</li>
+              <li>Estimate follow-up is tracked automatically.</li>
+              <li>Job status is visible without asking the crew or office.</li>
+              <li>Invoice reminder is created when the job is completed.</li>
+              <li>Review request is sent as part of the closing workflow.</li>
+            </ul>
+          </div>
+        </div>
+      </section>
+
+      <section id="cta" class="cta">
+        <div>
+          <span class="badge"><span class="pulse"></span> Build the first workflow sprint</span>
+          <h2>This is the kind of lightweight system a Workflow Audit can uncover.</h2>
+          <p>
+            If your business is losing time to intake, follow-up, job tracking, invoicing, or customer communication, the first step is mapping the workflow and finding the highest-value fix.
+          </p>
+        </div>
+        <a class="button button-secondary" href="mailto:hello@bromseysystems.com?subject=Workflow%20Audit">Book a workflow audit</a>
+      </section>
+    </main>
+
+    <footer>
+      <span>© 2026 Bromsey Systems</span>
+      <span>Interactive workflow compression demo for service businesses.</span>
+      <span class="footer-links">
+        <a href="index.html">Home</a>
+        <a href="workflow-audit.html">Workflow Audit</a>
+        <a href="demo.html">Demo</a>
+      </span>
+    </footer>
+  </div>
+
+  <script>
+    const stages = ["lead", "estimate", "job", "invoice", "review"];
+
+    const stageData = {
+      lead: {
+        label: "Lead",
+        title: "New lead intake",
+        primary: "Capture lead",
+        secondary: "Generate intake reply",
+        contextTitle: "What this replaces",
+        contextText: "Instead of copying this lead from email into a spreadsheet and then remembering to follow up, the intake creates one record and the next action automatically.",
+        channel: "Text",
+        message: () => `Hi ${customer()} — thanks for reaching out to Clearline Exterior Services. We received your ${service().toLowerCase()} request for ${shortAddress()} and will send over an estimate shortly.`,
+        eventTitle: "Lead captured",
+        eventText: () => `${customer()} was added from ${source()} with a ${value()} estimated opportunity.`
+      },
+      estimate: {
+        label: "Estimate",
+        title: "Estimate follow-up",
+        primary: "Send estimate follow-up",
+        secondary: "Generate follow-up message",
+        contextTitle: "Compressed next action",
+        contextText: "The system knows the estimate was sent and creates the follow-up task automatically, so the office does not need a spreadsheet reminder.",
+        channel: "Email",
+        message: () => `Hi ${customer()} — just checking in on the ${service().toLowerCase()} estimate for ${shortAddress()}. We can still get you scheduled before your target date if you would like to move forward.`,
+        eventTitle: "Estimate follow-up queued",
+        eventText: () => `Follow-up reminder created for ${customer()} after estimate delivery.`
+      },
+      job: {
+        label: "Job",
+        title: "Job status",
+        primary: "Mark job complete",
+        secondary: "Generate job update",
+        contextTitle: "Owner visibility",
+        contextText: "The job status is visible without asking the crew, checking texts, or opening a spreadsheet. Everyone can see the next operational state.",
+        channel: "Customer update",
+        message: () => `Hi ${customer()} — your ${service().toLowerCase()} job at ${shortAddress()} is now marked complete. We appreciate the opportunity to help.`,
+        eventTitle: "Job completed",
+        eventText: () => `${service()} moved from scheduled to completed. Invoice reminder is now ready.`
+      },
+      invoice: {
+        label: "Invoice",
+        title: "Invoice reminder",
+        primary: "Send invoice reminder",
+        secondary: "Generate invoice note",
+        contextTitle: "No more late billing",
+        contextText: "When the job is completed, billing becomes the next action automatically. The owner does not have to remember which jobs still need invoices.",
+        channel: "Email",
+        message: () => `Hi ${customer()} — thanks again for choosing Clearline Exterior Services. Your invoice for ${value()} has been sent. Please let us know if you have any questions.`,
+        eventTitle: "Invoice reminder sent",
+        eventText: () => `Invoice reminder created for ${value()} and attached to the customer record.`
+      },
+      review: {
+        label: "Review",
+        title: "Review request",
+        primary: "Send review request",
+        secondary: "Generate review request",
+        contextTitle: "Closed-loop customer workflow",
+        contextText: "The system turns completed work into reputation growth by triggering a review request at the right time.",
+        channel: "Text",
+        message: () => `Hi ${customer()} — thanks again for working with Clearline Exterior Services. If you were happy with the ${service().toLowerCase()}, would you mind leaving us a quick Google review? It really helps local customers find us.`,
+        eventTitle: "Review request sent",
+        eventText: () => `Review request sent to ${customer()} after completion and invoice follow-up.`
+      }
+    };
+
+    let activeStage = "lead";
+    let completed = new Set();
+    let eventLog = [
+      {
+        title: "Demo lead loaded",
+        text: "Sample customer record created for Clearline Exterior Services.",
+        time: "Just now"
+      }
+    ];
+
+    const els = {
+      customerName: document.getElementById("customerName"),
+      serviceType: document.getElementById("serviceType"),
+      leadSource: document.getElementById("leadSource"),
+      jobValue: document.getElementById("jobValue"),
+      address: document.getElementById("address"),
+      notes: document.getElementById("notes"),
+      recordTitle: document.getElementById("recordTitle"),
+      primaryAction: document.getElementById("primaryAction"),
+      secondaryAction: document.getElementById("secondaryAction"),
+      contextTitle: document.getElementById("contextTitle"),
+      contextText: document.getElementById("contextText"),
+      messageTitle: document.getElementById("messageTitle"),
+      messageChannel: document.getElementById("messageChannel"),
+      messageText: document.getElementById("messageText"),
+      pipelineStatus: document.getElementById("pipelineStatus"),
+      hoursSaved: document.getElementById("hoursSaved"),
+      stepsCut: document.getElementById("stepsCut"),
+      openTasks: document.getElementById("openTasks"),
+      ownerTouches: document.getElementById("ownerTouches"),
+      timeline: document.getElementById("timeline"),
+      timelineCount: document.getElementById("timelineCount"),
+      resetButton: document.getElementById("resetButton")
+    };
+
+    function customer() {
+      return els.customerName.value.trim() || "the customer";
+    }
+
+    function service() {
+      return els.serviceType.value;
+    }
+
+    function source() {
+      return els.leadSource.value;
+    }
+
+    function value() {
+      return els.jobValue.value.trim() || "$0";
+    }
+
+    function shortAddress() {
+      const address = els.address.value.trim();
+      if (!address) return "the property";
+      return address.split(",")[0];
+    }
+
+    function addEvent(title, text) {
+      eventLog.unshift({
+        title,
+        text,
+        time: new Date().toLocaleTimeString([], { hour: "numeric", minute: "2-digit" })
+      });
+      renderTimeline();
+    }
+
+    function renderTimeline() {
+      els.timeline.innerHTML = eventLog.map(item => `
+        <div class="timeline-item">
+          <span class="timeline-dot"></span>
+          <div>
+            <strong>${escapeHtml(item.title)}</strong>
+            <span>${escapeHtml(item.text)}</span>
+            <div class="timeline-time">${escapeHtml(item.time)}</div>
+          </div>
+        </div>
+      `).join("");
+
+      els.timelineCount.textContent = `${eventLog.length} ${eventLog.length === 1 ? "event" : "events"}`;
+    }
+
+    function renderStage() {
+      const data = stageData[activeStage];
+      els.recordTitle.textContent = data.title;
+      els.primaryAction.textContent = data.primary;
+      els.secondaryAction.textContent = data.secondary;
+      els.contextTitle.textContent = data.contextTitle;
+      els.contextText.textContent = data.contextText;
+      els.messageTitle.textContent = "Suggested customer message";
+      els.messageChannel.textContent = data.channel;
+      els.messageText.textContent = data.message();
+      els.pipelineStatus.textContent = data.label;
+
+      document.querySelectorAll(".pipeline-step").forEach(button => {
+        const stage = button.dataset.stage;
+        button.classList.toggle("active", stage === activeStage);
+        button.classList.toggle("complete", completed.has(stage));
+        button.classList.toggle("due", stage === nextIncompleteStage() && stage !== activeStage && !completed.has(stage));
+      });
+
+      stages.forEach(stage => {
+        const chip = document.getElementById(`chip-${stage}`);
+        if (completed.has(stage)) {
+          chip.textContent = "Done";
+        } else if (stage === activeStage) {
+          chip.textContent = "Active";
+        } else if (stage === nextIncompleteStage()) {
+          chip.textContent = "Due";
+        } else {
+          chip.textContent = "Waiting";
+        }
+      });
+
+      renderMetrics();
+    }
+
+    function renderMetrics() {
+      const count = completed.size;
+      const hours = (2.5 + count * 1.25).toFixed(1);
+      const steps = 4 + count * 2;
+      const open = Math.max(1, 5 - count);
+      const touches = 3 + count;
+
+      els.hoursSaved.textContent = hours;
+      els.stepsCut.textContent = steps;
+      els.openTasks.textContent = open;
+      els.ownerTouches.textContent = touches;
+    }
+
+    function nextIncompleteStage() {
+      return stages.find(stage => !completed.has(stage)) || "review";
+    }
+
+    function completeActiveStage() {
+      const data = stageData[activeStage];
+      completed.add(activeStage);
+      addEvent(data.eventTitle, data.eventText());
+
+      const currentIndex = stages.indexOf(activeStage);
+      if (currentIndex < stages.length - 1) {
+        activeStage = stages[currentIndex + 1];
+      }
+
+      renderStage();
+    }
+
+    function generateMessage() {
+      const data = stageData[activeStage];
+      els.messageText.textContent = data.message();
+      addEvent("Message generated", `${data.channel} drafted for ${customer()} at the ${data.label.toLowerCase()} stage.`);
+    }
+
+    function resetDemo() {
+      activeStage = "lead";
+      completed = new Set();
+      eventLog = [
+        {
+          title: "Demo lead loaded",
+          text: "Sample customer record created for Clearline Exterior Services.",
+          time: "Just now"
+        }
+      ];
+
+      els.customerName.value = "Sarah Mitchell";
+      els.serviceType.value = "Exterior wash";
+      els.leadSource.value = "Google search";
+      els.jobValue.value = "$875";
+      els.address.value = "184 Parkside Ave, Rochester, NY";
+      els.notes.value = "Customer wants exterior wash before a graduation party next weekend. Asked for quick estimate and preferred text updates.";
+
+      renderTimeline();
+      renderStage();
+    }
+
+    function escapeHtml(value) {
+      return String(value)
+        .replaceAll("&", "&amp;")
+        .replaceAll("<", "&lt;")
+        .replaceAll(">", "&gt;")
+        .replaceAll('"', "&quot;")
+        .replaceAll("'", "&#039;");
+    }
+
+    document.querySelectorAll(".pipeline-step").forEach(button => {
+      button.addEventListener("click", () => {
+        activeStage = button.dataset.stage;
+        renderStage();
+      });
+    });
+
+    els.primaryAction.addEventListener("click", completeActiveStage);
+    els.secondaryAction.addEventListener("click", generateMessage);
+    els.resetButton.addEventListener("click", resetDemo);
+
+    [els.customerName, els.serviceType, els.leadSource, els.jobValue, els.address, els.notes].forEach(input => {
+      input.addEventListener("input", renderStage);
+      input.addEventListener("change", renderStage);
+    });
+
+    renderTimeline();
+    renderStage();
+  </script>
+</body>
+</html>

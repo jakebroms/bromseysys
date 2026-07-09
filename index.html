@@ -1,0 +1,1212 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Bromsey Systems | Workflow Compression for Growing Businesses</title>
+  <meta name="description" content="Bromsey Systems helps owner-led businesses eliminate manual work with simple systems, automations, dashboards, and lightweight internal tools." />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=Inter:wght@400;500;600;650;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --background: #FAFAF8;
+      --surface: #FFFFFF;
+      --surface-2: #F5F5F2;
+      --text: #11110F;
+      --text-muted: #66665B;
+      --muted-2: #8C8C80;
+      --border: #EDEDE8;
+      --border-strong: #D8D8D0;
+
+      --brand: #245BFF;
+      --brand-hover: #123EF2;
+      --brand-soft: #EEF4FF;
+      --brand-border: #D9E6FF;
+      --brand-dark: #0A1438;
+
+      --success: #17B26A;
+      --warning: #F79009;
+
+      --font-sans: "Inter", "Helvetica Neue", Arial, sans-serif;
+      --font-mono: "IBM Plex Mono", "SFMono-Regular", Consolas, monospace;
+
+      --radius-sm: 6px;
+      --radius-md: 10px;
+      --radius-lg: 16px;
+      --radius-xl: 24px;
+      --radius-full: 999px;
+
+      --shadow-sm: 0 1px 2px rgba(17, 17, 15, 0.06);
+      --shadow-md: 0 8px 24px rgba(17, 17, 15, 0.08);
+      --shadow-lg: 0 24px 80px rgba(17, 17, 15, 0.14);
+      --glow-brand: 0 0 80px rgba(36, 91, 255, 0.35);
+    }
+
+    * { box-sizing: border-box; }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      margin: 0;
+      font-family: var(--font-sans);
+      background:
+        radial-gradient(circle at 82% 8%, rgba(36, 91, 255, 0.10), transparent 28rem),
+        radial-gradient(circle at 14% 18%, rgba(36, 91, 255, 0.06), transparent 22rem),
+        var(--background);
+      color: var(--text);
+      line-height: 1.5;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    .page {
+      overflow: hidden;
+    }
+
+    .nav {
+      width: min(1120px, calc(100% - 40px));
+      margin: 0 auto;
+      padding: 24px 0 16px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 24px;
+    }
+
+    .brand-lockup {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      font-weight: 700;
+      letter-spacing: -0.03em;
+    }
+
+    .mark {
+      width: 34px;
+      height: 34px;
+      border-radius: 10px;
+      background: var(--text);
+      position: relative;
+      box-shadow: var(--shadow-md);
+    }
+
+    .mark::before {
+      content: "";
+      position: absolute;
+      left: 8px;
+      top: 8px;
+      width: 18px;
+      height: 18px;
+      border-radius: 6px;
+      background: var(--brand);
+      box-shadow: 0 0 34px rgba(36, 91, 255, 0.45);
+    }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 22px;
+      font-size: 14px;
+      color: var(--text-muted);
+      font-weight: 500;
+    }
+
+    .nav-links a:hover {
+      color: var(--text);
+    }
+
+    .button {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: var(--radius-md);
+      padding: 12px 18px;
+      font-weight: 650;
+      font-size: 14px;
+      line-height: 1;
+      transition: transform 180ms ease, background 180ms ease, border-color 180ms ease, box-shadow 180ms ease;
+      white-space: nowrap;
+    }
+
+    .button-primary {
+      background: var(--brand);
+      color: #fff;
+      box-shadow: 0 0 40px rgba(36, 91, 255, 0.28);
+      border: 1px solid var(--brand);
+    }
+
+    .button-primary:hover {
+      background: var(--brand-hover);
+      transform: translateY(-1px);
+    }
+
+    .button-secondary {
+      background: var(--surface);
+      color: var(--text);
+      border: 1px solid var(--border);
+      box-shadow: var(--shadow-sm);
+    }
+
+    .button-secondary:hover {
+      border-color: var(--border-strong);
+      transform: translateY(-1px);
+    }
+
+    .hero {
+      width: min(1120px, calc(100% - 40px));
+      margin: 0 auto;
+      padding: 82px 0 72px;
+      display: grid;
+      grid-template-columns: minmax(0, 1.03fr) minmax(420px, 0.97fr);
+      gap: 56px;
+      align-items: center;
+    }
+
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: var(--brand-soft);
+      color: var(--brand-hover);
+      border: 1px solid var(--brand-border);
+      border-radius: var(--radius-full);
+      font-family: var(--font-mono);
+      font-size: 12px;
+      font-weight: 600;
+      letter-spacing: -0.02em;
+      padding: 7px 11px;
+    }
+
+    .pulse {
+      width: 7px;
+      height: 7px;
+      border-radius: 999px;
+      background: var(--brand);
+      box-shadow: 0 0 0 6px rgba(36, 91, 255, 0.10);
+    }
+
+    h1 {
+      margin: 24px 0 24px;
+      font-size: clamp(48px, 7vw, 76px);
+      line-height: 0.94;
+      letter-spacing: -0.065em;
+      font-weight: 650;
+    }
+
+    .hero-copy {
+      color: var(--text-muted);
+      font-size: 19px;
+      line-height: 1.55;
+      max-width: 660px;
+      margin: 0 0 30px;
+    }
+
+    .hero-actions {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      flex-wrap: wrap;
+      margin-bottom: 28px;
+    }
+
+    .trust-row {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      flex-wrap: wrap;
+      color: var(--text-muted);
+      font-family: var(--font-mono);
+      font-size: 12px;
+      letter-spacing: -0.02em;
+    }
+
+    .trust-dot {
+      width: 4px;
+      height: 4px;
+      border-radius: 999px;
+      background: var(--border-strong);
+    }
+
+    .hero-visual {
+      position: relative;
+    }
+
+    .hero-visual::before {
+      content: "";
+      position: absolute;
+      inset: 30px;
+      background: var(--brand);
+      filter: blur(75px);
+      opacity: 0.17;
+      z-index: 0;
+    }
+
+    .ops-card {
+      position: relative;
+      z-index: 1;
+      background: rgba(255, 255, 255, 0.86);
+      backdrop-filter: blur(16px);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-xl);
+      box-shadow: var(--shadow-lg);
+      padding: 22px;
+    }
+
+    .ops-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding-bottom: 18px;
+      border-bottom: 1px solid var(--border);
+      margin-bottom: 18px;
+    }
+
+    .mono-label {
+      font-family: var(--font-mono);
+      color: var(--text-muted);
+      font-size: 12px;
+      letter-spacing: -0.02em;
+      text-transform: uppercase;
+    }
+
+    .status-chip {
+      font-family: var(--font-mono);
+      font-size: 12px;
+      color: var(--brand-hover);
+      background: var(--brand-soft);
+      border: 1px solid var(--brand-border);
+      padding: 6px 9px;
+      border-radius: var(--radius-full);
+      font-weight: 600;
+    }
+
+    .flow {
+      display: grid;
+      gap: 10px;
+    }
+
+    .flow-row {
+      display: grid;
+      grid-template-columns: 94px 1fr auto;
+      gap: 12px;
+      align-items: center;
+      padding: 13px;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-lg);
+      box-shadow: var(--shadow-sm);
+    }
+
+    .flow-tag {
+      font-family: var(--font-mono);
+      font-size: 11px;
+      color: var(--text-muted);
+    }
+
+    .flow-title {
+      font-weight: 650;
+      letter-spacing: -0.02em;
+    }
+
+    .flow-meta {
+      color: var(--text-muted);
+      font-size: 13px;
+      margin-top: 2px;
+    }
+
+    .mini-metric {
+      font-family: var(--font-mono);
+      font-size: 12px;
+      color: var(--success);
+      background: rgba(23, 178, 106, 0.08);
+      border: 1px solid rgba(23, 178, 106, 0.18);
+      border-radius: var(--radius-full);
+      padding: 6px 8px;
+      white-space: nowrap;
+    }
+
+    .visual-footer {
+      margin-top: 14px;
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 10px;
+    }
+
+    .stat {
+      border: 1px solid var(--border);
+      background: var(--surface-2);
+      border-radius: var(--radius-lg);
+      padding: 14px;
+    }
+
+    .stat strong {
+      display: block;
+      font-size: 24px;
+      line-height: 1;
+      letter-spacing: -0.05em;
+      margin-bottom: 6px;
+    }
+
+    .stat span {
+      color: var(--text-muted);
+      font-size: 12px;
+      font-family: var(--font-mono);
+      letter-spacing: -0.02em;
+    }
+
+    .section {
+      width: min(1120px, calc(100% - 40px));
+      margin: 0 auto;
+      padding: 78px 0;
+    }
+
+    .section-tight {
+      padding-top: 40px;
+    }
+
+    .section-heading {
+      display: grid;
+      grid-template-columns: minmax(0, 0.86fr) minmax(260px, 0.64fr);
+      gap: 48px;
+      align-items: end;
+      margin-bottom: 34px;
+    }
+
+    h2 {
+      margin: 14px 0 0;
+      font-size: clamp(36px, 5vw, 54px);
+      line-height: 0.98;
+      letter-spacing: -0.055em;
+      font-weight: 650;
+    }
+
+    .section-heading p {
+      margin: 0;
+      color: var(--text-muted);
+      font-size: 17px;
+      line-height: 1.6;
+    }
+
+    .pain-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 12px;
+    }
+
+    .pain-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-lg);
+      box-shadow: var(--shadow-sm);
+      padding: 19px;
+      min-height: 152px;
+      display: flex;
+      flex-direction: column;
+      gap: 18px;
+      justify-content: space-between;
+    }
+
+    .icon {
+      width: 32px;
+      height: 32px;
+      border-radius: 9px;
+      background: var(--surface-2);
+      border: 1px solid var(--border);
+      display: grid;
+      place-items: center;
+      color: var(--brand);
+    }
+
+    .pain-card p {
+      margin: 0;
+      color: var(--text);
+      font-weight: 600;
+      letter-spacing: -0.025em;
+      line-height: 1.35;
+    }
+
+    .split-system {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 14px;
+      align-items: stretch;
+    }
+
+    .system-panel {
+      border: 1px solid var(--border);
+      border-radius: var(--radius-xl);
+      background: var(--surface);
+      padding: 24px;
+      box-shadow: var(--shadow-md);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .system-panel.after {
+      border-color: var(--brand-border);
+      box-shadow: var(--shadow-md), 0 0 60px rgba(36, 91, 255, 0.12);
+    }
+
+    .panel-title {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      margin-bottom: 20px;
+    }
+
+    .panel-title h3 {
+      margin: 0;
+      font-size: 22px;
+      line-height: 1.1;
+      letter-spacing: -0.04em;
+    }
+
+    .stack {
+      display: grid;
+      gap: 10px;
+    }
+
+    .stack-item {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      padding: 13px 14px;
+      border-radius: var(--radius-md);
+      background: var(--surface-2);
+      border: 1px solid var(--border);
+      color: var(--text-muted);
+      font-size: 14px;
+    }
+
+    .stack-item strong {
+      color: var(--text);
+      font-weight: 650;
+    }
+
+    .connected-line {
+      height: 32px;
+      width: 2px;
+      background: linear-gradient(var(--brand), rgba(36, 91, 255, 0.05));
+      margin: -2px 0 -2px 28px;
+    }
+
+    .services-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 14px;
+    }
+
+    .service-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-xl);
+      box-shadow: var(--shadow-md);
+      padding: 22px;
+      display: flex;
+      flex-direction: column;
+      min-height: 430px;
+      position: relative;
+    }
+
+    .service-card.featured {
+      border-color: var(--brand-border);
+      box-shadow: var(--shadow-md), 0 0 70px rgba(36, 91, 255, 0.15);
+    }
+
+    .service-kicker {
+      font-family: var(--font-mono);
+      color: var(--brand-hover);
+      font-size: 12px;
+      font-weight: 600;
+      letter-spacing: -0.02em;
+      margin-bottom: 18px;
+    }
+
+    .service-card h3 {
+      margin: 0 0 12px;
+      font-size: 24px;
+      line-height: 1;
+      letter-spacing: -0.05em;
+    }
+
+    .service-card p {
+      margin: 0 0 20px;
+      color: var(--text-muted);
+      font-size: 14px;
+      line-height: 1.55;
+    }
+
+    .service-card ul {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+      display: grid;
+      gap: 10px;
+    }
+
+    .service-card li {
+      display: flex;
+      gap: 9px;
+      color: var(--text);
+      font-size: 14px;
+      line-height: 1.35;
+    }
+
+    .check {
+      color: var(--brand);
+      font-weight: 700;
+      flex: 0 0 auto;
+    }
+
+    .price {
+      margin-top: auto;
+      padding-top: 20px;
+      font-family: var(--font-mono);
+      color: var(--text);
+      font-size: 13px;
+      letter-spacing: -0.02em;
+      border-top: 1px solid var(--border);
+    }
+
+    .price strong {
+      display: block;
+      font-family: var(--font-sans);
+      font-size: 24px;
+      letter-spacing: -0.05em;
+      margin-top: 5px;
+    }
+
+    .capabilities {
+      display: grid;
+      grid-template-columns: 0.82fr 1.18fr;
+      gap: 18px;
+      align-items: stretch;
+    }
+
+    .dark-card {
+      background:
+        radial-gradient(circle at 76% 20%, rgba(36, 91, 255, 0.32), transparent 22rem),
+        #11110F;
+      color: #FAFAF8;
+      border-radius: var(--radius-xl);
+      padding: 30px;
+      min-height: 400px;
+      box-shadow: var(--shadow-lg);
+      position: relative;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .dark-card h2 {
+      color: #FAFAF8;
+      margin-top: 18px;
+    }
+
+    .dark-card p {
+      color: #B8B8AC;
+      font-size: 17px;
+      line-height: 1.6;
+      margin: 18px 0 0;
+      max-width: 520px;
+    }
+
+    .metric-strip {
+      position: static;
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 10px;
+      margin-top: auto;
+      padding-top: 34px;
+    }
+
+    .metric-strip .stat {
+      background: rgba(250,250,248,0.07);
+      border-color: rgba(250,250,248,0.10);
+      min-width: 0;
+    }
+
+    .metric-strip .stat span {
+      color: #B8B8AC;
+    }
+
+    .cap-list {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-xl);
+      padding: 24px;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px;
+      box-shadow: var(--shadow-md);
+    }
+
+    .cap-item {
+      padding: 15px;
+      border: 1px solid var(--border);
+      border-radius: var(--radius-lg);
+      background: var(--surface-2);
+    }
+
+    .cap-item h3 {
+      margin: 0 0 8px;
+      font-size: 16px;
+      letter-spacing: -0.03em;
+    }
+
+    .cap-item p {
+      margin: 0;
+      color: var(--text-muted);
+      font-size: 14px;
+      line-height: 1.45;
+    }
+
+    .proof-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 14px;
+    }
+
+    .proof-card {
+      border: 1px solid var(--border);
+      background: var(--surface);
+      border-radius: var(--radius-xl);
+      padding: 24px;
+      box-shadow: var(--shadow-sm);
+    }
+
+    .proof-card h3 {
+      margin: 18px 0 10px;
+      font-size: 20px;
+      letter-spacing: -0.04em;
+      line-height: 1.1;
+    }
+
+    .proof-card p {
+      margin: 0;
+      color: var(--text-muted);
+      font-size: 15px;
+      line-height: 1.55;
+    }
+
+    .cta {
+      width: min(1120px, calc(100% - 40px));
+      margin: 34px auto 96px;
+      background:
+        radial-gradient(circle at 88% 18%, rgba(36, 91, 255, 0.24), transparent 26rem),
+        #11110F;
+      color: #FAFAF8;
+      border-radius: 32px;
+      padding: clamp(34px, 6vw, 64px);
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) auto;
+      gap: 32px;
+      align-items: end;
+      box-shadow: var(--shadow-lg);
+    }
+
+    .cta h2 {
+      color: #FAFAF8;
+      margin-top: 16px;
+      max-width: 800px;
+    }
+
+    .cta p {
+      color: #B8B8AC;
+      font-size: 18px;
+      line-height: 1.6;
+      margin: 18px 0 0;
+      max-width: 760px;
+    }
+
+    .cta .button-secondary {
+      background: #FAFAF8;
+      border-color: #FAFAF8;
+    }
+
+    .footer {
+      width: min(1120px, calc(100% - 40px));
+      margin: 0 auto;
+      padding: 0 0 40px;
+      color: var(--text-muted);
+      font-size: 13px;
+      display: flex;
+      justify-content: space-between;
+      gap: 20px;
+      flex-wrap: wrap;
+      font-family: var(--font-mono);
+    }
+
+    .footer-links {
+      display: flex;
+      gap: 16px;
+    }
+
+    .footer-links a:hover {
+      color: var(--text);
+    }
+
+    @media (max-width: 980px) {
+      .hero {
+        grid-template-columns: 1fr;
+        padding-top: 56px;
+      }
+
+      .hero-visual {
+        max-width: 620px;
+      }
+
+      .section-heading,
+      .capabilities,
+      .cta {
+        grid-template-columns: 1fr;
+      }
+
+      .pain-grid,
+      .services-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      .split-system,
+      .proof-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .service-card {
+        min-height: auto;
+      }
+    }
+
+    @media (max-width: 680px) {
+      .nav-links {
+        display: none;
+      }
+
+      .hero,
+      .section,
+      .cta,
+      .nav,
+      .footer {
+        width: min(100% - 28px, 1120px);
+      }
+
+      .hero {
+        padding-bottom: 46px;
+      }
+
+      h1 {
+        font-size: 49px;
+      }
+
+      .hero-copy {
+        font-size: 17px;
+      }
+
+      .pain-grid,
+      .services-grid,
+      .cap-list,
+      .visual-footer,
+      .metric-strip {
+        grid-template-columns: 1fr;
+      }
+
+      .flow-row {
+        grid-template-columns: 1fr;
+      }
+
+      .section {
+        padding: 54px 0;
+      }
+
+      .cta {
+        margin-bottom: 56px;
+        border-radius: 24px;
+      }
+    }
+
+    @media print {
+      body {
+        background: #fff;
+      }
+      .button, .nav-links {
+        display: none;
+      }
+      .hero, .section, .cta {
+        page-break-inside: avoid;
+      }
+      .cta, .dark-card {
+        background: #11110F !important;
+        -webkit-print-color-adjust: exact;
+        print-color-adjust: exact;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <main class="page">
+    <nav class="nav" aria-label="Main navigation">
+      <a class="brand-lockup" href="index.html">
+        <span class="mark" aria-hidden="true"></span>
+        <span>Bromsey Systems</span>
+      </a>
+      <div class="nav-links">
+        <a href="index.html">Home</a>
+        <a href="workflow-audit.html">Workflow Audit</a>
+        <a href="demo.html">Demo</a>
+        <a class="button button-primary" href="mailto:hello@bromseysystems.com?subject=Workflow%20Audit%20Inquiry">Book a workflow audit</a>
+      </div>
+    </nav>
+
+    <section class="hero">
+      <div>
+        <span class="badge"><span class="pulse"></span> Workflow compression for growing businesses</span>
+        <h1>Find the manual work. Fix the workflow. Get the hours back.</h1>
+        <p class="hero-copy">
+          Bromsey Systems helps owner-led businesses replace spreadsheet chaos, duplicate data entry, and disconnected tools with simple workflows, automations, dashboards, and lightweight internal software.
+        </p>
+        <div class="hero-actions">
+          <a class="button button-primary" href="mailto:hello@bromseysystems.com?subject=Workflow%20Audit%20Inquiry">Book a workflow audit</a>
+          <a class="button button-secondary" href="#services">See the offers</a>
+        </div>
+        <div class="trust-row" aria-label="Trust signals">
+          <span>Built for operators</span>
+          <span class="trust-dot"></span>
+          <span>Finance-grade systems</span>
+          <span class="trust-dot"></span>
+          <span>Fast implementation</span>
+        </div>
+      </div>
+
+      <div class="hero-visual" aria-label="Workflow system example">
+        <div class="ops-card">
+          <div class="ops-header">
+            <div>
+              <div class="mono-label">Workflow OS</div>
+              <strong>Lead → Job → Invoice</strong>
+            </div>
+            <span class="status-chip">Live system</span>
+          </div>
+
+          <div class="flow">
+            <div class="flow-row">
+              <span class="flow-tag">INTAKE</span>
+              <div>
+                <div class="flow-title">New request captured</div>
+                <div class="flow-meta">Form, email, and phone notes routed into one queue</div>
+              </div>
+              <span class="mini-metric">-3 steps</span>
+            </div>
+
+            <div class="flow-row">
+              <span class="flow-tag">FOLLOW-UP</span>
+              <div>
+                <div class="flow-title">Estimate reminders triggered</div>
+                <div class="flow-meta">No more spreadsheet tracking or memory-based follow-up</div>
+              </div>
+              <span class="mini-metric">+8 hrs/wk</span>
+            </div>
+
+            <div class="flow-row">
+              <span class="flow-tag">VISIBILITY</span>
+              <div>
+                <div class="flow-title">Owner dashboard updated</div>
+                <div class="flow-meta">Open leads, active jobs, aging invoices, and next actions</div>
+              </div>
+              <span class="mini-metric">1 view</span>
+            </div>
+          </div>
+
+          <div class="visual-footer">
+            <div class="stat">
+              <strong>10+</strong>
+              <span>hours found</span>
+            </div>
+            <div class="stat">
+              <strong>4</strong>
+              <span>tools connected</span>
+            </div>
+            <div class="stat">
+              <strong>1</strong>
+              <span>clean workflow</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section section-tight">
+      <div class="section-heading">
+        <div>
+          <span class="badge">Symptoms of operational drag</span>
+          <h2>You do not need more software. You need better workflows.</h2>
+        </div>
+        <p>
+          Most growing businesses already have tools. The problem is the manual work between those tools: copying data, chasing updates, building reports, and remembering follow-ups.
+        </p>
+      </div>
+
+      <div class="pain-grid">
+        <div class="pain-card">
+          <span class="icon">↔</span>
+          <p>Your team enters the same information in multiple places.</p>
+        </div>
+        <div class="pain-card">
+          <span class="icon">▦</span>
+          <p>Your business depends on spreadsheets only one person understands.</p>
+        </div>
+        <div class="pain-card">
+          <span class="icon">!</span>
+          <p>Leads, jobs, tasks, or follow-ups slip through the cracks.</p>
+        </div>
+        <div class="pain-card">
+          <span class="icon">◎</span>
+          <p>The owner is still the central router for every update and decision.</p>
+        </div>
+        <div class="pain-card">
+          <span class="icon">⌁</span>
+          <p>Customer updates and internal handoffs are handled manually.</p>
+        </div>
+        <div class="pain-card">
+          <span class="icon">▤</span>
+          <p>Reports take hours to pull together from scattered sources.</p>
+        </div>
+        <div class="pain-card">
+          <span class="icon">⎇</span>
+          <p>You pay for software but still do work around it.</p>
+        </div>
+        <div class="pain-card">
+          <span class="icon">AI</span>
+          <p>You know automation could help, but you are not sure where to start.</p>
+        </div>
+      </div>
+    </section>
+
+    <section id="systems" class="section">
+      <div class="section-heading">
+        <div>
+          <span class="badge">Before / after</span>
+          <h2>Compress messy operations into one clean operating rhythm.</h2>
+        </div>
+        <p>
+          The goal is not to rebuild your entire business. The goal is to remove unnecessary steps, connect the tools that matter, and give your team a system they will actually use.
+        </p>
+      </div>
+
+      <div class="split-system">
+        <div class="system-panel">
+          <div class="panel-title">
+            <h3>Before</h3>
+            <span class="mono-label">Manual drag</span>
+          </div>
+          <div class="stack">
+            <div class="stack-item"><strong>Lead info</strong><span>Email inbox</span></div>
+            <div class="stack-item"><strong>Follow-up</strong><span>Memory</span></div>
+            <div class="stack-item"><strong>Job status</strong><span>Spreadsheet</span></div>
+            <div class="stack-item"><strong>Invoices</strong><span>QuickBooks</span></div>
+            <div class="stack-item"><strong>Reporting</strong><span>Manual export</span></div>
+          </div>
+        </div>
+
+        <div class="system-panel after">
+          <div class="panel-title">
+            <h3>After</h3>
+            <span class="status-chip">Compressed</span>
+          </div>
+          <div class="stack">
+            <div class="stack-item"><strong>Intake</strong><span>One source of truth</span></div>
+            <div class="connected-line"></div>
+            <div class="stack-item"><strong>Automation</strong><span>Follow-ups and routing</span></div>
+            <div class="connected-line"></div>
+            <div class="stack-item"><strong>Dashboard</strong><span>Owner visibility</span></div>
+            <div class="connected-line"></div>
+            <div class="stack-item"><strong>System</strong><span>Less manual work</span></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="services" class="section">
+      <div class="section-heading">
+        <div>
+          <span class="badge">Productized services</span>
+          <h2>Start small. Fix the highest-value workflow first.</h2>
+        </div>
+        <p>
+          Each engagement is scoped around business outcomes: fewer manual steps, cleaner data, better visibility, and time returned to the owner and team.
+        </p>
+      </div>
+
+      <div class="services-grid">
+        <article id="audit" class="service-card featured">
+          <div class="service-kicker">01 / DIAGNOSE</div>
+          <h3>Workflow Audit</h3>
+          <p>For businesses that know operations are messy but are not sure what to fix first.</p>
+          <ul>
+            <li><span class="check">✓</span><span>Current workflow review</span></li>
+            <li><span class="check">✓</span><span>Software and spreadsheet inventory</span></li>
+            <li><span class="check">✓</span><span>Duplicate-entry analysis</span></li>
+            <li><span class="check">✓</span><span>Top automation opportunities</span></li>
+            <li><span class="check">✓</span><span>Roadmap and fixed-price quote</span></li>
+          </ul>
+          <div class="price">Typical investment <strong>$1.5k–$3.5k</strong></div>
+        </article>
+
+        <article class="service-card">
+          <div class="service-kicker">02 / IMPLEMENT</div>
+          <h3>Workflow Sprint</h3>
+          <p>A focused sprint to remove manual work from one painful workflow.</p>
+          <ul>
+            <li><span class="check">✓</span><span>Lead intake and follow-up</span></li>
+            <li><span class="check">✓</span><span>Estimate or quote tracking</span></li>
+            <li><span class="check">✓</span><span>Customer onboarding</span></li>
+            <li><span class="check">✓</span><span>Reporting workflows</span></li>
+            <li><span class="check">✓</span><span>AI-assisted email or document processing</span></li>
+          </ul>
+          <div class="price">Typical investment <strong>$5k–$12k</strong></div>
+        </article>
+
+        <article class="service-card">
+          <div class="service-kicker">03 / BUILD</div>
+          <h3>Custom Micro App</h3>
+          <p>Lightweight internal software built around how your business actually works.</p>
+          <ul>
+            <li><span class="check">✓</span><span>Custom CRM</span></li>
+            <li><span class="check">✓</span><span>Job tracker or scheduling board</span></li>
+            <li><span class="check">✓</span><span>Field inspection app</span></li>
+            <li><span class="check">✓</span><span>Quote builder</span></li>
+            <li><span class="check">✓</span><span>Operations dashboard</span></li>
+          </ul>
+          <div class="price">Typical investment <strong>$10k–$30k+</strong></div>
+        </article>
+
+        <article class="service-card">
+          <div class="service-kicker">04 / OPERATE</div>
+          <h3>Systems Partner</h3>
+          <p>Ongoing workflow, automation, and systems support without a full-time CIO.</p>
+          <ul>
+            <li><span class="check">✓</span><span>Monthly workflow review</span></li>
+            <li><span class="check">✓</span><span>Automation backlog management</span></li>
+            <li><span class="check">✓</span><span>CRM and dashboard improvements</span></li>
+            <li><span class="check">✓</span><span>Software recommendations</span></li>
+            <li><span class="check">✓</span><span>Training and documentation</span></li>
+          </ul>
+          <div class="price">Typical investment <strong>$2.5k–$7.5k/mo</strong></div>
+        </article>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="capabilities">
+        <div class="dark-card">
+          <span class="badge">Practical systems, not AI hype</span>
+          <h2>Built for the work your team actually does.</h2>
+          <p>
+            Bromsey Systems combines operations experience, CRM design, software integration, automation, and AI-assisted development to help businesses move faster without adding complexity.
+          </p>
+          <div class="metric-strip">
+            <div class="stat">
+              <strong>Less</strong>
+              <span>manual routing</span>
+            </div>
+            <div class="stat">
+              <strong>Cleaner</strong>
+              <span>business data</span>
+            </div>
+            <div class="stat">
+              <strong>Faster</strong>
+              <span>follow-through</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="cap-list">
+          <div class="cap-item">
+            <h3>CRM design</h3>
+            <p>Lead, customer, job, and follow-up workflows built around the actual sales process.</p>
+          </div>
+          <div class="cap-item">
+            <h3>Automation</h3>
+            <p>Remove duplicate entry, reminders, routing, status updates, and other recurring admin.</p>
+          </div>
+          <div class="cap-item">
+            <h3>Dashboards</h3>
+            <p>Give owners and managers visibility into what is open, stuck, aging, or at risk.</p>
+          </div>
+          <div class="cap-item">
+            <h3>AI workflows</h3>
+            <p>Use AI for practical document, email, intake, summary, and knowledge workflows.</p>
+          </div>
+          <div class="cap-item">
+            <h3>Micro apps</h3>
+            <p>Build the missing internal tool when off-the-shelf software is too clunky.</p>
+          </div>
+          <div class="cap-item">
+            <h3>Training</h3>
+            <p>Document the system and teach the team how to keep the workflow alive.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="section-heading">
+        <div>
+          <span class="badge">Why Bromsey Systems</span>
+          <h2>Operations first. Software second.</h2>
+        </div>
+        <p>
+          The best internal tools are not built around technology trends. They are built around clear ownership, fewer handoffs, cleaner data, and the shortest path from request to result.
+        </p>
+      </div>
+
+      <div class="proof-grid">
+        <div class="proof-card">
+          <span class="icon">01</span>
+          <h3>Understands messy work</h3>
+          <p>We start with how the process actually happens today, including the spreadsheets, inboxes, workarounds, and owner-dependent decisions.</p>
+        </div>
+        <div class="proof-card">
+          <span class="icon">02</span>
+          <h3>Builds lightweight</h3>
+          <p>No bloated agency process. No unnecessary enterprise complexity. Just practical systems designed to remove drag.</p>
+        </div>
+        <div class="proof-card">
+          <span class="icon">03</span>
+          <h3>Focuses on adoption</h3>
+          <p>A workflow only works if the team uses it. Every build includes structure, documentation, and training.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="cta">
+      <div>
+        <span class="badge"><span class="pulse"></span> Start with a Workflow Audit</span>
+        <h2>Find where your business is losing time before buying or building more software.</h2>
+        <p>
+          We will map your current workflow, identify manual drag, prioritize the highest-value fixes, and define the first implementation sprint.
+        </p>
+      </div>
+      <a class="button button-secondary" href="mailto:hello@bromseysystems.com?subject=Workflow%20Audit%20Inquiry">Book a workflow audit</a>
+    </section>
+
+    <footer class="footer">
+      <span>© 2026 Bromsey Systems</span>
+      <span>Custom systems, automations, and dashboards for teams that need less manual work and more operating leverage.</span>
+      <span class="footer-links">
+        <a href="index.html">Home</a>
+        <a href="workflow-audit.html">Workflow Audit</a>
+        <a href="demo.html">Demo</a>
+      </span>
+    </footer>
+  </main>
+</body>
+</html>
