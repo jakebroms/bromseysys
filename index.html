@@ -124,6 +124,42 @@
       color: var(--text);
     }
 
+    .nav-toggle {
+      display: none;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      gap: 5px;
+      width: 38px;
+      height: 38px;
+      border-radius: var(--radius-md);
+      border: 1px solid var(--border);
+      background: var(--surface);
+      cursor: pointer;
+      padding: 0;
+      margin-left: auto;
+    }
+
+    .nav-toggle-bar {
+      display: block;
+      width: 16px;
+      height: 2px;
+      background: var(--text);
+      transition: transform 200ms ease, opacity 200ms ease;
+    }
+
+    .nav-toggle.active .nav-toggle-bar:nth-child(1) {
+      transform: translateY(7px) rotate(45deg);
+    }
+
+    .nav-toggle.active .nav-toggle-bar:nth-child(2) {
+      opacity: 0;
+    }
+
+    .nav-toggle.active .nav-toggle-bar:nth-child(3) {
+      transform: translateY(-7px) rotate(-45deg);
+    }
+
     .button {
       display: inline-flex;
       align-items: center;
@@ -789,8 +825,27 @@
     }
 
     @media (max-width: 680px) {
+      .nav-toggle {
+        display: flex;
+      }
+
+      .nav-links {
+        flex-basis: 100%;
+      }
+
       .nav-links a:not(.button) {
         display: none;
+      }
+
+      .nav-links.open {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 14px;
+        padding-top: 8px;
+      }
+
+      .nav-links.open a:not(.button) {
+        display: block;
       }
 
       .hero,
@@ -861,7 +916,12 @@
         <span class="mark" aria-hidden="true"></span>
         <span>Bromsey Systems</span>
       </a>
-      <div class="nav-links">
+      <button class="nav-toggle" id="navToggle" type="button" aria-label="Toggle menu" aria-expanded="false" aria-controls="navLinks">
+        <span class="nav-toggle-bar"></span>
+        <span class="nav-toggle-bar"></span>
+        <span class="nav-toggle-bar"></span>
+      </button>
+      <div class="nav-links" id="navLinks">
         <a href="index.html">Home</a>
         <a href="workflow-audit.html">Workflow Audit</a>
         <a href="demo.html">Demo</a>
@@ -1211,5 +1271,24 @@
       </span>
     </footer>
   </main>
+
+  <script>
+    const navToggle = document.getElementById("navToggle");
+    const navLinks = document.getElementById("navLinks");
+
+    navToggle.addEventListener("click", () => {
+      const isOpen = navLinks.classList.toggle("open");
+      navToggle.classList.toggle("active", isOpen);
+      navToggle.setAttribute("aria-expanded", String(isOpen));
+    });
+
+    navLinks.querySelectorAll("a").forEach(link => {
+      link.addEventListener("click", () => {
+        navLinks.classList.remove("open");
+        navToggle.classList.remove("active");
+        navToggle.setAttribute("aria-expanded", "false");
+      });
+    });
+  </script>
 </body>
 </html>
