@@ -517,6 +517,135 @@
       flex: 0 0 auto;
     }
 
+    /* ---- Celebratory feedback ---- */
+
+    @keyframes stepPop {
+      0% { transform: scale(1); }
+      45% { transform: scale(1.28); }
+      100% { transform: scale(1); }
+    }
+
+    .stepper-node.celebrate .stepper-circle {
+      animation: stepPop 480ms ease;
+    }
+
+    @keyframes metricPulse {
+      0% { background: var(--success-soft); border-color: var(--success-border); }
+      100% { background: var(--surface-2); border-color: var(--border); }
+    }
+
+    .metric-card.metric-pulse {
+      animation: metricPulse 900ms ease;
+    }
+
+    .send-status {
+      font-family: var(--font-mono);
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: -0.01em;
+      color: var(--muted);
+    }
+
+    @keyframes pulseFade {
+      0%, 100% { opacity: 0.45; }
+      50% { opacity: 1; }
+    }
+
+    .send-status.sending {
+      color: var(--brand-hover);
+      animation: pulseFade 850ms ease-in-out infinite;
+    }
+
+    .send-status.sent {
+      color: var(--success);
+    }
+
+    .toast-stack {
+      position: fixed;
+      right: 20px;
+      bottom: 20px;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      z-index: 60;
+      max-width: 340px;
+    }
+
+    .toast {
+      background: var(--surface);
+      border: 1px solid var(--success-border);
+      box-shadow: var(--shadow-lg);
+      border-radius: var(--radius-lg);
+      padding: 13px 15px;
+      font-size: 13.5px;
+      line-height: 1.45;
+      color: var(--text);
+      opacity: 0;
+      transform: translateY(12px);
+      transition: opacity 220ms ease, transform 220ms ease;
+    }
+
+    .toast.show {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .toast strong {
+      display: block;
+      color: var(--success);
+      font-size: 12.5px;
+      letter-spacing: -0.02em;
+      margin-bottom: 4px;
+    }
+
+    @keyframes completionIn {
+      0% { opacity: 0; transform: translateY(8px) scale(0.98); }
+      100% { opacity: 1; transform: translateY(0) scale(1); }
+    }
+
+    .completion-panel:not(.hidden) {
+      animation: completionIn 420ms ease;
+    }
+
+    .completion-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      font-family: var(--font-mono);
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: -0.02em;
+      color: var(--success);
+      background: var(--success-soft);
+      border: 1px solid var(--success-border);
+      border-radius: var(--radius-full);
+      padding: 7px 12px;
+      margin-bottom: 16px;
+    }
+
+    .completion-panel h3 {
+      margin: 0 0 10px;
+      font-size: 24px;
+      letter-spacing: -0.045em;
+      line-height: 1.15;
+    }
+
+    .completion-panel > p {
+      margin: 0 0 22px;
+      color: var(--muted);
+      font-size: 15px;
+      line-height: 1.55;
+      max-width: 520px;
+    }
+
+    .completion-stats {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 10px;
+      margin-bottom: 24px;
+      max-width: 520px;
+    }
+
     .panel {
       background: var(--surface);
       border: 1px solid var(--border);
@@ -968,6 +1097,16 @@
         align-items: flex-start;
         flex-direction: column;
       }
+
+      .completion-stats {
+        grid-template-columns: 1fr 1fr;
+      }
+
+      .toast-stack {
+        left: 14px;
+        right: 14px;
+        max-width: none;
+      }
     }
   </style>
 </head>
@@ -1052,75 +1191,102 @@
 
           <div class="workspace-grid">
             <div class="workspace-main" aria-label="Interactive workflow record">
-              <div class="workspace-main-head">
-                <div class="mono">Customer record</div>
-                <h3 id="recordTitle">New lead intake</h3>
-                <p class="step-desc" id="stepDesc">Capture the request once and create the customer record.</p>
-              </div>
+              <div class="workflow-form" id="workflowForm">
+                <div class="workspace-main-head">
+                  <div class="mono">Customer record</div>
+                  <h3 id="recordTitle">New lead intake</h3>
+                  <p class="step-desc" id="stepDesc">Capture the request once and create the customer record.</p>
+                </div>
 
-              <div class="hint-banner" id="hintBanner">
-                <span>👋 <strong>Try it:</strong> edit any field below, then click "Capture lead" to move the workflow forward.</span>
-                <button type="button" class="hint-dismiss" id="hintDismiss" aria-label="Dismiss tip">×</button>
-              </div>
+                <div class="hint-banner" id="hintBanner">
+                  <span>👋 <strong>Try it:</strong> edit any field below, then click "Capture lead" to move the workflow forward.</span>
+                  <button type="button" class="hint-dismiss" id="hintDismiss" aria-label="Dismiss tip">×</button>
+                </div>
 
-              <div class="record-grid">
-                <div class="field">
-                  <label for="customerName">Customer</label>
-                  <input id="customerName" value="Sarah Mitchell" />
-                </div>
-                <div class="field">
-                  <label for="serviceType">Service</label>
-                  <select id="serviceType">
-                    <option>Gutter cleaning</option>
-                    <option selected>Exterior wash</option>
-                    <option>Drainage repair</option>
-                    <option>Window cleaning</option>
-                    <option>Roof moss treatment</option>
-                  </select>
-                </div>
-                <div class="field">
-                  <label for="leadSource">Lead source</label>
-                  <select id="leadSource">
-                    <option selected>Google search</option>
-                    <option>Referral</option>
-                    <option>Facebook</option>
-                    <option>Repeat customer</option>
-                    <option>Yard sign</option>
-                  </select>
-                </div>
-                <div class="field">
-                  <label for="jobValue">Estimated value</label>
-                  <input id="jobValue" value="$875" />
-                </div>
-                <div class="field full">
-                  <label for="address">Address</label>
-                  <input id="address" value="184 Parkside Ave, Rochester, NY" />
-                </div>
-                <div class="field full">
-                  <label for="notes">Request notes</label>
-                  <textarea id="notes">Customer wants exterior wash before a graduation party next weekend. Asked for quick estimate and preferred text updates.</textarea>
-                </div>
-              </div>
-
-              <div class="action-row" id="actionRow">
-                <button class="button button-primary" type="button" id="primaryAction">Capture lead</button>
-                <button class="button button-secondary" type="button" id="secondaryAction">Generate next message</button>
-              </div>
-
-              <div class="context-card">
-                <h4 id="contextTitle">What this replaces</h4>
-                <p id="contextText">Instead of copying this lead from email into a spreadsheet and then remembering to follow up, the intake creates one record and the next action automatically.</p>
-              </div>
-
-              <div class="message-box">
-                <div class="message-top">
-                  <span class="message-title" id="messageTitle">Suggested customer message</span>
-                  <div class="message-top-actions">
-                    <span class="status-pill" id="messageChannel">Text</span>
-                    <button type="button" class="copy-btn" id="copyMessageBtn">Copy</button>
+                <div class="record-grid">
+                  <div class="field">
+                    <label for="customerName">Customer</label>
+                    <input id="customerName" value="Sarah Mitchell" />
+                  </div>
+                  <div class="field">
+                    <label for="serviceType">Service</label>
+                    <select id="serviceType">
+                      <option>Gutter cleaning</option>
+                      <option selected>Exterior wash</option>
+                      <option>Drainage repair</option>
+                      <option>Window cleaning</option>
+                      <option>Roof moss treatment</option>
+                    </select>
+                  </div>
+                  <div class="field">
+                    <label for="leadSource">Lead source</label>
+                    <select id="leadSource">
+                      <option selected>Google search</option>
+                      <option>Referral</option>
+                      <option>Facebook</option>
+                      <option>Repeat customer</option>
+                      <option>Yard sign</option>
+                    </select>
+                  </div>
+                  <div class="field">
+                    <label for="jobValue">Estimated value</label>
+                    <input id="jobValue" value="$875" />
+                  </div>
+                  <div class="field full">
+                    <label for="address">Address</label>
+                    <input id="address" value="184 Parkside Ave, Rochester, NY" />
+                  </div>
+                  <div class="field full">
+                    <label for="notes">Request notes</label>
+                    <textarea id="notes">Customer wants exterior wash before a graduation party next weekend. Asked for quick estimate and preferred text updates.</textarea>
                   </div>
                 </div>
-                <p id="messageText">Hi Sarah — thanks for reaching out to Clearline Exterior Services. We received your exterior wash request for 184 Parkside Ave and will send over an estimate shortly.</p>
+
+                <div class="action-row" id="actionRow">
+                  <button class="button button-primary" type="button" id="primaryAction">Capture lead</button>
+                  <button class="button button-secondary" type="button" id="secondaryAction">Generate next message</button>
+                </div>
+
+                <div class="context-card">
+                  <h4 id="contextTitle">What this replaces</h4>
+                  <p id="contextText">Instead of copying this lead from email into a spreadsheet and then remembering to follow up, the intake creates one record and the next action automatically.</p>
+                </div>
+
+                <div class="message-box">
+                  <div class="message-top">
+                    <span class="message-title" id="messageTitle">Suggested customer message</span>
+                    <div class="message-top-actions">
+                      <span class="status-pill" id="messageChannel">Text</span>
+                      <span class="send-status" id="sendStatus"></span>
+                      <button type="button" class="copy-btn" id="copyMessageBtn">Copy</button>
+                    </div>
+                  </div>
+                  <p id="messageText">Hi Sarah — thanks for reaching out to Clearline Exterior Services. We received your exterior wash request for 184 Parkside Ave and will send over an estimate shortly.</p>
+                </div>
+              </div>
+
+              <div class="completion-panel hidden" id="completionPanel">
+                <span class="completion-badge">🎉 Workflow complete</span>
+                <h3>Every step happened without a spreadsheet, a sticky note, or a reminder.</h3>
+                <p>This is what a compressed workflow looks like running for real — on every lead, every day, without the owner chasing any of it.</p>
+                <div class="completion-stats">
+                  <div class="metric-card">
+                    <strong id="finalHours">6.3</strong>
+                    <span>hours saved / week</span>
+                  </div>
+                  <div class="metric-card">
+                    <strong id="finalSteps">14</strong>
+                    <span>manual steps cut</span>
+                  </div>
+                  <div class="metric-card">
+                    <strong id="finalTouches">8</strong>
+                    <span>owner touches removed</span>
+                  </div>
+                </div>
+                <div class="action-row">
+                  <a class="button button-primary" href="mailto:hello@bromseysystems.com?subject=Workflow%20Audit">Book a workflow audit</a>
+                  <button class="button button-secondary" type="button" id="restartDemoBtn">Run the demo again</button>
+                </div>
               </div>
             </div>
 
@@ -1225,6 +1391,8 @@
     </footer>
   </div>
 
+  <div class="toast-stack" id="toastStack" aria-live="polite"></div>
+
   <script>
     const stages = ["lead", "estimate", "job", "invoice", "review"];
 
@@ -1240,7 +1408,8 @@
         channel: "Text",
         message: () => `Hi ${customer()} — thanks for reaching out to Clearline Exterior Services. We received your ${service().toLowerCase()} request for ${shortAddress()} and will send over an estimate shortly.`,
         eventTitle: "Lead captured",
-        eventText: () => `${customer()} was added from ${source()} with a ${value()} estimated opportunity.`
+        eventText: () => `${customer()} was added from ${source()} with a ${value()} estimated opportunity.`,
+        payoff: "You didn't have to copy this into a spreadsheet — the record and the next action were created for you."
       },
       estimate: {
         label: "Estimate",
@@ -1253,7 +1422,8 @@
         channel: "Email",
         message: () => `Hi ${customer()} — just checking in on the ${service().toLowerCase()} estimate for ${shortAddress()}. We can still get you scheduled before your target date if you would like to move forward.`,
         eventTitle: "Estimate follow-up queued",
-        eventText: () => `Follow-up reminder created for ${customer()} after estimate delivery.`
+        eventText: () => `Follow-up reminder created for ${customer()} after estimate delivery.`,
+        payoff: "No sticky note, no spreadsheet reminder — the follow-up was scheduled the moment the estimate went out."
       },
       job: {
         label: "Job",
@@ -1266,7 +1436,8 @@
         channel: "Customer update",
         message: () => `Hi ${customer()} — your ${service().toLowerCase()} job at ${shortAddress()} is now marked complete. We appreciate the opportunity to help.`,
         eventTitle: "Job completed",
-        eventText: () => `${service()} moved from scheduled to completed. Invoice reminder is now ready.`
+        eventText: () => `${service()} moved from scheduled to completed. Invoice reminder is now ready.`,
+        payoff: "The crew, the office, and the customer can all see this status without a phone call."
       },
       invoice: {
         label: "Invoice",
@@ -1279,7 +1450,8 @@
         channel: "Email",
         message: () => `Hi ${customer()} — thanks again for choosing Clearline Exterior Services. Your invoice for ${value()} has been sent. Please let us know if you have any questions.`,
         eventTitle: "Invoice reminder sent",
-        eventText: () => `Invoice reminder created for ${value()} and attached to the customer record.`
+        eventText: () => `Invoice reminder created for ${value()} and attached to the customer record.`,
+        payoff: "Billing became the next action the moment the job closed — nothing to remember."
       },
       review: {
         label: "Review",
@@ -1292,7 +1464,8 @@
         channel: "Text",
         message: () => `Hi ${customer()} — thanks again for working with Clearline Exterior Services. If you were happy with the ${service().toLowerCase()}, would you mind leaving us a quick Google review? It really helps local customers find us.`,
         eventTitle: "Review request sent",
-        eventText: () => `Review request sent to ${customer()} after completion and invoice follow-up.`
+        eventText: () => `Review request sent to ${customer()} after completion and invoice follow-up.`,
+        payoff: "The review request went out on its own, right when it mattered most."
       }
     };
 
@@ -1324,6 +1497,7 @@
       messageChannel: document.getElementById("messageChannel"),
       messageText: document.getElementById("messageText"),
       copyMessageBtn: document.getElementById("copyMessageBtn"),
+      sendStatus: document.getElementById("sendStatus"),
       hoursSaved: document.getElementById("hoursSaved"),
       stepsCut: document.getElementById("stepsCut"),
       openTasks: document.getElementById("openTasks"),
@@ -1335,8 +1509,17 @@
       hintDismiss: document.getElementById("hintDismiss"),
       progressPill: document.getElementById("progressPill"),
       progressLabel: document.getElementById("progressLabel"),
-      progressFill: document.getElementById("progressFill")
+      progressFill: document.getElementById("progressFill"),
+      toastStack: document.getElementById("toastStack"),
+      workflowForm: document.getElementById("workflowForm"),
+      completionPanel: document.getElementById("completionPanel"),
+      finalHours: document.getElementById("finalHours"),
+      finalSteps: document.getElementById("finalSteps"),
+      finalTouches: document.getElementById("finalTouches"),
+      restartDemoBtn: document.getElementById("restartDemoBtn")
     };
+
+    let isBusy = false;
 
     function customer() {
       return els.customerName.value.trim() || "the customer";
@@ -1433,12 +1616,14 @@
       els.messageChannel.textContent = data.channel;
       els.messageText.textContent = data.message();
 
-      if (isDone && isFinalStage) {
-        els.primaryAction.textContent = "Workflow complete";
-        els.primaryAction.disabled = true;
-      } else {
-        els.primaryAction.disabled = false;
-        els.primaryAction.textContent = isDone ? "Continue to next step" : data.primary;
+      if (!isBusy) {
+        if (isDone && isFinalStage) {
+          els.primaryAction.textContent = "Workflow complete";
+          els.primaryAction.disabled = true;
+        } else {
+          els.primaryAction.disabled = false;
+          els.primaryAction.textContent = isDone ? "Continue to next step" : data.primary;
+        }
       }
 
       renderStepper();
@@ -1458,22 +1643,91 @@
       els.ownerTouches.textContent = touches;
     }
 
-    function completeActiveStage() {
-      const data = stageData[activeStage];
-      const alreadyDone = completed.has(activeStage);
+    function showToast(title, body) {
+      const toast = document.createElement("div");
+      toast.className = "toast";
+      toast.innerHTML = `<strong>✓ ${escapeHtml(title)}</strong><span>${escapeHtml(body)}</span>`;
+      els.toastStack.appendChild(toast);
+      requestAnimationFrame(() => toast.classList.add("show"));
+      setTimeout(() => {
+        toast.classList.remove("show");
+        setTimeout(() => toast.remove(), 240);
+      }, 3600);
+    }
 
-      if (!alreadyDone) {
-        completed.add(activeStage);
-        addEvent(data.eventTitle, data.eventText(), "progress");
-        els.hintBanner.classList.add("hidden");
-      }
+    function celebrateStep(stage) {
+      const node = document.querySelector(`.stepper-node[data-stage="${stage}"]`);
+      if (!node) return;
+      node.classList.add("celebrate");
+      setTimeout(() => node.classList.remove("celebrate"), 520);
+    }
 
+    function renderMetricsWithPulse() {
+      renderMetrics();
+      document.querySelectorAll(".workspace-side .metric-card").forEach(card => {
+        card.classList.remove("metric-pulse");
+        void card.offsetWidth;
+        card.classList.add("metric-pulse");
+      });
+    }
+
+    function showCompletion() {
+      els.finalHours.textContent = els.hoursSaved.textContent;
+      els.finalSteps.textContent = els.stepsCut.textContent;
+      els.finalTouches.textContent = els.ownerTouches.textContent;
+      els.workflowForm.classList.add("hidden");
+      els.completionPanel.classList.remove("hidden");
+    }
+
+    function advanceStage() {
       const currentIndex = stages.indexOf(activeStage);
       if (currentIndex < stages.length - 1) {
         activeStage = stages[currentIndex + 1];
       }
-
+      els.sendStatus.textContent = "";
+      els.sendStatus.className = "send-status";
       renderStage();
+
+      if (completed.size === stages.length && activeStage === stages[stages.length - 1]) {
+        showCompletion();
+      }
+    }
+
+    function completeActiveStage() {
+      if (isBusy) return;
+      const stage = activeStage;
+      const data = stageData[stage];
+
+      if (completed.has(stage)) {
+        advanceStage();
+        return;
+      }
+
+      isBusy = true;
+      els.primaryAction.disabled = true;
+      els.primaryAction.textContent = "Sending…";
+      els.sendStatus.textContent = "Sending…";
+      els.sendStatus.className = "send-status sending";
+
+      setTimeout(() => {
+        completed.add(stage);
+        addEvent(data.eventTitle, data.eventText(), "progress");
+        els.hintBanner.classList.add("hidden");
+
+        els.primaryAction.textContent = "Sent ✓";
+        els.sendStatus.textContent = "Sent ✓";
+        els.sendStatus.className = "send-status sent";
+
+        showToast(data.eventTitle, data.payoff);
+        celebrateStep(stage);
+        renderStepper();
+        renderMetricsWithPulse();
+
+        setTimeout(() => {
+          isBusy = false;
+          advanceStage();
+        }, 900);
+      }, 550);
     }
 
     function generateMessage() {
@@ -1496,6 +1750,7 @@
     }
 
     function resetDemo() {
+      isBusy = false;
       activeStage = "lead";
       completed = new Set();
       eventLog = [
@@ -1515,6 +1770,10 @@
       els.notes.value = "Customer wants exterior wash before a graduation party next weekend. Asked for quick estimate and preferred text updates.";
 
       els.hintBanner.classList.remove("hidden");
+      els.sendStatus.textContent = "";
+      els.sendStatus.className = "send-status";
+      els.workflowForm.classList.remove("hidden");
+      els.completionPanel.classList.add("hidden");
 
       renderTimeline();
       renderStage();
@@ -1531,6 +1790,7 @@
 
     document.querySelectorAll(".stepper-node").forEach(button => {
       button.addEventListener("click", () => {
+        if (isBusy) return;
         activeStage = button.dataset.stage;
         renderStage();
       });
@@ -1540,6 +1800,7 @@
     els.secondaryAction.addEventListener("click", generateMessage);
     els.copyMessageBtn.addEventListener("click", copyMessage);
     els.resetButton.addEventListener("click", resetDemo);
+    els.restartDemoBtn.addEventListener("click", resetDemo);
     els.hintDismiss.addEventListener("click", () => els.hintBanner.classList.add("hidden"));
 
     [els.customerName, els.serviceType, els.leadSource, els.jobValue, els.address, els.notes].forEach(input => {
