@@ -132,6 +132,12 @@
       cursor: pointer;
     }
 
+    .button:disabled {
+      opacity: 0.5;
+      cursor: not-allowed;
+      transform: none !important;
+    }
+
     .button-primary {
       background: var(--brand);
       color: white;
@@ -139,7 +145,7 @@
       box-shadow: 0 0 40px rgba(36, 91, 255, 0.28);
     }
 
-    .button-primary:hover {
+    .button-primary:hover:not(:disabled) {
       background: var(--brand-hover);
       transform: translateY(-1px);
     }
@@ -194,28 +200,25 @@
       flex: 0 0 auto;
     }
 
-    .hero {
-      padding: 78px 0 44px;
-      display: grid;
-      grid-template-columns: minmax(0, 0.95fr) minmax(420px, 1.05fr);
-      gap: 56px;
-      align-items: center;
+    .demo-intro {
+      padding: 52px 0 30px;
+      max-width: 760px;
     }
 
     h1 {
-      margin: 24px 0 24px;
-      font-size: clamp(50px, 7vw, 82px);
-      line-height: 0.92;
-      letter-spacing: -0.07em;
+      margin: 22px 0 20px;
+      font-size: clamp(44px, 6.2vw, 72px);
+      line-height: 0.96;
+      letter-spacing: -0.065em;
       font-weight: 650;
-      max-width: 820px;
+      max-width: 720px;
     }
 
     .hero-copy {
-      margin: 0 0 30px;
-      max-width: 670px;
+      margin: 0 0 26px;
+      max-width: 640px;
       color: var(--muted);
-      font-size: 19px;
+      font-size: 18px;
       line-height: 1.58;
     }
 
@@ -223,7 +226,7 @@
       display: flex;
       gap: 12px;
       flex-wrap: wrap;
-      margin-bottom: 26px;
+      margin-bottom: 22px;
     }
 
     .trust {
@@ -244,107 +247,12 @@
       border-radius: var(--radius-full);
     }
 
-    .preview-card {
-      border-radius: 30px;
-      background: rgba(255, 255, 255, 0.86);
-      border: 1px solid var(--border);
-      box-shadow: var(--shadow-lg);
-      padding: 22px;
-      backdrop-filter: blur(16px);
-      position: relative;
-    }
-
-    .preview-card::before {
-      content: "";
-      position: absolute;
-      inset: 34px;
-      background: var(--brand);
-      opacity: 0.13;
-      filter: blur(80px);
-      z-index: -1;
-    }
-
-    .preview-top {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      gap: 16px;
-      border-bottom: 1px solid var(--border);
-      padding-bottom: 18px;
-      margin-bottom: 18px;
-    }
-
-    .mono {
-      font-family: var(--font-mono);
-      font-size: 12px;
-      color: var(--muted);
-      letter-spacing: -0.02em;
-      text-transform: uppercase;
-    }
-
-    .status-pill {
-      display: inline-flex;
-      align-items: center;
-      border-radius: var(--radius-full);
-      border: 1px solid var(--brand-border);
-      background: var(--brand-soft);
-      color: var(--brand-hover);
-      padding: 6px 9px;
-      font-family: var(--font-mono);
-      font-size: 12px;
-      font-weight: 600;
-      letter-spacing: -0.02em;
-      white-space: nowrap;
-    }
-
-    .mini-flow {
-      display: grid;
-      gap: 10px;
-    }
-
-    .mini-flow-row {
-      display: grid;
-      grid-template-columns: 96px 1fr auto;
-      align-items: center;
-      gap: 12px;
-      border: 1px solid var(--border);
-      border-radius: 16px;
-      background: var(--surface);
-      box-shadow: var(--shadow-sm);
-      padding: 13px;
-    }
-
-    .mini-flow-row .stage {
-      font-family: var(--font-mono);
-      color: var(--muted);
-      font-size: 11px;
-      letter-spacing: -0.02em;
-    }
-
-    .mini-flow-row strong {
-      letter-spacing: -0.025em;
-    }
-
-    .mini-flow-row small {
-      display: block;
-      color: var(--muted);
-      font-size: 13px;
-      margin-top: 2px;
-    }
-
-    .mini-outcome {
-      font-family: var(--font-mono);
-      font-size: 12px;
-      color: var(--success);
-      background: var(--success-soft);
-      border: 1px solid var(--success-border);
-      border-radius: var(--radius-full);
-      padding: 6px 8px;
-      white-space: nowrap;
-    }
-
     .section {
       padding: 72px 0;
+    }
+
+    .tool-section {
+      padding: 6px 0 76px;
     }
 
     .section-head {
@@ -370,11 +278,243 @@
       line-height: 1.6;
     }
 
-    .demo-shell {
+    .mono {
+      font-family: var(--font-mono);
+      font-size: 12px;
+      color: var(--muted);
+      letter-spacing: -0.02em;
+      text-transform: uppercase;
+    }
+
+    .status-pill {
+      display: inline-flex;
+      align-items: center;
+      border-radius: var(--radius-full);
+      border: 1px solid var(--brand-border);
+      background: var(--brand-soft);
+      color: var(--brand-hover);
+      padding: 6px 9px;
+      font-family: var(--font-mono);
+      font-size: 12px;
+      font-weight: 600;
+      letter-spacing: -0.02em;
+      white-space: nowrap;
+    }
+
+    /* ---- Workspace (the tool) ---- */
+
+    .workspace {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-xl);
+      box-shadow: var(--shadow-lg);
+      overflow: hidden;
+    }
+
+    .workspace-topbar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      padding: 20px 24px;
+      border-bottom: 1px solid var(--border);
+      background: var(--surface-2);
+    }
+
+    .workspace-topbar strong {
+      display: block;
+      font-size: 17px;
+      letter-spacing: -0.035em;
+      margin-top: 2px;
+    }
+
+    .workspace-topbar-actions {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .stepper-bar {
+      padding: 22px 24px 6px;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .stepper {
+      display: flex;
+      align-items: flex-start;
+    }
+
+    .stepper-node {
+      flex: 1;
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 9px;
+      background: transparent;
+      border: none;
+      padding: 0 6px 20px;
+      cursor: pointer;
+      color: var(--text);
+    }
+
+    .stepper-node:disabled {
+      cursor: not-allowed;
+    }
+
+    .stepper-node:not(:last-child)::after {
+      content: "";
+      position: absolute;
+      top: 15px;
+      left: 50%;
+      width: 100%;
+      height: 2px;
+      background: var(--border);
+      z-index: 0;
+    }
+
+    .stepper-node.completed:not(:last-child)::after {
+      background: var(--success);
+    }
+
+    .stepper-circle {
+      position: relative;
+      z-index: 1;
+      width: 32px;
+      height: 32px;
+      border-radius: var(--radius-full);
+      background: var(--surface);
+      border: 2px solid var(--border-strong);
       display: grid;
-      grid-template-columns: 300px minmax(0, 1fr) 330px;
+      place-items: center;
+      font-family: var(--font-mono);
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--muted);
+      transition: 160ms ease;
+    }
+
+    .stepper-node.active .stepper-circle {
+      border-color: var(--brand);
+      background: var(--brand-soft);
+      color: var(--brand-hover);
+      box-shadow: 0 0 0 5px rgba(36, 91, 255, 0.12);
+    }
+
+    .stepper-node.completed .stepper-circle {
+      border-color: var(--success);
+      background: var(--success);
+      color: #fff;
+    }
+
+    .stepper-node.due .stepper-circle {
+      border-color: var(--warning);
+      background: var(--warning-soft);
+      color: var(--warning);
+    }
+
+    .stepper-node.locked {
+      opacity: 0.45;
+    }
+
+    .stepper-label {
+      font-size: 12.5px;
+      font-weight: 650;
+      letter-spacing: -0.02em;
+      color: var(--muted);
+      text-align: center;
+      line-height: 1.25;
+    }
+
+    .stepper-node.active .stepper-label,
+    .stepper-node.completed .stepper-label {
+      color: var(--text);
+    }
+
+    .stepper-foot {
+      display: flex;
+      align-items: center;
       gap: 14px;
-      align-items: start;
+      padding: 4px 24px 20px;
+      font-family: var(--font-mono);
+      font-size: 12px;
+      color: var(--muted);
+      letter-spacing: -0.02em;
+    }
+
+    .progress-track {
+      flex: 1;
+      height: 6px;
+      border-radius: var(--radius-full);
+      background: var(--border);
+      overflow: hidden;
+    }
+
+    .progress-fill {
+      height: 100%;
+      width: 0%;
+      background: var(--brand);
+      border-radius: var(--radius-full);
+      transition: width 240ms ease;
+    }
+
+    .workspace-grid {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) 330px;
+    }
+
+    .workspace-main {
+      padding: 26px;
+      border-right: 1px solid var(--border);
+      min-width: 0;
+    }
+
+    .workspace-main-head h3 {
+      margin: 4px 0 6px;
+      font-size: 21px;
+      letter-spacing: -0.04em;
+      line-height: 1.1;
+    }
+
+    .step-desc {
+      margin: 0 0 18px;
+      color: var(--muted);
+      font-size: 14px;
+      line-height: 1.45;
+      max-width: 560px;
+    }
+
+    .workspace-side {
+      padding: 26px;
+      display: grid;
+      gap: 14px;
+      align-content: start;
+    }
+
+    .hint-banner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      background: var(--brand-soft);
+      border: 1px solid var(--brand-border);
+      border-radius: var(--radius-lg);
+      padding: 12px 14px;
+      margin-bottom: 18px;
+      font-size: 14px;
+      line-height: 1.4;
+      color: var(--text);
+    }
+
+    .hint-dismiss {
+      background: transparent;
+      border: none;
+      color: var(--brand-hover);
+      font-size: 19px;
+      line-height: 1;
+      cursor: pointer;
+      padding: 2px 4px;
+      flex: 0 0 auto;
     }
 
     .panel {
@@ -403,81 +543,6 @@
 
     .panel-body {
       padding: 18px;
-    }
-
-    .pipeline {
-      display: grid;
-      gap: 10px;
-    }
-
-    .pipeline-step {
-      width: 100%;
-      text-align: left;
-      border: 1px solid var(--border);
-      background: var(--surface-2);
-      border-radius: 15px;
-      padding: 14px;
-      cursor: pointer;
-      transition: 160ms ease;
-      color: var(--text);
-      display: grid;
-      gap: 8px;
-    }
-
-    .pipeline-step:hover {
-      transform: translateY(-1px);
-      border-color: var(--border-strong);
-      box-shadow: var(--shadow-sm);
-    }
-
-    .pipeline-step.active {
-      border-color: var(--brand-border);
-      background: var(--brand-soft);
-      box-shadow: 0 0 0 4px rgba(36, 91, 255, 0.05);
-    }
-
-    .pipeline-step.complete {
-      border-color: var(--success-border);
-      background: var(--success-soft);
-    }
-
-    .pipeline-step.due {
-      border-color: var(--warning-border);
-      background: var(--warning-soft);
-    }
-
-    .step-top {
-      display: flex;
-      justify-content: space-between;
-      gap: 10px;
-      align-items: center;
-    }
-
-    .step-title {
-      font-weight: 700;
-      letter-spacing: -0.035em;
-      font-size: 15px;
-    }
-
-    .step-chip {
-      font-family: var(--font-mono);
-      font-size: 11px;
-      color: var(--muted);
-      background: rgba(255,255,255,0.55);
-      border: 1px solid rgba(216, 216, 208, 0.72);
-      padding: 5px 7px;
-      border-radius: var(--radius-full);
-      white-space: nowrap;
-    }
-
-    .step-text {
-      color: var(--muted);
-      font-size: 13px;
-      line-height: 1.4;
-    }
-
-    .app-main {
-      min-width: 0;
     }
 
     .record-grid {
@@ -576,16 +641,35 @@
       letter-spacing: -0.035em;
     }
 
+    .message-top-actions {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .copy-btn {
+      background: var(--surface);
+      border: 1px solid var(--brand-border);
+      color: var(--brand-hover);
+      font-family: var(--font-mono);
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: -0.01em;
+      border-radius: var(--radius-full);
+      padding: 6px 10px;
+      cursor: pointer;
+      transition: 160ms ease;
+    }
+
+    .copy-btn:hover {
+      background: var(--brand-soft);
+    }
+
     .message-box p {
       margin: 0;
       color: var(--text);
       font-size: 14px;
       line-height: 1.5;
-    }
-
-    .right-stack {
-      display: grid;
-      gap: 14px;
     }
 
     .metrics-grid {
@@ -645,7 +729,17 @@
       border-radius: var(--radius-full);
       background: var(--brand);
       margin-top: 5px;
-      box-shadow: 0 0 0 5px rgba(36,91,255,0.09);
+      box-shadow: 0 0 0 5px rgba(36, 91, 255, 0.09);
+    }
+
+    .timeline-dot-progress {
+      background: var(--success);
+      box-shadow: 0 0 0 5px rgba(23, 178, 106, 0.10);
+    }
+
+    .timeline-dot-system {
+      background: var(--muted-2);
+      box-shadow: 0 0 0 5px rgba(140, 140, 128, 0.12);
     }
 
     .timeline-item strong {
@@ -778,24 +872,18 @@
     }
 
     @media (max-width: 1100px) {
-      .hero,
       .section-head,
       .cta {
         grid-template-columns: 1fr;
       }
 
-      .preview-card {
-        max-width: 700px;
+      .workspace-grid {
+        grid-template-columns: 1fr;
       }
 
-      .demo-shell {
-        grid-template-columns: 270px minmax(0, 1fr);
-      }
-
-      .right-stack {
-        grid-column: 1 / -1;
-        grid-template-columns: 1fr 1fr;
-        align-items: start;
+      .workspace-main {
+        border-right: none;
+        border-bottom: 1px solid var(--border);
       }
     }
 
@@ -808,21 +896,18 @@
         display: none;
       }
 
-      .hero {
-        padding-top: 52px;
+      .demo-intro {
+        padding-top: 44px;
       }
 
       h1 {
-        font-size: 50px;
+        font-size: 46px;
       }
 
       .hero-copy {
         font-size: 17px;
       }
 
-      .mini-flow-row,
-      .demo-shell,
-      .right-stack,
       .manual-vs-system,
       .record-grid {
         grid-template-columns: 1fr;
@@ -832,8 +917,16 @@
         padding: 56px 0;
       }
 
+      .tool-section {
+        padding-bottom: 60px;
+      }
+
       .metrics-grid {
         grid-template-columns: 1fr 1fr;
+      }
+
+      .stepper-label {
+        font-size: 11px;
       }
 
       .cta {
@@ -843,9 +936,26 @@
     }
 
     @media (max-width: 540px) {
-      .preview-card,
       .panel-body,
-      .panel-header {
+      .panel-header,
+      .workspace-main,
+      .workspace-side {
+        padding-left: 14px;
+        padding-right: 14px;
+      }
+
+      .workspace-topbar {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 12px;
+      }
+
+      .stepper-bar {
+        padding-left: 14px;
+        padding-right: 14px;
+      }
+
+      .stepper-foot {
         padding-left: 14px;
         padding-right: 14px;
       }
@@ -854,8 +964,7 @@
         grid-template-columns: 1fr;
       }
 
-      .visual-top,
-      .preview-top {
+      .message-top {
         align-items: flex-start;
         flex-direction: column;
       }
@@ -878,142 +987,82 @@
     </nav>
 
     <main>
-      <section class="hero">
-        <div>
-          <span class="badge"><span class="pulse"></span> Interactive service business demo</span>
-          <h1>A micro app that compresses the whole customer workflow.</h1>
-          <p class="hero-copy">
-            This demo shows how a local service business can move from lead intake to estimate follow-up, job status, invoice reminders, and review requests without running the process from spreadsheets, inboxes, and memory.
-          </p>
-          <div class="hero-actions">
-            <a class="button button-primary" href="#demo">Try the workflow</a>
-            <a class="button button-secondary" href="#compare">See what it replaces</a>
-          </div>
-          <div class="trust">
-            <span>Lead intake</span>
-            <span class="dot"></span>
-            <span>Estimate follow-up</span>
-            <span class="dot"></span>
-            <span>Job status</span>
-            <span class="dot"></span>
-            <span>Invoice + review</span>
-          </div>
+      <section class="demo-intro">
+        <span class="badge"><span class="pulse"></span> Live interactive demo</span>
+        <h1>Try the actual workflow tool.</h1>
+        <p class="hero-copy">
+          Everything below is fully interactive. Edit the lead and move it through intake, estimate follow-up, job status, invoicing, and review requests — exactly how an owner would run it day to day, with no spreadsheets, inboxes, or memory required.
+        </p>
+        <div class="hero-actions">
+          <a class="button button-primary" href="#demo">Start the demo</a>
+          <a class="button button-secondary" href="#compare">See what it replaces</a>
         </div>
-
-        <div class="preview-card">
-          <div class="preview-top">
-            <div>
-              <div class="mono">Example business</div>
-              <strong>Clearline Exterior Services</strong>
-            </div>
-            <span class="status-pill">Workflow live</span>
-          </div>
-
-          <div class="mini-flow">
-            <div class="mini-flow-row">
-              <span class="stage">INTAKE</span>
-              <div>
-                <strong>Lead captured once</strong>
-                <small>Customer details, service need, value, and notes enter one record.</small>
-              </div>
-              <span class="mini-outcome">1 source</span>
-            </div>
-            <div class="mini-flow-row">
-              <span class="stage">ESTIMATE</span>
-              <div>
-                <strong>Follow-up is triggered</strong>
-                <small>Reminders and next actions appear automatically.</small>
-              </div>
-              <span class="mini-outcome">no chase</span>
-            </div>
-            <div class="mini-flow-row">
-              <span class="stage">JOB</span>
-              <div>
-                <strong>Status is visible</strong>
-                <small>Scheduled, in progress, completed, invoiced, reviewed.</small>
-              </div>
-              <span class="mini-outcome">live view</span>
-            </div>
-            <div class="mini-flow-row">
-              <span class="stage">REVIEW</span>
-              <div>
-                <strong>Invoice and review request sent</strong>
-                <small>The final mile stops depending on memory.</small>
-              </div>
-              <span class="mini-outcome">closed loop</span>
-            </div>
-          </div>
+        <div class="trust">
+          <span>Lead intake</span>
+          <span class="dot"></span>
+          <span>Estimate follow-up</span>
+          <span class="dot"></span>
+          <span>Job status</span>
+          <span class="dot"></span>
+          <span>Invoice + review</span>
         </div>
       </section>
 
-      <section id="demo" class="section">
-        <div class="section-head">
-          <div>
-            <span class="badge">Live demo</span>
-            <h2>Click through the workflow like an owner would use it.</h2>
+      <section id="demo" class="tool-section">
+        <div class="workspace">
+          <div class="workspace-topbar">
+            <div>
+              <div class="mono">Workflow OS · Customer record</div>
+              <strong>Clearline Exterior Services</strong>
+            </div>
+            <div class="workspace-topbar-actions">
+              <span class="status-pill" id="progressPill">0% complete</span>
+              <button class="button button-ghost" id="resetButton" type="button">Reset demo</button>
+            </div>
           </div>
-          <p>
-            Edit the lead, move it through the workflow, and watch the next actions, timeline, metrics, and customer messages update.
-          </p>
-        </div>
 
-        <div class="demo-shell">
-          <aside class="panel">
-            <div class="panel-header">
-              <h3>Pipeline</h3>
-              <span class="status-pill" id="pipelineStatus">Lead</span>
+          <div class="stepper-bar">
+            <div class="stepper" role="list" aria-label="Workflow progress">
+              <button class="stepper-node" data-stage="lead" role="listitem" type="button">
+                <span class="stepper-circle">1</span>
+                <span class="stepper-label">Lead intake</span>
+              </button>
+              <button class="stepper-node" data-stage="estimate" role="listitem" type="button">
+                <span class="stepper-circle">2</span>
+                <span class="stepper-label">Estimate follow-up</span>
+              </button>
+              <button class="stepper-node" data-stage="job" role="listitem" type="button">
+                <span class="stepper-circle">3</span>
+                <span class="stepper-label">Job status</span>
+              </button>
+              <button class="stepper-node" data-stage="invoice" role="listitem" type="button">
+                <span class="stepper-circle">4</span>
+                <span class="stepper-label">Invoice reminder</span>
+              </button>
+              <button class="stepper-node" data-stage="review" role="listitem" type="button">
+                <span class="stepper-circle">5</span>
+                <span class="stepper-label">Review request</span>
+              </button>
             </div>
-            <div class="panel-body">
-              <div class="pipeline">
-                <button class="pipeline-step active" data-stage="lead">
-                  <span class="step-top">
-                    <span class="step-title">1. Lead intake</span>
-                    <span class="step-chip" id="chip-lead">Active</span>
-                  </span>
-                  <span class="step-text">Capture the request once and create the customer record.</span>
-                </button>
-                <button class="pipeline-step" data-stage="estimate">
-                  <span class="step-top">
-                    <span class="step-title">2. Estimate follow-up</span>
-                    <span class="step-chip" id="chip-estimate">Waiting</span>
-                  </span>
-                  <span class="step-text">Track quote sent date, follow-up due date, and next action.</span>
-                </button>
-                <button class="pipeline-step" data-stage="job">
-                  <span class="step-top">
-                    <span class="step-title">3. Job status</span>
-                    <span class="step-chip" id="chip-job">Waiting</span>
-                  </span>
-                  <span class="step-text">Move the job from scheduled to in progress to complete.</span>
-                </button>
-                <button class="pipeline-step" data-stage="invoice">
-                  <span class="step-top">
-                    <span class="step-title">4. Invoice reminder</span>
-                    <span class="step-chip" id="chip-invoice">Waiting</span>
-                  </span>
-                  <span class="step-text">Create the invoice reminder and keep the owner out of the chase.</span>
-                </button>
-                <button class="pipeline-step" data-stage="review">
-                  <span class="step-top">
-                    <span class="step-title">5. Review request</span>
-                    <span class="step-chip" id="chip-review">Waiting</span>
-                  </span>
-                  <span class="step-text">Close the loop with a review request after the work is complete.</span>
-                </button>
-              </div>
+            <div class="stepper-foot">
+              <span id="progressLabel">0 of 5 steps complete</span>
+              <span class="progress-track"><span class="progress-fill" id="progressFill"></span></span>
             </div>
-          </aside>
+          </div>
 
-          <section class="panel app-main" aria-label="Interactive workflow record">
-            <div class="panel-header">
-              <div>
+          <div class="workspace-grid">
+            <div class="workspace-main" aria-label="Interactive workflow record">
+              <div class="workspace-main-head">
                 <div class="mono">Customer record</div>
                 <h3 id="recordTitle">New lead intake</h3>
+                <p class="step-desc" id="stepDesc">Capture the request once and create the customer record.</p>
               </div>
-              <button class="button button-ghost" id="resetButton" type="button">Reset</button>
-            </div>
 
-            <div class="panel-body">
+              <div class="hint-banner" id="hintBanner">
+                <span>👋 <strong>Try it:</strong> edit any field below, then click "Capture lead" to move the workflow forward.</span>
+                <button type="button" class="hint-dismiss" id="hintDismiss" aria-label="Dismiss tip">×</button>
+              </div>
+
               <div class="record-grid">
                 <div class="field">
                   <label for="customerName">Customer</label>
@@ -1066,51 +1115,54 @@
               <div class="message-box">
                 <div class="message-top">
                   <span class="message-title" id="messageTitle">Suggested customer message</span>
-                  <span class="status-pill" id="messageChannel">Text</span>
+                  <div class="message-top-actions">
+                    <span class="status-pill" id="messageChannel">Text</span>
+                    <button type="button" class="copy-btn" id="copyMessageBtn">Copy</button>
+                  </div>
                 </div>
                 <p id="messageText">Hi Sarah — thanks for reaching out to Clearline Exterior Services. We received your exterior wash request for 184 Parkside Ave and will send over an estimate shortly.</p>
               </div>
             </div>
-          </section>
 
-          <aside class="right-stack">
-            <section class="panel">
-              <div class="panel-header">
-                <h3>Workflow metrics</h3>
-                <span class="status-pill">Live</span>
-              </div>
-              <div class="panel-body">
-                <div class="metrics-grid">
-                  <div class="metric-card">
-                    <strong id="hoursSaved">2.5</strong>
-                    <span>hours saved / week</span>
-                  </div>
-                  <div class="metric-card">
-                    <strong id="stepsCut">4</strong>
-                    <span>manual steps cut</span>
-                  </div>
-                  <div class="metric-card">
-                    <strong id="openTasks">1</strong>
-                    <span>open next actions</span>
-                  </div>
-                  <div class="metric-card">
-                    <strong id="ownerTouches">3</strong>
-                    <span>owner touches removed</span>
+            <div class="workspace-side">
+              <section class="panel">
+                <div class="panel-header">
+                  <h3>Workflow metrics</h3>
+                  <span class="status-pill">Live</span>
+                </div>
+                <div class="panel-body">
+                  <div class="metrics-grid">
+                    <div class="metric-card">
+                      <strong id="hoursSaved">2.5</strong>
+                      <span>hours saved / week</span>
+                    </div>
+                    <div class="metric-card">
+                      <strong id="stepsCut">4</strong>
+                      <span>manual steps cut</span>
+                    </div>
+                    <div class="metric-card">
+                      <strong id="openTasks">1</strong>
+                      <span>open next actions</span>
+                    </div>
+                    <div class="metric-card">
+                      <strong id="ownerTouches">3</strong>
+                      <span>owner touches removed</span>
+                    </div>
                   </div>
                 </div>
-              </div>
-            </section>
+              </section>
 
-            <section class="panel">
-              <div class="panel-header">
-                <h3>Timeline</h3>
-                <span class="status-pill" id="timelineCount">1 event</span>
-              </div>
-              <div class="panel-body">
-                <div class="timeline" id="timeline"></div>
-              </div>
-            </section>
-          </aside>
+              <section class="panel">
+                <div class="panel-header">
+                  <h3>Timeline</h3>
+                  <span class="status-pill" id="timelineCount">1 event</span>
+                </div>
+                <div class="panel-body">
+                  <div class="timeline" id="timeline"></div>
+                </div>
+              </section>
+            </div>
+          </div>
         </div>
       </section>
 
@@ -1180,6 +1232,7 @@
       lead: {
         label: "Lead",
         title: "New lead intake",
+        description: "Capture the request once and create the customer record.",
         primary: "Capture lead",
         secondary: "Generate intake reply",
         contextTitle: "What this replaces",
@@ -1192,6 +1245,7 @@
       estimate: {
         label: "Estimate",
         title: "Estimate follow-up",
+        description: "Track quote sent date, follow-up due date, and next action.",
         primary: "Send estimate follow-up",
         secondary: "Generate follow-up message",
         contextTitle: "Compressed next action",
@@ -1204,6 +1258,7 @@
       job: {
         label: "Job",
         title: "Job status",
+        description: "Move the job from scheduled to in progress to complete.",
         primary: "Mark job complete",
         secondary: "Generate job update",
         contextTitle: "Owner visibility",
@@ -1216,6 +1271,7 @@
       invoice: {
         label: "Invoice",
         title: "Invoice reminder",
+        description: "Create the invoice reminder and keep the owner out of the chase.",
         primary: "Send invoice reminder",
         secondary: "Generate invoice note",
         contextTitle: "No more late billing",
@@ -1228,6 +1284,7 @@
       review: {
         label: "Review",
         title: "Review request",
+        description: "Close the loop with a review request after the work is complete.",
         primary: "Send review request",
         secondary: "Generate review request",
         contextTitle: "Closed-loop customer workflow",
@@ -1245,7 +1302,8 @@
       {
         title: "Demo lead loaded",
         text: "Sample customer record created for Clearline Exterior Services.",
-        time: "Just now"
+        time: "Just now",
+        kind: "system"
       }
     ];
 
@@ -1257,6 +1315,7 @@
       address: document.getElementById("address"),
       notes: document.getElementById("notes"),
       recordTitle: document.getElementById("recordTitle"),
+      stepDesc: document.getElementById("stepDesc"),
       primaryAction: document.getElementById("primaryAction"),
       secondaryAction: document.getElementById("secondaryAction"),
       contextTitle: document.getElementById("contextTitle"),
@@ -1264,14 +1323,19 @@
       messageTitle: document.getElementById("messageTitle"),
       messageChannel: document.getElementById("messageChannel"),
       messageText: document.getElementById("messageText"),
-      pipelineStatus: document.getElementById("pipelineStatus"),
+      copyMessageBtn: document.getElementById("copyMessageBtn"),
       hoursSaved: document.getElementById("hoursSaved"),
       stepsCut: document.getElementById("stepsCut"),
       openTasks: document.getElementById("openTasks"),
       ownerTouches: document.getElementById("ownerTouches"),
       timeline: document.getElementById("timeline"),
       timelineCount: document.getElementById("timelineCount"),
-      resetButton: document.getElementById("resetButton")
+      resetButton: document.getElementById("resetButton"),
+      hintBanner: document.getElementById("hintBanner"),
+      hintDismiss: document.getElementById("hintDismiss"),
+      progressPill: document.getElementById("progressPill"),
+      progressLabel: document.getElementById("progressLabel"),
+      progressFill: document.getElementById("progressFill")
     };
 
     function customer() {
@@ -1296,10 +1360,11 @@
       return address.split(",")[0];
     }
 
-    function addEvent(title, text) {
+    function addEvent(title, text, kind = "info") {
       eventLog.unshift({
         title,
         text,
+        kind,
         time: new Date().toLocaleTimeString([], { hour: "numeric", minute: "2-digit" })
       });
       renderTimeline();
@@ -1308,7 +1373,7 @@
     function renderTimeline() {
       els.timeline.innerHTML = eventLog.map(item => `
         <div class="timeline-item">
-          <span class="timeline-dot"></span>
+          <span class="timeline-dot timeline-dot-${escapeHtml(item.kind)}"></span>
           <div>
             <strong>${escapeHtml(item.title)}</strong>
             <span>${escapeHtml(item.text)}</span>
@@ -1320,38 +1385,63 @@
       els.timelineCount.textContent = `${eventLog.length} ${eventLog.length === 1 ? "event" : "events"}`;
     }
 
+    function nextIncompleteStage() {
+      return stages.find(stage => !completed.has(stage)) || stages[stages.length - 1];
+    }
+
+    function frontierIndex() {
+      return stages.indexOf(nextIncompleteStage());
+    }
+
+    function renderStepper() {
+      const frontier = frontierIndex();
+
+      document.querySelectorAll(".stepper-node").forEach((button, index) => {
+        const stage = button.dataset.stage;
+        const isCompleted = completed.has(stage);
+        const isActive = stage === activeStage;
+        const locked = index > frontier;
+        const isDue = index === frontier && !isCompleted && !isActive;
+
+        button.classList.toggle("completed", isCompleted);
+        button.classList.toggle("active", isActive);
+        button.classList.toggle("due", isDue);
+        button.classList.toggle("locked", locked);
+        button.disabled = locked;
+        button.title = locked ? "Complete the previous step first" : "";
+
+        button.querySelector(".stepper-circle").textContent = isCompleted ? "✓" : String(index + 1);
+      });
+
+      const percent = Math.round((completed.size / stages.length) * 100);
+      els.progressPill.textContent = `${percent}% complete`;
+      els.progressLabel.textContent = `${completed.size} of ${stages.length} steps complete`;
+      els.progressFill.style.width = `${percent}%`;
+    }
+
     function renderStage() {
       const data = stageData[activeStage];
+      const isDone = completed.has(activeStage);
+      const isFinalStage = activeStage === stages[stages.length - 1];
+
       els.recordTitle.textContent = data.title;
-      els.primaryAction.textContent = data.primary;
+      els.stepDesc.textContent = data.description;
       els.secondaryAction.textContent = data.secondary;
       els.contextTitle.textContent = data.contextTitle;
       els.contextText.textContent = data.contextText;
       els.messageTitle.textContent = "Suggested customer message";
       els.messageChannel.textContent = data.channel;
       els.messageText.textContent = data.message();
-      els.pipelineStatus.textContent = data.label;
 
-      document.querySelectorAll(".pipeline-step").forEach(button => {
-        const stage = button.dataset.stage;
-        button.classList.toggle("active", stage === activeStage);
-        button.classList.toggle("complete", completed.has(stage));
-        button.classList.toggle("due", stage === nextIncompleteStage() && stage !== activeStage && !completed.has(stage));
-      });
+      if (isDone && isFinalStage) {
+        els.primaryAction.textContent = "Workflow complete";
+        els.primaryAction.disabled = true;
+      } else {
+        els.primaryAction.disabled = false;
+        els.primaryAction.textContent = isDone ? "Continue to next step" : data.primary;
+      }
 
-      stages.forEach(stage => {
-        const chip = document.getElementById(`chip-${stage}`);
-        if (completed.has(stage)) {
-          chip.textContent = "Done";
-        } else if (stage === activeStage) {
-          chip.textContent = "Active";
-        } else if (stage === nextIncompleteStage()) {
-          chip.textContent = "Due";
-        } else {
-          chip.textContent = "Waiting";
-        }
-      });
-
+      renderStepper();
       renderMetrics();
     }
 
@@ -1368,14 +1458,15 @@
       els.ownerTouches.textContent = touches;
     }
 
-    function nextIncompleteStage() {
-      return stages.find(stage => !completed.has(stage)) || "review";
-    }
-
     function completeActiveStage() {
       const data = stageData[activeStage];
-      completed.add(activeStage);
-      addEvent(data.eventTitle, data.eventText());
+      const alreadyDone = completed.has(activeStage);
+
+      if (!alreadyDone) {
+        completed.add(activeStage);
+        addEvent(data.eventTitle, data.eventText(), "progress");
+        els.hintBanner.classList.add("hidden");
+      }
 
       const currentIndex = stages.indexOf(activeStage);
       if (currentIndex < stages.length - 1) {
@@ -1388,7 +1479,20 @@
     function generateMessage() {
       const data = stageData[activeStage];
       els.messageText.textContent = data.message();
-      addEvent("Message generated", `${data.channel} drafted for ${customer()} at the ${data.label.toLowerCase()} stage.`);
+      addEvent("Message generated", `${data.channel} drafted for ${customer()} at the ${data.label.toLowerCase()} stage.`, "info");
+    }
+
+    async function copyMessage() {
+      const originalLabel = "Copy";
+      try {
+        await navigator.clipboard.writeText(els.messageText.textContent);
+        els.copyMessageBtn.textContent = "Copied!";
+      } catch (err) {
+        els.copyMessageBtn.textContent = "Copy failed";
+      }
+      setTimeout(() => {
+        els.copyMessageBtn.textContent = originalLabel;
+      }, 1400);
     }
 
     function resetDemo() {
@@ -1398,7 +1502,8 @@
         {
           title: "Demo lead loaded",
           text: "Sample customer record created for Clearline Exterior Services.",
-          time: "Just now"
+          time: "Just now",
+          kind: "system"
         }
       ];
 
@@ -1408,6 +1513,8 @@
       els.jobValue.value = "$875";
       els.address.value = "184 Parkside Ave, Rochester, NY";
       els.notes.value = "Customer wants exterior wash before a graduation party next weekend. Asked for quick estimate and preferred text updates.";
+
+      els.hintBanner.classList.remove("hidden");
 
       renderTimeline();
       renderStage();
@@ -1422,7 +1529,7 @@
         .replaceAll("'", "&#039;");
     }
 
-    document.querySelectorAll(".pipeline-step").forEach(button => {
+    document.querySelectorAll(".stepper-node").forEach(button => {
       button.addEventListener("click", () => {
         activeStage = button.dataset.stage;
         renderStage();
@@ -1431,7 +1538,9 @@
 
     els.primaryAction.addEventListener("click", completeActiveStage);
     els.secondaryAction.addEventListener("click", generateMessage);
+    els.copyMessageBtn.addEventListener("click", copyMessage);
     els.resetButton.addEventListener("click", resetDemo);
+    els.hintDismiss.addEventListener("click", () => els.hintBanner.classList.add("hidden"));
 
     [els.customerName, els.serviceType, els.leadSource, els.jobValue, els.address, els.notes].forEach(input => {
       input.addEventListener("input", renderStage);
