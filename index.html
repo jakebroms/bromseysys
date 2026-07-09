@@ -76,6 +76,8 @@
       display: flex;
       align-items: center;
       justify-content: space-between;
+      flex-wrap: wrap;
+      row-gap: 10px;
       gap: 24px;
     }
 
@@ -85,6 +87,7 @@
       gap: 12px;
       font-weight: 700;
       letter-spacing: -0.03em;
+      white-space: nowrap;
     }
 
     .mark {
@@ -786,7 +789,7 @@
     }
 
     @media (max-width: 680px) {
-      .nav-links {
+      .nav-links a:not(.button) {
         display: none;
       }
 
