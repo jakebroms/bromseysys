@@ -847,12 +847,13 @@
     }
 
     .web-pulses line:nth-child(1) { animation-delay: 0s; }
-    .web-pulses line:nth-child(2) { animation-delay: 1.1s; }
-    .web-pulses line:nth-child(3) { animation-delay: 2.2s; }
-    .web-pulses line:nth-child(4) { animation-delay: 3.3s; }
-    .web-pulses line:nth-child(5) { animation-delay: 4.4s; }
-    .web-pulses line:nth-child(6) { animation-delay: 5.5s; }
-    .web-pulses line:nth-child(7) { animation-delay: 6.6s; }
+    .web-pulses line:nth-child(2) { animation-delay: 1s; }
+    .web-pulses line:nth-child(3) { animation-delay: 2s; }
+    .web-pulses line:nth-child(4) { animation-delay: 3s; }
+    .web-pulses line:nth-child(5) { animation-delay: 4s; }
+    .web-pulses line:nth-child(6) { animation-delay: 5s; }
+    .web-pulses line:nth-child(7) { animation-delay: 6s; }
+    .web-pulses line:nth-child(8) { animation-delay: 7s; }
 
     @keyframes brain-pulse {
       0%   { stroke-dashoffset: 0; opacity: 0; }
@@ -890,9 +891,9 @@
     }
 
     .node-legend {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 10px 16px;
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 10px 12px;
       margin-top: 14px;
       font-family: var(--font-mono);
       font-size: 12px;
@@ -902,6 +903,7 @@
     .node-legend span {
       display: inline-flex;
       align-items: center;
+      justify-content: center;
       gap: 6px;
     }
 
@@ -943,6 +945,10 @@
     }
 
     @media (max-width: 680px) {
+      .node-legend {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
       .nav-toggle {
         display: flex;
       }
@@ -1098,33 +1104,36 @@
             <span class="status-chip live">Indexing…</span>
           </div>
 
-          <svg class="brain-diagram" viewBox="180 20 540 480" role="img" aria-hidden="true">
+          <svg class="brain-diagram" viewBox="210 20 480 480" role="img" aria-hidden="true">
             <g class="web-lines">
               <line class="web-line" x1="450" y1="70" x2="450" y2="260" />
-              <line class="web-line" x1="598" y1="141" x2="450" y2="260" />
-              <line class="web-line" x1="635" y1="302" x2="450" y2="260" />
-              <line class="web-line" x1="532" y1="431" x2="450" y2="260" />
-              <line class="web-line" x1="368" y1="431" x2="450" y2="260" />
-              <line class="web-line" x1="265" y1="302" x2="450" y2="260" />
-              <line class="web-line" x1="302" y1="141" x2="450" y2="260" />
+              <line class="web-line" x1="584" y1="126" x2="450" y2="260" />
+              <line class="web-line" x1="640" y1="260" x2="450" y2="260" />
+              <line class="web-line" x1="584" y1="394" x2="450" y2="260" />
+              <line class="web-line" x1="450" y1="450" x2="450" y2="260" />
+              <line class="web-line" x1="316" y1="394" x2="450" y2="260" />
+              <line class="web-line" x1="260" y1="260" x2="450" y2="260" />
+              <line class="web-line" x1="316" y1="126" x2="450" y2="260" />
             </g>
             <g class="web-pulses">
               <line class="web-pulse" x1="450" y1="70" x2="450" y2="260" />
-              <line class="web-pulse" x1="598" y1="141" x2="450" y2="260" />
-              <line class="web-pulse" x1="635" y1="302" x2="450" y2="260" />
-              <line class="web-pulse" x1="532" y1="431" x2="450" y2="260" />
-              <line class="web-pulse" x1="368" y1="431" x2="450" y2="260" />
-              <line class="web-pulse" x1="265" y1="302" x2="450" y2="260" />
-              <line class="web-pulse" x1="302" y1="141" x2="450" y2="260" />
+              <line class="web-pulse" x1="584" y1="126" x2="450" y2="260" />
+              <line class="web-pulse" x1="640" y1="260" x2="450" y2="260" />
+              <line class="web-pulse" x1="584" y1="394" x2="450" y2="260" />
+              <line class="web-pulse" x1="450" y1="450" x2="450" y2="260" />
+              <line class="web-pulse" x1="316" y1="394" x2="450" y2="260" />
+              <line class="web-pulse" x1="260" y1="260" x2="450" y2="260" />
+              <line class="web-pulse" x1="316" y1="126" x2="450" y2="260" />
             </g>
             <g class="web-nodes">
               <g class="node" transform="translate(450,70)"><title>Email</title><circle r="26" /><text y="1">&#9993;</text></g>
-              <g class="node" transform="translate(598,141)"><title>CRM</title><circle r="26" /><text y="1">&#9723;</text></g>
-              <g class="node" transform="translate(635,302)"><title>Docs</title><circle r="26" /><text y="1">&#9636;</text></g>
-              <g class="node" transform="translate(532,431)"><title>Content &amp; podcasts</title><circle r="26" /><text y="1">&#9654;</text></g>
-              <g class="node" transform="translate(368,431)"><title>Database</title><circle r="26" /><text y="1">&#8984;</text></g>
-              <g class="node" transform="translate(265,302)"><title>Meetings</title><circle r="26" /><text y="1">&#9684;</text></g>
-              <g class="node" transform="translate(302,141)"><title>Website</title><circle r="26" /><text y="1">&#9633;</text></g>
+              <g class="node" transform="translate(584,126)"><title>CRM</title><circle r="26" /><text y="1">&#9723;</text></g>
+              <g class="node" transform="translate(640,260)"><title>Docs</title><circle r="26" /><text y="1">&#9636;</text></g>
+              <g class="node" transform="translate(584,394)"><title>Content &amp; podcasts</title><circle r="26" /><text y="1">&#9654;</text></g>
+              <g class="node" transform="translate(450,450)"><title>Database</title><circle r="26" /><text y="1">&#8984;</text></g>
+              <g class="node" transform="translate(316,394)"><title>Meetings</title><circle r="26" /><text y="1">&#9684;</text></g>
+              <g class="node" transform="translate(260,260)"><title>Website</title><circle r="26" /><text y="1">&#9633;</text></g>
+              <g class="node" transform="translate(316,126)"><title>Chat</title><circle r="26" /><text y="1">&#9670;</text></g>
               <g class="node center" transform="translate(450,260)"><title>AI Brain</title><circle r="44" /><text y="1">BRAIN</text></g>
             </g>
           </svg>
@@ -1137,11 +1146,12 @@
             <span><span class="glyph">&#8984;</span> Database</span>
             <span><span class="glyph">&#9684;</span> Meetings</span>
             <span><span class="glyph">&#9633;</span> Website</span>
+            <span><span class="glyph">&#9670;</span> Chat</span>
           </div>
 
           <div class="visual-footer">
             <div class="stat">
-              <strong data-counter="7" data-suffix="+">0+</strong>
+              <strong data-counter="8" data-suffix="+">0+</strong>
               <span>sources connected</span>
             </div>
             <div class="stat">
