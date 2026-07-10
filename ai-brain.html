@@ -3,8 +3,8 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Bromsey Systems | Workflow Compression for Growing Businesses</title>
-  <meta name="description" content="Bromsey Systems helps owner-led businesses eliminate manual work with simple systems, automations, dashboards, and lightweight internal tools." />
+  <title>Bromsey Systems | Develop an AI Brain</title>
+  <meta name="description" content="A recursive knowledge layer for your company. Every email, doc, call, and database table indexed into one system your AI can actually use." />
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=Inter:wght@400;500;600;650;700&display=swap" rel="stylesheet">
@@ -123,6 +123,10 @@
 
     .nav-links a:hover {
       color: var(--text);
+    }
+
+    .nav-links a.current {
+      color: var(--brand-hover);
     }
 
     .nav-toggle {
@@ -326,6 +330,12 @@
       font-weight: 600;
     }
 
+    .status-chip.live {
+      color: var(--success);
+      background: rgba(23, 178, 106, 0.08);
+      border-color: rgba(23, 178, 106, 0.18);
+    }
+
     .flow {
       display: grid;
       gap: 10px;
@@ -471,11 +481,26 @@
       line-height: 1.35;
     }
 
-    .split-system {
+    .how-grid {
       display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 14px;
+      grid-template-columns: 0.86fr 1.14fr;
+      gap: 18px;
       align-items: stretch;
+    }
+
+    .how-copy {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      gap: 16px;
+    }
+
+    .how-copy p {
+      margin: 0;
+      color: var(--text-muted);
+      font-size: 16px;
+      line-height: 1.6;
+      max-width: 420px;
     }
 
     .system-panel {
@@ -531,11 +556,36 @@
       font-weight: 650;
     }
 
+    .stack-item.current {
+      border-color: var(--brand-border);
+      box-shadow: 0 0 0 1px var(--brand-border) inset;
+      background: var(--brand-soft);
+    }
+
+    a.stack-item:hover {
+      border-color: var(--border-strong);
+    }
+
     .connected-line {
       height: 32px;
       width: 2px;
       background: linear-gradient(var(--brand), rgba(36, 91, 255, 0.05));
       margin: -2px 0 -2px 28px;
+    }
+
+    .index-map {
+      max-width: 720px;
+      margin: 0 auto;
+    }
+
+    .pricing-single {
+      max-width: 460px;
+      margin: 0 auto;
+    }
+
+    .path-panel {
+      max-width: 640px;
+      margin: 0 auto;
     }
 
     .services-grid {
@@ -624,116 +674,74 @@
       margin-top: 5px;
     }
 
-    .capabilities {
-      display: grid;
-      grid-template-columns: 0.82fr 1.18fr;
-      gap: 18px;
-      align-items: stretch;
-    }
-
-    .dark-card {
-      background:
-        radial-gradient(circle at 76% 20%, rgba(36, 91, 255, 0.32), transparent 22rem),
-        #11110F;
-      color: #FAFAF8;
-      border-radius: var(--radius-xl);
-      padding: 30px;
-      min-height: 400px;
-      box-shadow: var(--shadow-lg);
-      position: relative;
-      overflow: hidden;
-      display: flex;
-      flex-direction: column;
-    }
-
-    .dark-card h2 {
-      color: #FAFAF8;
-      margin-top: 18px;
-    }
-
-    .dark-card p {
-      color: #B8B8AC;
-      font-size: 17px;
-      line-height: 1.6;
-      margin: 18px 0 0;
-      max-width: 520px;
-    }
-
-    .metric-strip {
-      position: static;
-      display: grid;
-      grid-template-columns: repeat(3, minmax(0, 1fr));
-      gap: 10px;
-      margin-top: auto;
-      padding-top: 34px;
-    }
-
-    .metric-strip .stat {
-      background: rgba(250,250,248,0.07);
-      border-color: rgba(250,250,248,0.10);
-      min-width: 0;
-    }
-
-    .metric-strip .stat span {
-      color: #B8B8AC;
-    }
-
-    .cap-list {
-      background: var(--surface);
-      border: 1px solid var(--border);
-      border-radius: var(--radius-xl);
-      padding: 24px;
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 10px;
-      box-shadow: var(--shadow-md);
-    }
-
-    .cap-item {
-      padding: 15px;
-      border: 1px solid var(--border);
-      border-radius: var(--radius-lg);
-      background: var(--surface-2);
-    }
-
-    .cap-item h3 {
-      margin: 0 0 8px;
-      font-size: 16px;
-      letter-spacing: -0.03em;
-    }
-
-    .cap-item p {
-      margin: 0;
-      color: var(--text-muted);
-      font-size: 14px;
-      line-height: 1.45;
-    }
-
-    .proof-grid {
+    .use-grid {
       display: grid;
       grid-template-columns: repeat(3, 1fr);
       gap: 14px;
     }
 
-    .proof-card {
+    .use-card {
       border: 1px solid var(--border);
       background: var(--surface);
-      border-radius: var(--radius-xl);
-      padding: 24px;
+      border-radius: var(--radius-lg);
+      padding: 20px;
       box-shadow: var(--shadow-sm);
     }
 
-    .proof-card h3 {
-      margin: 18px 0 10px;
-      font-size: 20px;
-      letter-spacing: -0.04em;
-      line-height: 1.1;
+    .use-card h3 {
+      margin: 16px 0 8px;
+      font-size: 17px;
+      letter-spacing: -0.03em;
     }
 
-    .proof-card p {
+    .use-card p {
       margin: 0;
       color: var(--text-muted);
-      font-size: 15px;
+      font-size: 14px;
+      line-height: 1.5;
+    }
+
+    .faq-list {
+      display: grid;
+      gap: 10px;
+      max-width: 780px;
+      margin: 0 auto;
+    }
+
+    .faq-item {
+      border: 1px solid var(--border);
+      border-radius: var(--radius-lg);
+      background: var(--surface);
+      padding: 16px 19px;
+      box-shadow: var(--shadow-sm);
+    }
+
+    .faq-item summary {
+      cursor: pointer;
+      font-weight: 650;
+      letter-spacing: -0.02em;
+      list-style: none;
+    }
+
+    .faq-item summary::-webkit-details-marker {
+      display: none;
+    }
+
+    .faq-item summary::after {
+      content: "+";
+      float: right;
+      color: var(--brand);
+      font-weight: 700;
+    }
+
+    .faq-item[open] summary::after {
+      content: "\2013";
+    }
+
+    .faq-item p {
+      margin: 12px 0 0;
+      color: var(--text-muted);
+      font-size: 14px;
       line-height: 1.55;
     }
 
@@ -772,52 +780,6 @@
       border-color: #FAFAF8;
     }
 
-    .brain-banner {
-      background:
-        radial-gradient(circle at 84% 16%, rgba(36, 91, 255, 0.30), transparent 24rem),
-        #11110F;
-      color: #FAFAF8;
-      border-radius: 28px;
-      padding: clamp(28px, 5vw, 48px);
-      display: grid;
-      grid-template-columns: minmax(0, 1fr) auto;
-      gap: 32px;
-      align-items: end;
-      box-shadow: var(--shadow-lg);
-    }
-
-    .brain-banner h2 {
-      color: #FAFAF8;
-      margin-top: 16px;
-      max-width: 640px;
-    }
-
-    .brain-banner p {
-      color: #B8B8AC;
-      font-size: 16px;
-      line-height: 1.6;
-      margin: 16px 0 0;
-      max-width: 560px;
-    }
-
-    .brain-banner-cta {
-      display: flex;
-      flex-direction: column;
-      align-items: flex-end;
-      gap: 6px;
-      text-align: right;
-    }
-
-    .brain-banner-cta .mono-label {
-      color: #B8B8AC;
-    }
-
-    .brain-banner-cta strong {
-      font-size: 32px;
-      letter-spacing: -0.05em;
-      margin-bottom: 6px;
-    }
-
     .footer {
       width: min(1120px, calc(100% - 40px));
       margin: 0 auto;
@@ -840,6 +802,92 @@
       color: var(--text);
     }
 
+    /* Brain diagram */
+    .brain-diagram {
+      width: 100%;
+      height: auto;
+      display: block;
+      overflow: visible;
+    }
+
+    .web-line {
+      stroke: var(--border-strong);
+      stroke-width: 1.5;
+      fill: none;
+    }
+
+    .web-pulse {
+      stroke: var(--brand);
+      stroke-width: 2.5;
+      fill: none;
+      stroke-linecap: round;
+      stroke-dasharray: 6 26;
+      opacity: 0.85;
+      animation: brain-pulse 2.6s linear infinite;
+      animation-play-state: paused;
+    }
+
+    .reveal.in-view .web-pulse {
+      animation-play-state: running;
+    }
+
+    @keyframes brain-pulse {
+      to { stroke-dashoffset: -320; }
+    }
+
+    .node circle {
+      fill: var(--surface);
+      stroke: var(--border-strong);
+      stroke-width: 1.5;
+    }
+
+    .node text {
+      font-size: 20px;
+      text-anchor: middle;
+      dominant-baseline: central;
+      fill: var(--brand);
+    }
+
+    .node.center circle {
+      fill: var(--text);
+      stroke: var(--brand);
+      stroke-width: 2;
+    }
+
+    .node.center text {
+      fill: var(--surface);
+      font-family: var(--font-mono);
+      font-size: 13px;
+      font-weight: 700;
+      letter-spacing: -0.02em;
+    }
+
+    .node-legend {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px 16px;
+      margin-top: 14px;
+      font-family: var(--font-mono);
+      font-size: 12px;
+      color: var(--text-muted);
+    }
+
+    .node-legend span {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .node-legend .glyph {
+      color: var(--brand);
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      .web-pulse {
+        animation: none;
+      }
+    }
+
     @media (max-width: 980px) {
       .hero {
         grid-template-columns: 1fr;
@@ -851,25 +899,15 @@
       }
 
       .section-heading,
-      .capabilities,
-      .cta,
-      .brain-banner {
+      .how-grid,
+      .cta {
         grid-template-columns: 1fr;
-      }
-
-      .brain-banner-cta {
-        align-items: flex-start;
-        text-align: left;
       }
 
       .pain-grid,
-      .services-grid {
+      .services-grid,
+      .use-grid {
         grid-template-columns: repeat(2, 1fr);
-      }
-
-      .split-system,
-      .proof-grid {
-        grid-template-columns: 1fr;
       }
 
       .service-card {
@@ -917,10 +955,6 @@
         width: min(100% - 28px, 1120px);
       }
 
-      .brain-banner {
-        border-radius: 22px;
-      }
-
       .hero {
         padding-bottom: 46px;
       }
@@ -935,9 +969,8 @@
 
       .pain-grid,
       .services-grid,
-      .cap-list,
-      .visual-footer,
-      .metric-strip {
+      .use-grid,
+      .visual-footer {
         grid-template-columns: 1fr;
       }
 
@@ -965,7 +998,7 @@
       .hero, .section, .cta {
         page-break-inside: avoid;
       }
-      .cta, .dark-card {
+      .cta {
         background: #11110F !important;
         -webkit-print-color-adjust: exact;
         print-color-adjust: exact;
@@ -989,7 +1022,7 @@
       <div class="nav-links" id="navLinks">
         <a href="index.html">Home</a>
         <a href="workflow-audit.html">Workflow Audit</a>
-        <a href="ai-brain.html">AI Brain</a>
+        <a href="ai-brain.html" class="current">AI Brain</a>
         <a href="demo.html">Demo</a>
         <a class="button button-primary" href="book-audit.html">Book a workflow audit</a>
       </div>
@@ -997,75 +1030,87 @@
 
     <section class="hero">
       <div>
-        <span class="badge"><span class="pulse"></span> Workflow compression for growing businesses</span>
-        <h1>Find the manual work. Fix the workflow. Get the hours back.</h1>
+        <span class="badge"><span class="pulse"></span> Recursive knowledge layer</span>
+        <h1>Give your company a brain.</h1>
         <p class="hero-copy">
-          Bromsey Systems helps owner-led businesses replace spreadsheet chaos, duplicate data entry, and disconnected tools with simple workflows, automations, dashboards, and lightweight internal software.
+          Every email, doc, call, database table, and piece of content — indexed into one system your AI can actually use. Not a chatbot bolted onto your files. A living knowledge layer that keeps itself current.
         </p>
         <div class="hero-actions">
-          <a class="button button-primary" href="book-audit.html">Book a workflow audit</a>
-          <a class="button button-secondary" href="#services">See the offers</a>
+          <a class="button button-primary" href="book-audit.html">Build my AI Brain — $5k</a>
+          <a class="button button-secondary" href="#how">See how it works</a>
         </div>
         <div class="trust-row" aria-label="Trust signals">
-          <span>Built for operators</span>
+          <span>Every session indexed</span>
           <span class="trust-dot"></span>
-          <span>Finance-grade systems</span>
+          <span>Every source connected</span>
           <span class="trust-dot"></span>
-          <span>Fast implementation</span>
+          <span>Nothing siloed</span>
         </div>
       </div>
 
-      <div class="hero-visual" aria-label="Workflow system example">
+      <div class="hero-visual reveal" aria-label="Diagram of company data sources connecting into a central AI brain">
         <div class="ops-card">
           <div class="ops-header">
             <div>
-              <div class="mono-label">Workflow OS</div>
-              <strong>Lead → Job → Invoice</strong>
+              <div class="mono-label">AI Brain</div>
+              <strong>Sources → Knowledge Core</strong>
             </div>
-            <span class="status-chip">Live system</span>
+            <span class="status-chip live">Indexing…</span>
           </div>
 
-          <div class="flow">
-            <div class="flow-row">
-              <span class="flow-tag">INTAKE</span>
-              <div>
-                <div class="flow-title">New request captured</div>
-                <div class="flow-meta">Form, email, and phone notes routed into one queue</div>
-              </div>
-              <span class="mini-metric">-3 steps</span>
-            </div>
+          <svg class="brain-diagram" viewBox="180 20 540 480" role="img" aria-hidden="true">
+            <g class="web-lines">
+              <line class="web-line" x1="450" y1="70" x2="450" y2="260" />
+              <line class="web-line" x1="598" y1="141" x2="450" y2="260" />
+              <line class="web-line" x1="635" y1="302" x2="450" y2="260" />
+              <line class="web-line" x1="532" y1="431" x2="450" y2="260" />
+              <line class="web-line" x1="368" y1="431" x2="450" y2="260" />
+              <line class="web-line" x1="265" y1="302" x2="450" y2="260" />
+              <line class="web-line" x1="302" y1="141" x2="450" y2="260" />
+            </g>
+            <g class="web-pulses">
+              <line class="web-pulse" x1="450" y1="70" x2="450" y2="260" />
+              <line class="web-pulse" x1="598" y1="141" x2="450" y2="260" />
+              <line class="web-pulse" x1="635" y1="302" x2="450" y2="260" />
+              <line class="web-pulse" x1="532" y1="431" x2="450" y2="260" />
+              <line class="web-pulse" x1="368" y1="431" x2="450" y2="260" />
+              <line class="web-pulse" x1="265" y1="302" x2="450" y2="260" />
+              <line class="web-pulse" x1="302" y1="141" x2="450" y2="260" />
+            </g>
+            <g class="web-nodes">
+              <g class="node" transform="translate(450,70)"><title>Email</title><circle r="26" /><text y="1">&#9993;</text></g>
+              <g class="node" transform="translate(598,141)"><title>CRM</title><circle r="26" /><text y="1">&#9723;</text></g>
+              <g class="node" transform="translate(635,302)"><title>Docs</title><circle r="26" /><text y="1">&#9636;</text></g>
+              <g class="node" transform="translate(532,431)"><title>Content &amp; podcasts</title><circle r="26" /><text y="1">&#9654;</text></g>
+              <g class="node" transform="translate(368,431)"><title>Database</title><circle r="26" /><text y="1">&#8984;</text></g>
+              <g class="node" transform="translate(265,302)"><title>Meetings</title><circle r="26" /><text y="1">&#9684;</text></g>
+              <g class="node" transform="translate(302,141)"><title>Website</title><circle r="26" /><text y="1">&#9633;</text></g>
+              <g class="node center" transform="translate(450,260)"><title>AI Brain</title><circle r="44" /><text y="1">BRAIN</text></g>
+            </g>
+          </svg>
 
-            <div class="flow-row">
-              <span class="flow-tag">FOLLOW-UP</span>
-              <div>
-                <div class="flow-title">Estimate reminders triggered</div>
-                <div class="flow-meta">No more spreadsheet tracking or memory-based follow-up</div>
-              </div>
-              <span class="mini-metric">+8 hrs/wk</span>
-            </div>
-
-            <div class="flow-row">
-              <span class="flow-tag">VISIBILITY</span>
-              <div>
-                <div class="flow-title">Owner dashboard updated</div>
-                <div class="flow-meta">Open leads, active jobs, aging invoices, and next actions</div>
-              </div>
-              <span class="mini-metric">1 view</span>
-            </div>
+          <div class="node-legend">
+            <span><span class="glyph">&#9993;</span> Email</span>
+            <span><span class="glyph">&#9723;</span> CRM</span>
+            <span><span class="glyph">&#9636;</span> Docs</span>
+            <span><span class="glyph">&#9654;</span> Content</span>
+            <span><span class="glyph">&#8984;</span> Database</span>
+            <span><span class="glyph">&#9684;</span> Meetings</span>
+            <span><span class="glyph">&#9633;</span> Website</span>
           </div>
 
           <div class="visual-footer">
             <div class="stat">
-              <strong data-counter="10" data-suffix="+">0+</strong>
-              <span>hours found</span>
+              <strong data-counter="7" data-suffix="+">0+</strong>
+              <span>sources connected</span>
             </div>
             <div class="stat">
-              <strong data-counter="4">0</strong>
-              <span>tools connected</span>
+              <strong data-counter="24" data-suffix="/7">0</strong>
+              <span>ingestion</span>
             </div>
             <div class="stat">
               <strong data-counter="1">0</strong>
-              <span>clean workflow</span>
+              <span>brain</span>
             </div>
           </div>
         </div>
@@ -1075,227 +1120,84 @@
     <section class="section section-tight">
       <div class="section-heading reveal">
         <div>
-          <span class="badge">Symptoms of operational drag</span>
-          <h2>You do not need more software. You need better workflows.</h2>
+          <span class="badge">The problem</span>
+          <h2>Your company already has the data. It's just scattered.</h2>
         </div>
         <p>
-          Most growing businesses already have tools. The problem is the manual work between those tools: copying data, chasing updates, building reports, and remembering follow-ups.
+          None of this is missing. It is just sitting in eight different places, unindexed, and impossible for AI to actually use.
         </p>
       </div>
 
       <div class="pain-grid reveal-group">
         <div class="pain-card reveal-item">
-          <span class="icon">↔</span>
-          <p>Your team enters the same information in multiple places.</p>
+          <span class="icon">&#9993;</span>
+          <p>Years of customer context buried in email threads.</p>
         </div>
         <div class="pain-card reveal-item">
-          <span class="icon">▦</span>
-          <p>Your business depends on spreadsheets only one person understands.</p>
+          <span class="icon">&#9723;</span>
+          <p>CRM notes nobody reads after they are written.</p>
         </div>
         <div class="pain-card reveal-item">
-          <span class="icon">!</span>
-          <p>Leads, jobs, tasks, or follow-ups slip through the cracks.</p>
+          <span class="icon">&#9684;</span>
+          <p>Meeting recordings and notes that never get revisited.</p>
         </div>
         <div class="pain-card reveal-item">
-          <span class="icon">◎</span>
-          <p>The owner is still the central router for every update and decision.</p>
+          <span class="icon">&#9654;</span>
+          <p>Podcasts and content nobody has time to repurpose.</p>
         </div>
         <div class="pain-card reveal-item">
-          <span class="icon">⌁</span>
-          <p>Customer updates and internal handoffs are handled manually.</p>
+          <span class="icon">&#8984;</span>
+          <p>Database tables that only make sense to one engineer.</p>
         </div>
         <div class="pain-card reveal-item">
-          <span class="icon">▤</span>
-          <p>Reports take hours to pull together from scattered sources.</p>
+          <span class="icon">&#9636;</span>
+          <p>Docs and SOPs that are already out of date.</p>
         </div>
         <div class="pain-card reveal-item">
-          <span class="icon">⎇</span>
-          <p>You pay for software but still do work around it.</p>
+          <span class="icon">&#9633;</span>
+          <p>Website copy that never reflects what you actually offer now.</p>
         </div>
         <div class="pain-card reveal-item">
           <span class="icon">AI</span>
-          <p>You know automation could help, but you are not sure where to start.</p>
+          <p>An AI tool for each of these, none of them talking to each other.</p>
         </div>
       </div>
     </section>
 
-    <section id="systems" class="section">
+    <section id="how" class="section">
       <div class="section-heading reveal">
         <div>
-          <span class="badge">Before / after</span>
-          <h2>Compress messy operations into one clean operating rhythm.</h2>
+          <span class="badge">How it works</span>
+          <h2>Every session makes the brain smarter.</h2>
         </div>
         <p>
-          The goal is not to rebuild your entire business. The goal is to remove unnecessary steps, connect the tools that matter, and give your team a system they will actually use.
+          This is not a one-time export into a folder. It is a pipeline that keeps running.
         </p>
       </div>
 
-      <div class="split-system reveal-group">
-        <div class="system-panel reveal-item">
-          <div class="panel-title">
-            <h3>Before</h3>
-            <span class="mono-label">Manual drag</span>
-          </div>
-          <div class="stack">
-            <div class="stack-item"><strong>Lead info</strong><span>Email inbox</span></div>
-            <div class="stack-item"><strong>Follow-up</strong><span>Memory</span></div>
-            <div class="stack-item"><strong>Job status</strong><span>Spreadsheet</span></div>
-            <div class="stack-item"><strong>Invoices</strong><span>QuickBooks</span></div>
-            <div class="stack-item"><strong>Reporting</strong><span>Manual export</span></div>
-          </div>
+      <div class="how-grid reveal-group">
+        <div class="how-copy reveal-item">
+          <p>
+            After every Claude Code session, every cloud session, every AI touchpoint — the new intake gets written back to the brain automatically.
+          </p>
+          <p>
+            Nothing sits unindexed for long. What you learned this morning is queryable by the afternoon.
+          </p>
         </div>
 
         <div class="system-panel after reveal-item">
           <div class="panel-title">
-            <h3>After</h3>
-            <span class="status-chip">Compressed</span>
+            <h3>Ingestion pipeline</h3>
+            <span class="status-chip live">Running nightly</span>
           </div>
           <div class="stack">
-            <div class="stack-item"><strong>Intake</strong><span>One source of truth</span></div>
+            <div class="stack-item"><strong>01 — Connect</strong><span>Email, CRM, docs, database, content</span></div>
             <div class="connected-line"></div>
-            <div class="stack-item"><strong>Automation</strong><span>Follow-ups and routing</span></div>
+            <div class="stack-item"><strong>02 — Write back</strong><span>Every AI session logs what it learned</span></div>
             <div class="connected-line"></div>
-            <div class="stack-item"><strong>Dashboard</strong><span>Owner visibility</span></div>
+            <div class="stack-item"><strong>03 — Re-index</strong><span>New intake formatted and folded in nightly</span></div>
             <div class="connected-line"></div>
-            <div class="stack-item"><strong>System</strong><span>Less manual work</span></div>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <section id="services" class="section">
-      <div class="section-heading reveal">
-        <div>
-          <span class="badge">Productized services</span>
-          <h2>Start small. Fix the highest-value workflow first.</h2>
-        </div>
-        <p>
-          Each engagement is scoped around business outcomes: fewer manual steps, cleaner data, better visibility, and time returned to the owner and team.
-        </p>
-      </div>
-
-      <div class="services-grid reveal-group">
-        <article id="audit" class="service-card featured reveal-item">
-          <div class="service-kicker">01 / DIAGNOSE</div>
-          <h3>Workflow Audit</h3>
-          <p>For businesses that know operations are messy but are not sure what to fix first.</p>
-          <ul>
-            <li><span class="check">✓</span><span>Current workflow review</span></li>
-            <li><span class="check">✓</span><span>Software and spreadsheet inventory</span></li>
-            <li><span class="check">✓</span><span>Duplicate-entry analysis</span></li>
-            <li><span class="check">✓</span><span>Top automation opportunities</span></li>
-            <li><span class="check">✓</span><span>Roadmap and fixed-price quote</span></li>
-          </ul>
-          <div class="price">Typical investment <strong>$1.5k–$3.5k</strong></div>
-        </article>
-
-        <article class="service-card reveal-item">
-          <div class="service-kicker">02 / IMPLEMENT</div>
-          <h3>Workflow Sprint</h3>
-          <p>A focused sprint to remove manual work from one painful workflow.</p>
-          <ul>
-            <li><span class="check">✓</span><span>Lead intake and follow-up</span></li>
-            <li><span class="check">✓</span><span>Estimate or quote tracking</span></li>
-            <li><span class="check">✓</span><span>Customer onboarding</span></li>
-            <li><span class="check">✓</span><span>Reporting workflows</span></li>
-            <li><span class="check">✓</span><span>AI-assisted email or document processing</span></li>
-          </ul>
-          <div class="price">Typical investment <strong>$2k–$8k</strong></div>
-        </article>
-
-        <article class="service-card reveal-item">
-          <div class="service-kicker">03 / BUILD</div>
-          <h3>Custom Micro App</h3>
-          <p>Lightweight internal software built around how your business actually works.</p>
-          <ul>
-            <li><span class="check">✓</span><span>Custom CRM</span></li>
-            <li><span class="check">✓</span><span>Job tracker or scheduling board</span></li>
-            <li><span class="check">✓</span><span>Field inspection app</span></li>
-            <li><span class="check">✓</span><span>Quote builder</span></li>
-            <li><span class="check">✓</span><span>Operations dashboard</span></li>
-          </ul>
-          <div class="price">Typical investment <strong>$10k–$30k+</strong></div>
-        </article>
-
-        <article class="service-card reveal-item">
-          <div class="service-kicker">04 / OPERATE</div>
-          <h3>Systems Partner</h3>
-          <p>Ongoing workflow, automation, and systems support without a full-time CIO.</p>
-          <ul>
-            <li><span class="check">✓</span><span>Monthly workflow review</span></li>
-            <li><span class="check">✓</span><span>Automation backlog management</span></li>
-            <li><span class="check">✓</span><span>CRM and dashboard improvements</span></li>
-            <li><span class="check">✓</span><span>Software recommendations</span></li>
-            <li><span class="check">✓</span><span>Training and documentation</span></li>
-          </ul>
-          <div class="price">Typical investment <strong>$2.5k–$7.5k/mo</strong></div>
-        </article>
-      </div>
-    </section>
-
-    <section class="section section-tight">
-      <div class="brain-banner reveal">
-        <div>
-          <span class="badge"><span class="pulse"></span> New: Recursive Knowledge Layer</span>
-          <h2>Develop an AI Brain for your company.</h2>
-          <p>Every email, doc, call, and database table — indexed into one system your AI can actually use. The natural next step after a Workflow Sprint.</p>
-        </div>
-        <div class="brain-banner-cta">
-          <span class="mono-label">Flat build</span>
-          <strong>$5,000</strong>
-          <a class="button button-primary" href="ai-brain.html">Explore AI Brain</a>
-        </div>
-      </div>
-    </section>
-
-    <section class="section">
-      <div class="capabilities reveal-group">
-        <div class="dark-card reveal-item">
-          <span class="badge">Practical systems, not AI hype</span>
-          <h2>Built for the work your team actually does.</h2>
-          <p>
-            Bromsey Systems combines operations experience, CRM design, software integration, automation, and AI-assisted development to help businesses move faster without adding complexity.
-          </p>
-          <div class="metric-strip">
-            <div class="stat">
-              <strong>Less</strong>
-              <span>manual routing</span>
-            </div>
-            <div class="stat">
-              <strong>Cleaner</strong>
-              <span>business data</span>
-            </div>
-            <div class="stat">
-              <strong>Faster</strong>
-              <span>follow-through</span>
-            </div>
-          </div>
-        </div>
-
-        <div class="cap-list reveal-item">
-          <div class="cap-item">
-            <h3>CRM design</h3>
-            <p>Lead, customer, job, and follow-up workflows built around the actual sales process.</p>
-          </div>
-          <div class="cap-item">
-            <h3>Automation</h3>
-            <p>Remove duplicate entry, reminders, routing, status updates, and other recurring admin.</p>
-          </div>
-          <div class="cap-item">
-            <h3>Dashboards</h3>
-            <p>Give owners and managers visibility into what is open, stuck, aging, or at risk.</p>
-          </div>
-          <div class="cap-item">
-            <h3>AI workflows</h3>
-            <p>Use AI for practical document, email, intake, summary, and knowledge workflows.</p>
-          </div>
-          <div class="cap-item">
-            <h3>Micro apps</h3>
-            <p>Build the missing internal tool when off-the-shelf software is too clunky.</p>
-          </div>
-          <div class="cap-item">
-            <h3>Training</h3>
-            <p>Document the system and teach the team how to keep the workflow alive.</p>
+            <div class="stack-item"><strong>04 — Query</strong><span>Ask it for anything, anytime</span></div>
           </div>
         </div>
       </div>
@@ -1304,47 +1206,221 @@
     <section class="section">
       <div class="section-heading reveal">
         <div>
-          <span class="badge">Why Bromsey Systems</span>
-          <h2>Operations first. Software second.</h2>
+          <span class="badge">Index map</span>
+          <h2>See what's inside.</h2>
         </div>
         <p>
-          The best internal tools are not built around technology trends. They are built around clear ownership, fewer handoffs, cleaner data, and the shortest path from request to result.
+          The brain is not a black box. Every domain is indexed, browsable, and named the way your team already thinks about the business.
         </p>
       </div>
 
-      <div class="proof-grid reveal-group">
-        <div class="proof-card reveal-item">
-          <span class="icon">01</span>
-          <h3>Understands messy work</h3>
-          <p>We start with how the process actually happens today, including the spreadsheets, inboxes, workarounds, and owner-dependent decisions.</p>
+      <div class="index-map reveal">
+        <div class="ops-card">
+          <div class="ops-header">
+            <div>
+              <div class="mono-label">File index</div>
+              <strong>yourcompany/brain</strong>
+            </div>
+            <span class="status-chip">6 domains</span>
+          </div>
+          <div class="flow">
+            <div class="flow-row">
+              <span class="flow-tag">/customers</span>
+              <div>
+                <div class="flow-title">Customer history</div>
+                <div class="flow-meta">Onboarding notes, preferences, past quotes</div>
+              </div>
+              <span class="mini-metric">Live</span>
+            </div>
+            <div class="flow-row">
+              <span class="flow-tag">/pricing</span>
+              <div>
+                <div class="flow-title">Pricing &amp; quoting</div>
+                <div class="flow-meta">Rate cards, past deals, margin rules</div>
+              </div>
+              <span class="mini-metric">Live</span>
+            </div>
+            <div class="flow-row">
+              <span class="flow-tag">/marketing</span>
+              <div>
+                <div class="flow-title">Marketing ideas</div>
+                <div class="flow-meta">Brand voice, past campaigns, what worked</div>
+              </div>
+              <span class="mini-metric">Live</span>
+            </div>
+            <div class="flow-row">
+              <span class="flow-tag">/ops</span>
+              <div>
+                <div class="flow-title">Operations</div>
+                <div class="flow-meta">Workflows, SOPs, vendor information</div>
+              </div>
+              <span class="mini-metric">Live</span>
+            </div>
+            <div class="flow-row">
+              <span class="flow-tag">/content</span>
+              <div>
+                <div class="flow-title">Content &amp; podcasts</div>
+                <div class="flow-meta">Transcripts, blog drafts, website copy</div>
+              </div>
+              <span class="mini-metric">Live</span>
+            </div>
+            <div class="flow-row">
+              <span class="flow-tag">/threads</span>
+              <div>
+                <div class="flow-title">Conversations</div>
+                <div class="flow-meta">Meeting notes, email threads, chat history</div>
+              </div>
+              <span class="mini-metric">Live</span>
+            </div>
+          </div>
         </div>
-        <div class="proof-card reveal-item">
-          <span class="icon">02</span>
-          <h3>Builds lightweight</h3>
-          <p>No bloated agency process. No unnecessary enterprise complexity. Just practical systems designed to remove drag.</p>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="section-heading reveal">
+        <div>
+          <span class="badge">Use cases</span>
+          <h2>Leverage it for anything you want.</h2>
         </div>
-        <div class="proof-card reveal-item">
-          <span class="icon">03</span>
-          <h3>Focuses on adoption</h3>
-          <p>A workflow only works if the team uses it. Every build includes structure, documentation, and training.</p>
+        <p>
+          One brain, queried a different way for every part of the business.
+        </p>
+      </div>
+
+      <div class="use-grid reveal-group">
+        <div class="use-card reveal-item">
+          <span class="icon">&#9684;</span>
+          <h3>Customer onboarding</h3>
+          <p>Turn a new customer's history into a ready-made onboarding packet.</p>
         </div>
+        <div class="use-card reveal-item">
+          <span class="icon">$</span>
+          <h3>Pricing &amp; quoting</h3>
+          <p>Pull past deals and margin rules to build a quote in minutes.</p>
+        </div>
+        <div class="use-card reveal-item">
+          <span class="icon">&#9998;</span>
+          <h3>Marketing ideas</h3>
+          <p>Mine calls, docs, and content for the angles that already work.</p>
+        </div>
+        <div class="use-card reveal-item">
+          <span class="icon">&#9654;</span>
+          <h3>Content updating</h3>
+          <p>Repurpose transcripts and notes into new posts automatically.</p>
+        </div>
+        <div class="use-card reveal-item">
+          <span class="icon">&#8635;</span>
+          <h3>Recursive website updates</h3>
+          <p>Let the brain propose and draft updates to your own site.</p>
+        </div>
+        <div class="use-card reveal-item">
+          <span class="icon">?</span>
+          <h3>Ask the brain</h3>
+          <p>Get a straight answer from everything your company has ever written.</p>
+        </div>
+      </div>
+    </section>
+
+    <section id="pricing" class="section">
+      <div class="section-heading reveal">
+        <div>
+          <span class="badge">Pricing</span>
+          <h2>One flat build. Your whole company, connected.</h2>
+        </div>
+        <p>
+          Scoped to get your highest-value sources connected and indexed first.
+        </p>
+      </div>
+
+      <div class="pricing-single reveal">
+        <article class="service-card featured">
+          <div class="service-kicker">05 / CONNECT</div>
+          <h3>Develop an AI Brain</h3>
+          <p>A recursive knowledge layer that ingests your data, indexes it, and keeps itself current.</p>
+          <ul>
+            <li><span class="check">&#10003;</span><span>Source connection setup (email, CRM, docs, database, content)</span></li>
+            <li><span class="check">&#10003;</span><span>Initial indexing and index map delivered</span></li>
+            <li><span class="check">&#10003;</span><span>Nightly recursive re-indexing pipeline</span></li>
+            <li><span class="check">&#10003;</span><span>Session write-back configured (Claude Code, cloud, any AI touchpoint)</span></li>
+            <li><span class="check">&#10003;</span><span>2–3 use cases configured to start</span></li>
+          </ul>
+          <div class="price">Flat build <strong>$5,000</strong></div>
+        </article>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="section-heading reveal">
+        <div>
+          <span class="badge">Where this fits</span>
+          <h2>The natural next step after a Workflow Sprint.</h2>
+        </div>
+        <p>
+          An audit finds the mess. A sprint fixes one workflow. The brain connects everything, permanently.
+        </p>
+      </div>
+
+      <div class="path-panel reveal">
+        <div class="system-panel after">
+          <div class="stack">
+            <a class="stack-item" href="workflow-audit.html"><strong>01 — Workflow Audit</strong><span>Find what's broken →</span></a>
+            <div class="connected-line"></div>
+            <a class="stack-item" href="index.html#services"><strong>02 — Workflow Sprint</strong><span>Fix one workflow →</span></a>
+            <div class="connected-line"></div>
+            <div class="stack-item current"><strong>03 — AI Brain</strong><span>Connect everything · you are here</span></div>
+            <div class="connected-line"></div>
+            <a class="stack-item" href="index.html#services"><strong>04 — Systems Partner</strong><span>Keep it running →</span></a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="section-heading reveal">
+        <div>
+          <span class="badge">FAQ</span>
+          <h2>Common questions.</h2>
+        </div>
+        <p>
+          If it's not covered here, ask us directly on the intake form.
+        </p>
+      </div>
+
+      <div class="faq-list reveal-group">
+        <details class="faq-item reveal-item">
+          <summary>Is my data secure?</summary>
+          <p>Your data stays in your own accounts and infrastructure wherever possible. We connect to sources with least-privilege access and document exactly what is indexed.</p>
+        </details>
+        <details class="faq-item reveal-item">
+          <summary>Which tools do you connect to?</summary>
+          <p>Common sources are email, CRM, shared docs, databases, and content platforms. If your team uses something specific, we scope for it during setup.</p>
+        </details>
+        <details class="faq-item reveal-item">
+          <summary>Do I need clean data first?</summary>
+          <p>No. Part of the build is formatting and structuring intake as it comes in — that is what the nightly re-index step is for.</p>
+        </details>
+        <details class="faq-item reveal-item">
+          <summary>Can I start with just one use case?</summary>
+          <p>Yes. Most companies start with two or three — onboarding and pricing are common first picks — then expand once the brain is live.</p>
+        </details>
       </div>
     </section>
 
     <section class="cta reveal">
       <div>
-        <span class="badge"><span class="pulse"></span> Start with a Workflow Audit</span>
-        <h2>Find where your business is losing time before buying or building more software.</h2>
+        <span class="badge"><span class="pulse"></span> Build my AI Brain</span>
+        <h2>Stop losing what you already know.</h2>
         <p>
-          We will map your current workflow, identify manual drag, prioritize the highest-value fixes, and define the first implementation sprint.
+          We will connect your highest-value sources, stand up the ingestion pipeline, and hand you an indexed brain your team can query from day one.
         </p>
       </div>
-      <a class="button button-secondary" href="book-audit.html">Book a workflow audit</a>
+      <a class="button button-secondary" href="book-audit.html">Start my AI Brain</a>
     </section>
 
     <footer class="footer">
       <span>© 2026 Bromsey Systems</span>
-      <span>Custom systems, automations, and dashboards for teams that need less manual work and more operating leverage.</span>
+      <span>A recursive knowledge layer for companies that want AI to actually know their business.</span>
       <span class="footer-links">
         <a href="index.html">Home</a>
         <a href="workflow-audit.html">Workflow Audit</a>
