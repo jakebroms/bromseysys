@@ -38,7 +38,7 @@ async function sendNotificationEmail(env, { name, email, company, notes }) {
       "Content-Type": "application/json",
     },
     body: JSON.stringify({
-      from: "Bromsey Systems <onboarding@resend.dev>",
+      from: "Bromsey Systems <notify@bromseysystems.com>",
       to: ["jakebromsey@gmail.com"],
       reply_to: email,
       subject: `New workflow audit request from ${name}`,
