@@ -47,6 +47,32 @@ async function sendNotificationEmail(env, { name, email, company, notes }) {
   });
 }
 
+async function sendConfirmationEmail(env, { name, email }) {
+  if (!env.RESEND_API_KEY) return;
+
+  const firstName = name.split(" ")[0];
+
+  const html = `
+    <p>Hi ${escapeHtml(firstName)},</p>
+    <p>Thanks for reaching out to Bromsey Systems. We've received your request and will take a look — expect to hear from us soon about scheduling your workflow audit.</p>
+    <p>— Bromsey Systems</p>
+  `;
+
+  await fetch("https://api.resend.com/emails", {
+    method: "POST",
+    headers: {
+      Authorization: `Bearer ${env.RESEND_API_KEY}`,
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({
+      from: "Bromsey Systems <hello@bromseysystems.com>",
+      to: [email],
+      subject: "Thanks for reaching out to Bromsey Systems",
+      html,
+    }),
+  });
+}
+
 export async function onRequestPost(context) {
   const { request, env } = context;
 
@@ -88,12 +114,17 @@ export async function onRequestPost(context) {
     .bind(name, email, company, notes, createdAt)
     .run();
 
-  try {
-    await sendNotificationEmail(env, { name, email, company, notes });
-  } catch (err) {
-    // The submission is already saved in D1 — don't fail the request over a flaky email send.
-    console.error("Resend notification failed:", err);
-  }
+  // The submission is already saved in D1 — a flaky email send should never fail the request,
+  // and one email failing shouldn't stop the other from going out.
+  const emailResults = await Promise.allSettled([
+    sendNotificationEmail(env, { name, email, company, notes }),
+    sendConfirmationEmail(env, { name, email }),
+  ]);
+  emailResults.forEach(result => {
+    if (result.status === "rejected") {
+      console.error("Resend email failed:", result.reason);
+    }
+  });
 
   return jsonResponse({ ok: true }, 200);
 }
