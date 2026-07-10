@@ -31,7 +31,7 @@ async function sendNotificationEmail(env, { name, email, company, notes }) {
     ${notesHtml}
   `;
 
-  await fetch("https://api.resend.com/emails", {
+  const response = await fetch("https://api.resend.com/emails", {
     method: "POST",
     headers: {
       Authorization: `Bearer ${env.RESEND_API_KEY}`,
@@ -45,6 +45,10 @@ async function sendNotificationEmail(env, { name, email, company, notes }) {
       html,
     }),
   });
+
+  if (!response.ok) {
+    throw new Error(`Resend notification failed: ${response.status} ${await response.text()}`);
+  }
 }
 
 async function sendConfirmationEmail(env, { name, email }) {
@@ -58,7 +62,7 @@ async function sendConfirmationEmail(env, { name, email }) {
     <p>— Bromsey Systems</p>
   `;
 
-  await fetch("https://api.resend.com/emails", {
+  const response = await fetch("https://api.resend.com/emails", {
     method: "POST",
     headers: {
       Authorization: `Bearer ${env.RESEND_API_KEY}`,
@@ -71,6 +75,10 @@ async function sendConfirmationEmail(env, { name, email }) {
       html,
     }),
   });
+
+  if (!response.ok) {
+    throw new Error(`Resend confirmation failed: ${response.status} ${await response.text()}`);
+  }
 }
 
 export async function onRequestPost(context) {
