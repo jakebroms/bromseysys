@@ -815,52 +815,6 @@
       border-color: #FAFAF8;
     }
 
-    .brain-banner {
-      background:
-        radial-gradient(circle at 84% 16%, rgba(36, 91, 255, 0.30), transparent 24rem),
-        #11110F;
-      color: #FAFAF8;
-      border-radius: 28px;
-      padding: clamp(28px, 5vw, 48px);
-      display: grid;
-      grid-template-columns: minmax(0, 1fr) auto;
-      gap: 32px;
-      align-items: end;
-      box-shadow: var(--shadow-lg);
-    }
-
-    .brain-banner h2 {
-      color: #FAFAF8;
-      margin-top: 16px;
-      max-width: 640px;
-    }
-
-    .brain-banner p {
-      color: #B8B8AC;
-      font-size: 16px;
-      line-height: 1.6;
-      margin: 16px 0 0;
-      max-width: 560px;
-    }
-
-    .brain-banner-cta {
-      display: flex;
-      flex-direction: column;
-      align-items: flex-end;
-      gap: 6px;
-      text-align: right;
-    }
-
-    .brain-banner-cta .mono-label {
-      color: #B8B8AC;
-    }
-
-    .brain-banner-cta strong {
-      font-size: 32px;
-      letter-spacing: -0.05em;
-      margin-bottom: 6px;
-    }
-
     .footer {
       width: min(1120px, calc(100% - 40px));
       margin: 0 auto;
@@ -895,14 +849,8 @@
 
       .section-heading,
       .capabilities,
-      .cta,
-      .brain-banner {
+      .cta {
         grid-template-columns: 1fr;
-      }
-
-      .brain-banner-cta {
-        align-items: flex-start;
-        text-align: left;
       }
 
       .pain-grid,
@@ -969,10 +917,6 @@
       .nav,
       .footer {
         width: min(100% - 28px, 1120px);
-      }
-
-      .brain-banner {
-        border-radius: 22px;
       }
 
       .hero {
@@ -1045,8 +989,6 @@
         <a href="services/">Services</a>
         <a href="workflow-audit.html">Workflow Audit</a>
         <a href="demo.html">Demo</a>
-        <span class="nav-divider" aria-hidden="true"></span>
-        <a href="ai-brain.html" class="nav-brain">AI Brain</a>
         <a class="button button-primary" href="book-audit.html">Book a workflow audit</a>
       </div>
     </nav>
@@ -1286,21 +1228,6 @@
           </ul>
           <div class="price">Typical investment <strong>$2.5k–$7.5k/mo</strong></div>
         </article>
-      </div>
-    </section>
-
-    <section class="section section-tight">
-      <div class="brain-banner reveal">
-        <div>
-          <span class="badge"><span class="pulse"></span> New: Recursive Knowledge Layer</span>
-          <h2>Develop an AI Brain for your company.</h2>
-          <p>Every email, doc, call, and database table — indexed into one system your AI can actually use. The natural next step after a Workflow Sprint.</p>
-        </div>
-        <div class="brain-banner-cta">
-          <span class="mono-label">Flat build</span>
-          <strong>$5,000</strong>
-          <a class="button button-primary" href="ai-brain.html">Explore AI Brain</a>
-        </div>
       </div>
     </section>
 
