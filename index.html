@@ -153,6 +153,18 @@
       color: var(--text);
     }
 
+    .nav-divider {
+      width: 1px;
+      height: 18px;
+      background: var(--border-strong);
+      flex: 0 0 auto;
+    }
+
+    .nav-links a.nav-brain {
+      color: var(--brand-hover);
+      font-weight: 650;
+    }
+
     .nav-toggle {
       display: none;
       flex-direction: column;
@@ -922,6 +934,17 @@
         display: none;
       }
 
+      .nav-divider {
+        display: none;
+      }
+
+      .nav-links.open .nav-divider {
+        display: block;
+        width: 100%;
+        height: 1px;
+        margin: 2px 0;
+      }
+
       .nav-links.open {
         flex-direction: column;
         align-items: flex-start;
@@ -1018,8 +1041,9 @@
         <a href="index.html">Home</a>
         <a href="services/">Services</a>
         <a href="workflow-audit.html">Workflow Audit</a>
-        <a href="ai-brain.html">AI Brain</a>
         <a href="demo.html">Demo</a>
+        <span class="nav-divider" aria-hidden="true"></span>
+        <a href="ai-brain.html" class="nav-brain">AI Brain</a>
         <a class="button button-primary" href="book-audit.html">Book a workflow audit</a>
       </div>
     </nav>
@@ -1378,8 +1402,8 @@
         <a href="index.html">Home</a>
         <a href="services/">Services</a>
         <a href="workflow-audit.html">Workflow Audit</a>
-        <a href="ai-brain.html">AI Brain</a>
         <a href="demo.html">Demo</a>
+        <a href="ai-brain.html">AI Brain</a>
       </span>
     </footer>
   </main>

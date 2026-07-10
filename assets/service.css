@@ -96,6 +96,18 @@ a { color: inherit; text-decoration: none; }
 .nav-actions a:hover { color: var(--text); }
 .nav-actions a.current { color: var(--text); }
 
+.nav-divider {
+  width: 1px;
+  height: 18px;
+  background: var(--border-strong);
+  flex: 0 0 auto;
+}
+
+.nav-actions a.nav-brain {
+  color: var(--brand-hover);
+  font-weight: 650;
+}
+
 .nav-toggle {
   display: none;
   flex-direction: column;
@@ -492,6 +504,14 @@ footer {
 
   .nav-actions.open a:not(.button) { display: block; }
   .nav-actions a:not(.button) { display: none; }
+
+  .nav-divider { display: none; }
+  .nav-actions.open .nav-divider {
+    display: block;
+    width: 100%;
+    height: 1px;
+    margin: 2px 0;
+  }
 
   h1 { font-size: 44px; }
   .hero-copy { font-size: 17px; }
