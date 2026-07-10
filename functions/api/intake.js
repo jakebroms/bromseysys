@@ -58,7 +58,7 @@ async function sendConfirmationEmail(env, { name, email }) {
 
   const html = `
     <p>Hi ${escapeHtml(firstName)},</p>
-    <p>Thanks for reaching out to Bromsey Systems. We've received your request and will take a look — expect to hear from us soon about scheduling your workflow audit.</p>
+    <p>Thanks for reaching out to Bromsey Systems. We've received your request and will take a look — expect to hear from us soon.</p>
     <p>— Bromsey Systems</p>
   `;
 
