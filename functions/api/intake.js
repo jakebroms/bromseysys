@@ -14,15 +14,17 @@ function escapeHtml(value) {
     .replaceAll("'", "&#039;");
 }
 
-async function sendNotificationEmail(env, { name, email, company, notes }) {
+async function sendNotificationEmail(env, { name, email, company, notes, type }) {
   if (!env.RESEND_API_KEY) return;
+
+  const label = type === "ai-brain" ? "AI Brain — Knowledge Layer" : "Workflow Audit";
 
   const notesHtml = notes
     ? `<p><strong>Notes:</strong><br>${escapeHtml(notes).replaceAll("\n", "<br>")}</p>`
     : "";
 
   const html = `
-    <p>New workflow audit request from the site:</p>
+    <p>New ${escapeHtml(label)} request from the site:</p>
     <p>
       <strong>Name:</strong> ${escapeHtml(name)}<br>
       <strong>Email:</strong> ${escapeHtml(email)}<br>
@@ -41,7 +43,7 @@ async function sendNotificationEmail(env, { name, email, company, notes }) {
       from: "Bromsey Systems <notify@bromseysystems.com>",
       to: ["jakebromsey@gmail.com"],
       reply_to: email,
-      subject: `New workflow audit request from ${name}`,
+      subject: `New ${label} request from ${name}`,
       html,
     }),
   });
@@ -100,6 +102,7 @@ export async function onRequestPost(context) {
   const email = (data.email || "").trim();
   const company = (data.company || "").trim();
   const notes = (data.notes || "").trim();
+  const type = data.type === "ai-brain" ? "ai-brain" : "workflow-audit";
 
   if (!name || !email) {
     return jsonResponse({ error: "Name and email are required." }, 400);
@@ -125,7 +128,7 @@ export async function onRequestPost(context) {
   // The submission is already saved in D1 — a flaky email send should never fail the request,
   // and one email failing shouldn't stop the other from going out.
   const emailResults = await Promise.allSettled([
-    sendNotificationEmail(env, { name, email, company, notes }),
+    sendNotificationEmail(env, { name, email, company, notes, type }),
     sendConfirmationEmail(env, { name, email }),
   ]);
   emailResults.forEach(result => {
